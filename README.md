@@ -5,4 +5,4 @@ Le concept de "LAN party" est apparu dans la fin des années 1990, elle consiste
 
 Au fil des années, l'industrie du jeu vidéo ainsi que les technologies réseau se sont développés et ceci a provoqué la disparition des jeux en réseau local. Néanmoins, l'organisation de tournois de jeu en LAN reste une pratique commune, pour citer quelques exemples : DreamHack, QuakeCon, Insomnia Gaming Festival.
 
-Grâce à LANker, vous pouvez prendre en main votre évènement sans aucune difficulté. Les utilisateurs pourront alors rejoindre votre évènement à l'aide d'un seul clic.
+Grâce à LANker, vous pouvez prendre en main votre évènement sans aucune difficulté. Les utilisateurs pourront alors rejoindre votre évènement à l'aide d'un seul clic..
