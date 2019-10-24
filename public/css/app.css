@@ -85,6 +85,12 @@ hr {
   overflow: visible;
 }
 
+.fit-image {
+    width: 100% !important;
+    height: 15vw !important;
+    object-fit: cover !important;
+}
+
 h1,
 h2,
 h3,
@@ -10643,4 +10649,3 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
-
