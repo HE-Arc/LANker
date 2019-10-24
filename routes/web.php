@@ -22,3 +22,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/event', function() {
    return view('event');
 });
+
+// TODO: change to user profile when users are implemented
+Route::get('/profile', function() {
+  return view('profile');
+});
