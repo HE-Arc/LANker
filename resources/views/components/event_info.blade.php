@@ -1,1 +1,1 @@
-<div class="event-info" id="{{$id}}">{{$content}}</div>
+<div class="event-info col-sm" id="{{$id}}"><b>{{$name}}:</b> {{$value}}</div>
