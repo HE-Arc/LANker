@@ -28,7 +28,12 @@
     </div>
     <div class="row mb-2">
       <a href="#" class="btn btn-primary mr-2">Change email</a>
-      <a href="#" class="btn btn-primary">Change password</a>
+      <a href="#" class="btn btn-primary mr-2">Change password</a>
+      <form action="{{ url('/users', ['id' => $user->id]) }}" method="POST"  onclick="return confirm('Are you sure?')">
+          {{ csrf_field() }}
+          {{ method_field('DELETE') }}
+          <input type="submit" class="btn btn-danger" value="Delete profile"/>
+      </form>
     </div>
     <div class="row">
       <h3>Description</h3>
