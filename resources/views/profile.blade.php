@@ -5,10 +5,12 @@
   <div class="row">
     <div class="col-sm">
       <div class="card" style="width: 18rem;">
-        <img src="img/goose.jpg" alt="" class="card-img-top img-thumbnail">
-        <div class="card-body m-auto">
-          <a href="#" class="btn btn-primary">Changer</a>
-        </div>
+        <img src="../img/goose.jpg" alt="" class="card-img-top img-thumbnail">
+        @if (Auth::check() && Auth::user()->id == $user->id)
+          <div class="card-body m-auto">
+            <a href="#" class="btn btn-primary">Changer</a>
+          </div>
+        @endunless
       </div>
     </div>
     <div class="col-sm">
@@ -22,19 +24,22 @@
     <div class="col-sm-6">
     </div>
   </div>
+
   <div class="col my-4">
-    <div class="row">
-      <h3>Actions</h3>
-    </div>
-    <div class="row mb-2">
-      <a href="#" class="btn btn-primary mr-2">Change email</a>
-      <a href="#" class="btn btn-primary mr-2">Change password</a>
-      <form action="{{ url('/users', ['id' => $user->id]) }}" method="POST"  onclick="return confirm('Are you sure?')">
-          {{ csrf_field() }}
-          {{ method_field('DELETE') }}
-          <input type="submit" class="btn btn-danger" value="Delete profile"/>
-      </form>
-    </div>
+    @if (Auth::check() && Auth::user()->id == $user->id)
+      <div class="row">
+        <h3>Actions</h3>
+      </div>
+      <div class="row mb-2">
+        <a href="#" class="btn btn-primary mr-2">Change email</a>
+        <a href="#" class="btn btn-primary mr-2">Change password</a>
+        <form action="{{ url('/users', ['id' => $user->id]) }}" method="POST"  onclick="return confirm('Are you sure?')">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            <input type="submit" class="btn btn-danger" value="Delete profile"/>
+        </form>
+      </div>
+    @endunless
     <div class="row">
       <h3>Description</h3>
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>

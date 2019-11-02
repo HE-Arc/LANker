@@ -25,8 +25,13 @@ Route::get('/event', function() {
 });
 
 // TODO: change to user profile when users are implemented
-Route::get('/profile', function() {
-  return view('profile', ['user' => Auth::user()]);
+// TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
+Route::get('/profile/{name}', function($name) {
+  $user = User::where('name',$name)->first();
+  if ($user === null) {
+   return redirect('/');
+  }
+  return view('profile', ['user' => $user]);
 });
 
 Route::delete('/users/{id}', function($id) {
