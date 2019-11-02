@@ -24,15 +24,24 @@ Route::get('/event', function() {
    return view('event');
 });
 
-// TODO: change to user profile when users are implemented
 // TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
+// TODO: the logic need to be in a controller
+// TODO: don't except a name, give the function the user himself as an object
 Route::get('/profile/{name}', function($name) {
   $user = User::where('name',$name)->first();
   if ($user === null) {
    return redirect('/');
   }
   return view('profile', ['user' => $user]);
-});
+})->name('profile'); // gives a name to a route so that route('nameOfTheRoute') can be used
+
+Route::get('/profile/edit/{user}',[
+  'as' => 'edit_profile',
+  'uses' => 'UserController@edit']);
+
+Route::patch('profile/edit/{user}/update', [
+  'as' => 'update_profile',
+  'uses' => 'UserController@update']);
 
 Route::delete('/users/{id}', function($id) {
   User::findOrFail($id)->delete();
