@@ -31,8 +31,7 @@
         <h3>Actions</h3>
       </div>
       <div class="row mb-2">
-        <a href="#" class="btn btn-primary mr-2">Change email</a>
-        <a href="#" class="btn btn-primary mr-2">Change password</a>
+        <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary mr-2">Change account informations</a>
         <form action="{{ url('/users', ['id' => $user->id]) }}" method="POST"  onclick="return confirm('Are you sure?')">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
