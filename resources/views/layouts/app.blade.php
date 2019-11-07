@@ -25,7 +25,7 @@
     <div id="app">
       <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #273c75;">
-          <a class="navbar-brand" href="#">LANker</a>
+          <a class="navbar-brand" href="{{ url('/') }}">LANker</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -55,6 +55,8 @@
                       </a>
 
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                          <a class="dropdown-item" href="{{ route('profile', Auth::user()->name) }}">Profile</a>
+
                           <a class="dropdown-item" href="{{ route('logout') }}"
                              onclick="event.preventDefault();
                                            document.getElementById('logout-form').submit();">
