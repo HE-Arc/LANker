@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+      if($this->app->environment('production')) {
+          URL::forceScheme('https');
+      }
       Blade::component('components.event_info', 'event_info');
       Blade::component('components.image', 'image');
     }
