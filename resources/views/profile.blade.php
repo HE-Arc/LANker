@@ -32,7 +32,7 @@
       </div>
       <div class="row mb-2">
         <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary mr-2">Change account informations</a>
-        <form action="{{ url('/users', ['id' => $user->id]) }}" method="POST"  onclick="return confirm('Are you sure?')">
+        <form action="{{ route('delete_profile', Auth::user()) }}" method="POST"  onclick="return confirm('Are you sure?')">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <input type="submit" class="btn btn-danger" value="Delete profile"/>
