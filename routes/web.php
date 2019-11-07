@@ -14,34 +14,34 @@ use App\User;
 
 Route::get('/', function () {
     return view('welcome');
-})->name('dashboard')->middleware('forcessl');
+})->name('dashboard');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('forcessl');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/event', function() {
    return view('event');
-})->middleware('forcessl');
+});
 
 // TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
 // TODO: the logic need to be in a controller
 // TODO: don't except a name, give the function the user himself as an object
 Route::get('/profile/{name}',[
   'as' => 'profile',
-  'uses' => 'UserController@show'])->middleware('forcessl');
+  'uses' => 'UserController@show']);
 
 Route::get('/profile/edit/{user}',[
   'as' => 'edit_profile',
-  'uses' => 'UserController@edit'])->middleware('auth', 'forcessl');
+  'uses' => 'UserController@edit'])->middleware('auth');
 
 Route::patch('profile/edit/{user}/update', [
   'as' => 'update_profile',
-  'uses' => 'UserController@update'])->middleware('auth', 'forcessl');
+  'uses' => 'UserController@update'])->middleware('auth');
 
 Route::delete('profile/delete/{user}', [
   'as' => 'delete_profile',
-  'uses' => 'UserController@delete'])->middleware('auth', 'forcessl');
+  'uses' => 'UserController@delete'])->middleware('auth');
 
 // Debug route to restore all softDeleted users
 Route::get('restore', [
