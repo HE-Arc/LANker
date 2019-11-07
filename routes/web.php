@@ -20,9 +20,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/event', function() {
-   return view('event');
-});
+Route::get('/event',[
+  'as' => 'event',
+  'uses' => 'EventController@show']);
+
+Route::get('/event/form',[
+  'as' => 'form_event',
+  'uses' => 'EventController@form']);
 
 // TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
 // TODO: the logic need to be in a controller
