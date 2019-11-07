@@ -9,12 +9,11 @@ class UserController extends Controller
 
   function __construct()
   {
-    $this->middleware('auth');
+    // $this->middleware('auth');
   }
 
   public function edit(User $user)
   {
-    $user = Auth::user();
     return view('edit', compact('user'));
   }
 
@@ -31,5 +30,43 @@ class UserController extends Controller
     $user->save();
 
     return redirect()->route('profile', $user->name);
+  }
+
+  public function delete(User $user)
+  {
+    $user->delete();
+
+    return redirect()->route('dashboard');
+  }
+
+  public function restore()
+  {
+    $users = User::withTrashed()->get();
+    foreach ($users as $user) {
+      $user->restore();
+    }
+
+    return redirect()->route('dashboard');
+  }
+
+  public function forceDelete()
+  {
+    $users = User::withTrashed()->get();
+    foreach ($users as $user) {
+      if($user->trashed()) {
+        $user->forceDelete();
+      }
+    }
+
+    return redirect()->route('dashboard');
+  }
+
+  public function show(string $name)
+  {
+    $user = User::where('name',$name)->first();
+    if ($user === null) {
+     return redirect()->route('dashboard');
+    }
+    return view('profile', ['user' => $user]);
   }
 }

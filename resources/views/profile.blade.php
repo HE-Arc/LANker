@@ -14,17 +14,15 @@
       </div>
     </div>
     <div class="col-sm">
-      <h1>Pierre</h1>
+      <h1>{{ $user->name }}</h1>
       <p class="text-muted">CEO of boicompany & govt. official</p>
       <h2>User information</h2>
-      <p>pierre.kowalski@he-arc.ch</p>
-      <p>Joined on 01.10.2014</p>
-      <p>+41 012 345 954</p>
+      <p>{{ $user->email }}</p>
+      <p>Joined on {{ date("d.m.Y",strtotime($user->created_at)) }}</p>
     </div>
     <div class="col-sm-6">
     </div>
   </div>
-
   <div class="col my-4">
     @if (Auth::check() && Auth::user()->id == $user->id)
       <div class="row">
@@ -32,7 +30,7 @@
       </div>
       <div class="row mb-2">
         <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary mr-2">Change account informations</a>
-        <form action="{{ url('/users', ['id' => $user->id]) }}" method="POST"  onclick="return confirm('Are you sure?')">
+        <form action="{{ route('delete_profile', Auth::user()) }}" method="POST"  onclick="return confirm('Are you sure?')">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
             <input type="submit" class="btn btn-danger" value="Delete profile"/>
@@ -40,11 +38,13 @@
       </div>
     @endunless
     <div class="row">
-      <h3>Description</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <div class="col pl-0 pr-0">
+        <h3>Description</h3>
+        <p>{{ $user->description }}</p>
+      </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col pl-0 pr-0">
     <!-- change accordion to blink collapsible ? -->
     <div class="accordion" id="accordionExample">
       <div class="card">
