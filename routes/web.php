@@ -55,3 +55,7 @@ Route::get('forceDelete', [
   'as' => 'forceDelete_profiles',
   'uses' => 'UserController@forceDelete'
 ]);
+
+Route::group(['prefix' => 'lanker_admin'], function () {
+    Voyager::routes();
+});
