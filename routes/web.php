@@ -20,9 +20,18 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/event', function() {
-   return view('event');
-});
+Route::get('/event',[
+  'as' => 'event',
+  'uses' => 'EventController@show']);
+
+//TODO: rajouter middleware auth
+Route::get('/event/form',[
+  'as' => 'form_event',
+  'uses' => 'EventController@form'])->middleware('auth');
+
+Route::post('/event/form/create', [
+  'as' => 'create_event',
+  'uses' => 'EventController@create'])->middleware('auth');;
 
 // TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
 Route::get('/profile/{name}',[
