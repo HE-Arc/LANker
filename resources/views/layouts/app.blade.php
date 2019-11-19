@@ -33,6 +33,11 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+              @auth
+              <li class="nav-item">
+                  <a class="nav-link" href="{{ route('form_event') }}">{{ __('Create event') }}</a>
+              </li>
+              @endauth
               <!-- My Events here -->
             </ul>
             <ul class="navbar-nav">
