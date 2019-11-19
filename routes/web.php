@@ -40,22 +40,31 @@ Route::get('/profile/{name}',[
 
 Route::get('/profile/edit/{user}',[
   'as' => 'edit_profile',
-  'uses' => 'UserController@edit'])->middleware('auth');
+  'uses' => 'UserController@edit'
+])->middleware('auth');
 
 Route::patch('profile/edit/{user}/update', [
   'as' => 'update_profile',
-  'uses' => 'UserController@update'])->middleware('auth');
+  'uses' => 'UserController@update'
+])->middleware('auth');
 
 Route::delete('profile/delete/{user}', [
   'as' => 'delete_profile',
-  'uses' => 'UserController@delete'])->middleware('auth');
+  'uses' => 'UserController@delete'
+])->middleware('auth');
 
 // Debug route to restore all softDeleted users
 Route::get('restore', [
   'as' => 'restore_profiles',
-  'uses' => 'UserController@restore']);
+  'uses' => 'UserController@restore'
+]);
 
 // Debug route to permanently delete all softDeleted users
 Route::get('forceDelete', [
   'as' => 'forceDelete_profiles',
-  'uses' => 'UserController@forceDelete']);
+  'uses' => 'UserController@forceDelete'
+]);
+
+Route::group(['prefix' => 'lanker_admin'], function () {
+    Voyager::routes();
+});

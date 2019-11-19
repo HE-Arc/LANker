@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -56,6 +56,9 @@
                       </a>
 
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        @if(Auth::user()->can('browse_admin'))
+                          <a class="dropdown-item" href="lanker_admin">Admin</a>
+                        @endif
                           <a class="dropdown-item" href="{{ route('profile', Auth::user()->name) }}">Profile</a>
 
                           <a class="dropdown-item" href="{{ route('logout') }}"

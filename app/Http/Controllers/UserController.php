@@ -21,12 +21,25 @@ class UserController extends Controller
   public function update(User $user)
   {
     $this->validate(request(), [
-      'email' => 'required|email|unique:users',
-      'password' => 'required|min:8|confirmed'
+      'email' => 'required|email',
+      'password' => 'confirmed',
+      'description' => 'max:2048'
     ]);
 
-    $user->email = request('email');
-    $user->password = bcrypt(request('password'));
+    if(strcmp(request('email'), $user->email) != 0)
+    {
+      $user->email = request('email');
+    }
+
+    if(request('password') != "")
+    {
+      $user->password = bcrypt(request('password'));
+    }
+
+    if(strcmp(request('description'), $user->description) != 0)
+    {
+      $user->description = request('description');
+    }
 
     $user->save();
 
