@@ -4,7 +4,7 @@
 <section class="row no-gutters align-items-center d-none d-lg-block">
   <div class="col-12 d-flex">
     <img src="{{ asset('storage/home/home-image4.jpg') }}" class="img-fluid deactivate fit-image" alt="">
-    <?php // TODO: add logo here ?>
+    <?php // TODO: add logo here, with a bg-dark-80 ?>
   </div>
 </section>
 <div class="bg-light">
