@@ -12,6 +12,14 @@ class User extends \TCG\Voyager\Models\User
     use Notifiable;
 
     /**
+     * The events that belong to the user.
+     */
+    public function roles()
+    {
+        return $this->belongsToMany('App\Event');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

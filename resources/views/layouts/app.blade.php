@@ -26,7 +26,7 @@
     <div id="app">
       <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #273c75;">
-          <a class="navbar-brand" href="{{ url('/') }}">LANker</a>
+          <a class="navbar-brand" href="{{ route('dashboard') }}">LANker</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

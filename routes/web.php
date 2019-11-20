@@ -12,31 +12,41 @@
 */
 use App\User;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('dashboard');
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['prefix' => '/'], function() {
+  Route::get('dashboard', [
+    'as' => 'dashboard',
+    'uses' => 'HomeController@index'
+  ]);
+
+  Route::get('home', [
+    'as' => 'dashboard',
+    'uses' => 'HomeController@index'
+  ]);
+});
 
 Route::get('/event',[
   'as' => 'event',
-  'uses' => 'EventController@show']);
+  'uses' => 'EventController@show'
+]);
 
 //TODO: rajouter middleware auth
 Route::get('/event/form',[
   'as' => 'form_event',
-  'uses' => 'EventController@form'])->middleware('auth');
+  'uses' => 'EventController@form'
+])->middleware('auth');
 
 Route::post('/event/form/create', [
   'as' => 'create_event',
-  'uses' => 'EventController@create'])->middleware('auth');;
+  'uses' => 'EventController@create'
+])->middleware('auth');;
 
 // TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
 Route::get('/profile/{name}',[
   'as' => 'profile',
-  'uses' => 'UserController@show']);
+  'uses' => 'UserController@show'
+]);
 
 Route::get('/profile/edit/{user}',[
   'as' => 'edit_profile',
