@@ -15,6 +15,10 @@ use App\User;
 Auth::routes();
 
 Route::group(['prefix' => '/'], function() {
+  Route::get('', [
+    'as' => 'dashboard',
+    'uses' => 'HomeController@index'
+  ]);
   Route::get('dashboard', [
     'as' => 'dashboard',
     'uses' => 'HomeController@index'

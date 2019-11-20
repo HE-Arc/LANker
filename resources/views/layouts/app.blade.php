@@ -25,7 +25,8 @@
   <body>
     <div id="app">
       <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #273c75;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-mazarine-blue">
+        {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-black"> --}}
           <a class="navbar-brand" href="{{ route('dashboard') }}">LANker</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,7 +44,7 @@
             <ul class="navbar-nav">
               <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0 d-none" type="submit">Search</button>
               </form>
               @guest
                   <li class="nav-item">
@@ -83,7 +84,7 @@
         </nav>
       </header>
 
-      <main class="my-5">
+      <main>
           @yield('content')
       </main>
     </div>

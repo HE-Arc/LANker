@@ -1,4 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+/* @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8"; */
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap');
+@charset "UTF-8";
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
 
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
@@ -27,8 +35,37 @@
 
 .fit-image {
     width: 100% !important;
-    height: 15vw !important;
+    height: 32vw !important;
     object-fit: cover !important;
+}
+
+.bg-white-80 {
+  background-color: white !important;
+  opacity: 80% !important;
+}
+
+.font-weight-boldest {
+  font-weight: 900 !important;
+}
+
+.img-object-fit {
+  object-fit: cover;
+}
+
+.bg-mazarine-blue {
+  background-color: var(--mazarine-blue) !important;
+}
+
+.color-mazarine-blue {
+  color: var(--mazarine-blue) !important;
+}
+
+.border-color-mazarine-blue {
+  border-color: var(--mazarine-blue) !important;
+}
+
+.bg-black {
+  background-color: #101010;
 }
 
 /* makes the font 33% larger relative to the icon container */
@@ -3079,6 +3116,8 @@
   --danger: #e3342f;
   --light: #f8f9fa;
   --dark: #343a40;
+  --mazarine-blue: #273c75;
+  /* --mazarine-blue: #0071e3; */
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -3116,13 +3155,13 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito", "FontAwesome",  sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+   /* background-color: #f8fafc; */
 }
 
 [tabindex="-1"]:focus {
