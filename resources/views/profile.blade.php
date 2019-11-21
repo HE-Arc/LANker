@@ -57,7 +57,21 @@
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
           <div class="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            @forelse ($user->events as $event)
+              @component('components/event_card')
+                @slot('name')
+                  {{$event->name}}
+                @endslot
+                @slot('description')
+                  {{$event->description}}
+                @endslot
+                @slot('created_at')
+                  {{$event->created_at}}
+                @endslot
+              @endcomponent
+            @empty
+              <p>You haven't participated in any event</p>
+            @endforelse
           </div>
         </div>
       </div>

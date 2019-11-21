@@ -31,6 +31,11 @@ Route::group(['prefix' => '/'], function() {
   ]);
 });
 
+Route::get('/search_event', [
+  'as' => 'search_event',
+  'uses' => 'EventController@searchEvent'
+]);
+
 Route::get('/event/{name}',[
   'as' => 'event',
   'uses' => 'EventController@show'
@@ -39,12 +44,12 @@ Route::get('/event/{name}',[
 Route::get('/event/join/{id}',[
   'as' => 'join_event',
   'uses' => 'EventController@joinEvent'
-]);
+])->middleware('auth');
 
 Route::get('/event/leave/{id}',[
   'as' => 'leave_event',
   'uses' => 'EventController@leaveEvent'
-]);
+])->middleware('auth');
 
 //TODO: rajouter middleware auth
 Route::get('/event/form',[
@@ -55,7 +60,7 @@ Route::get('/event/form',[
 Route::post('/event/form/create', [
   'as' => 'create_event',
   'uses' => 'EventController@create'
-])->middleware('auth');;
+])->middleware('auth');
 
 // TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
 Route::get('/profile/{name}',[
@@ -90,6 +95,6 @@ Route::get('forceDelete', [
   'uses' => 'UserController@forceDelete'
 ]);
 
-Route::group(['prefix' => 'lanker_admin'], function () {
-    Voyager::routes();
+Route::group(['prefix' => 'lanker_admin'], function() {
+  Voyager::routes();
 });

@@ -34,12 +34,19 @@ class EventController extends Controller
      return view('event_form');
    }
 
+   public function searchEvent(Request $request)
+   {
+     $name = $request->input('searchvalue') . '%';
+     $events = Event::where('name', 'like', $name)->take(10)->get();
+     return view('search_event', compact('events'));
+   }
+
    public function joinEvent(int $id)
    {
      $event = Event::find($id);
      $event->users()->attach($id);
      return redirect()->back();
-   }  
+   }
 
    public function leaveEvent(int $id)
    {
