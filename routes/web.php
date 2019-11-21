@@ -15,6 +15,11 @@ use App\User;
 Auth::routes();
 
 Route::group(['prefix' => '/'], function() {
+  Route::get('', [
+    'as' => 'dashboard',
+    'uses' => 'HomeController@index'
+  ]);
+
   Route::get('dashboard', [
     'as' => 'dashboard',
     'uses' => 'HomeController@index'
@@ -26,9 +31,19 @@ Route::group(['prefix' => '/'], function() {
   ]);
 });
 
-Route::get('/event',[
+Route::get('/event/{name}',[
   'as' => 'event',
   'uses' => 'EventController@show'
+]);
+
+Route::get('/event/join/{id}',[
+  'as' => 'join_event',
+  'uses' => 'EventController@joinEvent'
+]);
+
+Route::get('/event/leave/{id}',[
+  'as' => 'leave_event',
+  'uses' => 'EventController@leaveEvent'
 ]);
 
 //TODO: rajouter middleware auth

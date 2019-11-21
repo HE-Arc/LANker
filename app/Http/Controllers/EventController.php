@@ -23,14 +23,29 @@ class EventController extends Controller
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
-   public function show()
+   public function show(string $name)
    {
-     return view('event');
+     $event = Event::where('name', $name)->first();
+     return view('event', compact('event'));
    }
 
    public function form()
    {
      return view('event_form');
+   }
+
+   public function joinEvent(int $id)
+   {
+     $event = Event::find($id);
+     $event->users()->attach($id);
+     return redirect()->back();
+   }  
+
+   public function leaveEvent(int $id)
+   {
+     $event = Event::find($id);
+     $event->users()->detach($id);
+     return redirect()->back();
    }
 
    public function create(EventCreateRequest $request)
