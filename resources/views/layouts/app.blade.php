@@ -41,9 +41,10 @@
               <!-- My Events here -->
             </ul>
             <ul class="navbar-nav">
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('search_event') }}">
+                 @csrf
+                <input class="form-control mr-sm-2" name="searchvalue" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 d-none" type="submit">Search</button>
               </form>
               @guest
                   <li class="nav-item">
@@ -62,7 +63,7 @@
 
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @if(Auth::user()->can('browse_admin'))
-                          <a class="dropdown-item" href="lanker_admin">Admin</a>
+                          <a class="dropdown-item" href="{{ url('lanker_admin') }}">Admin</a>
                         @endif
                           <a class="dropdown-item" href="{{ route('profile', Auth::user()->name) }}">Profile</a>
 

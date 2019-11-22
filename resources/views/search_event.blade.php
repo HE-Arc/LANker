@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    <h1 class="display-4">Events</h1>
+    <h1 class="display-4">Search result</h1>
     @forelse ($events as $event)
       @component('components/event_card')
         @slot('name')
@@ -16,7 +16,7 @@
         @endslot
       @endcomponent
     @empty
-      <h3 class="text-muted">Seems like there's no ongoing events...</h3>
+      <h3 class="text-muted">No results founds...</h3>
     @endforelse
   </div>
 @endsection

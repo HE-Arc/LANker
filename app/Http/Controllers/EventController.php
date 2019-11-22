@@ -19,38 +19,60 @@ class EventController extends Controller
   }
 
   /**
-  * Show the application dashboard.
-  *
-  * @return \Illuminate\Contracts\Support\Renderable
-  */
-  public function show()
-  {
-    return view('event');
-  }
+   * Show the application dashboard.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
+   public function show(string $name)
+   {
+     $event = Event::where('name', $name)->first();
+     return view('event', compact('event'));
+   }
 
-  public function form()
-  {
-    return view('event_form');
-  }
+   public function form()
+   {
+     return view('event_form');
+   }
 
-  public function create(EventCreateRequest $request)
-  {
-    $validated = $request->validated();
+   public function searchEvent(Request $request)
+   {
+     $name = $request->input('searchvalue') . '%';
+     $events = Event::where('name', 'like', $name)->take(10)->get();
+     return view('search_event', compact('events'));
+   }
 
-    if(!$validated) {
-      return redirect()->back()->withInput();
-    }
+   public function joinEvent(int $id)
+   {
+     $event = Event::find($id);
+     $event->users()->attach($id);
+     return redirect()->back();
+   }
 
-    $event = new Event;
-    $event->name = $request->name;
-    $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->date $request->start:00"));
-    $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->date $request->end:00"));
-    $event->date_start = $combinedDTStart;
-    $event->date_end = $combinedDTEnd;
-    $event->location = $request->location;
-    $event->description = $request->description;
-    $event->save();
+   public function leaveEvent(int $id)
+   {
+     $event = Event::find($id);
+     $event->users()->detach($id);
+     return redirect()->back();
+   }
 
-    return redirect()->route('dashboard');
-  }
+   public function create(EventCreateRequest $request)
+   {
+     $validated = $request->validated();
+
+     if(!$validated){
+       return redirect()->back()->withInput();
+     }
+
+     $event = new Event;
+     $event->name = $request->name;
+     $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->date $request->start:00"));
+     $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->date $request->end:00"));
+     $event->date_start = $combinedDTStart;
+     $event->date_end = $combinedDTEnd;
+     $event->location = $request->location;
+     $event->description = $request->description;
+     $event->save();
+
+     return redirect()->route('dashboard');
+   }
 }
