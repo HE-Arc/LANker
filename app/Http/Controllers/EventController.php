@@ -9,10 +9,10 @@ use App\Http\Requests\EventCreateRequest;
 class EventController extends Controller
 {
   /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
+  * Create a new controller instance.
+  *
+  * @return void
+  */
   public function __construct()
   {
 
