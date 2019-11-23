@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{ asset('js/image_preview.js') }}" defer></script>
+
 <div class="container">
   <div class="container">
     <h1 class="display-4">Create Event</h1>
     <div class="card">
-      <form class="card-body form-col ml-2 mr-2" method="POST" action="{{ route('create_event') }}">
+      <form class="card-body form-col ml-2 mr-2" enctype="multipart/form-data" method="POST" action="{{ route('create_event') }}">
           @csrf
 
           <div class="form-group row">
@@ -20,11 +22,18 @@
 
           <div class="form-group row">
             <div class="form-row">
-              <div class="col-xs-6">
-                <img src="../img/goose.jpg" class="img-thumbnail float-left" alt="">
+              <div class="col-xs-9">
+                <img src="{{ url('storage/banners/dreamhack.jpg')}}" id="image_preview_container" class="img-thumbnail float-left event-banner" alt="">
               </div>
-              <div class="col-xs-6 align-self-end mt-2">
-                <button type="submit" class="btn btn-primary" >Upload an image</button>
+              <div class="col-xs-6 align-self-end mt-2 @error('image') is-invalid @enderror">
+                <span class="btn btn-primary btn-file">
+                  @error('image')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+                  Browse an image <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
+                </span>
               </div>
             </div>
           </div>
@@ -94,7 +103,7 @@
 
           <div class="row">
             <button class="btn btn-primary mr-2" type="submit" >Create event</button>
-            <button class="btn btn-secondary" type="submit" >Cancel</button>
+            <a class="btn btn-secondary" href="{{ url()->previous() }}">Cancel</a>
           </div>
 
         </form>

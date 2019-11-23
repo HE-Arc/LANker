@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Validator;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -61,6 +63,28 @@ class UserController extends Controller
     }
 
     return redirect()->route('dashboard');
+  }
+
+  public function changeAvatar(User $user)
+  {
+
+    $validator = Validator::make(request()->all(), [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator);
+    }
+
+    Storage::delete("public/".$user->avatar);
+
+    $image = request()->image->store('public/users');
+
+    $user->avatar = substr($image, strlen("public/"));
+
+    $user->save();
+
+    return redirect()->back();
   }
 
   public function forceDelete()

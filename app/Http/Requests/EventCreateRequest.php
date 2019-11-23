@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
+
 class EventCreateRequest extends FormRequest
 {
     /**
@@ -31,7 +32,8 @@ class EventCreateRequest extends FormRequest
           'end' => 'required|date_format:H:i|after_or_equal:start',
           'location' => 'required|string|max:120',
           'game' => 'required|string|max:120',
-          'description' => 'string|max:240|nullable'
+          'description' => 'string|max:240|nullable',
+          'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
       ];
     }
 

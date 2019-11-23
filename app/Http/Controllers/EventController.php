@@ -49,6 +49,17 @@ class EventController extends Controller
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
      $event->description = $request->description;
+
+     if($request->has("image"))
+     {
+       $image = $request->image->store('public/banners');
+       $event->banner = substr($image, strlen("public/"));
+     }
+     else {
+       $event->banner = "banners/dreamhack.jpg";
+     }
+
+
      $event->save();
 
      return redirect()->route('dashboard');

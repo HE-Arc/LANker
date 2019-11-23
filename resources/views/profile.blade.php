@@ -1,16 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
+<script src="{{ asset('js/image_preview.js') }}" defer></script>
+
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <div class="card" style="width: 18rem;">
-        <img src="../img/goose.jpg" alt="" class="card-img-top img-thumbnail">
+      <div class="card text-center" style="width: 18rem; ">
+
+        <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" alt="" class="card-img avatar img-thumbnail"/>
+
         @if (Auth::check() && Auth::user()->id == $user->id)
-          <div class="card-body m-auto">
-            <a href="#" class="btn btn-primary">Changer</a>
+        <form method="POST" enctype="multipart/form-data" id="upload_image_form" action="{{ route('change_profile_avatar', $user) }}" >
+          @csrf
+          {{ method_field('patch') }}
+          <div class="card-img-overlay h-100 d-flex flex-column justify-content-end mt-3">
+            <div class="form-group">
+              <span class="btn btn-primary btn-file">
+                Browse <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" accept="image/*"/>
+              </span>
+              @error('image')
+                  <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                  </span>
+              @enderror
+              <button type="submit" class="btn btn-primary ml-1">Change</button>
+            </div>
           </div>
+        </form>
         @endunless
+
       </div>
     </div>
     <div class="col-sm">
