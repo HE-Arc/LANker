@@ -1,0 +1,11 @@
+.avatar{
+   width: 100%!important;
+   height: 300px!important;
+   object-fit: cover;
+}
+
+.event-banner{
+  width: 670px!important;
+  height: 300px!important;
+  object-fit: cover;
+}

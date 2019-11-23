@@ -73,6 +73,11 @@ Route::get('/profile/edit/{user}',[
   'uses' => 'UserController@edit'
 ])->middleware('auth');
 
+Route::patch('/profile/avatar/{user}', [
+  'as' => 'change_profile_avatar',
+  'uses' => 'UserController@changeAvatar'
+])->middleware('auth');
+
 Route::patch('profile/edit/{user}/update', [
   'as' => 'update_profile',
   'uses' => 'UserController@update'
