@@ -73,7 +73,3 @@ Route::get('forceDelete', [
 Route::group(['prefix' => 'lanker_admin'], function () {
     Voyager::routes();
 });
-
-// Route::get('photo', [
-//   'as' => 'photo',
-//   'uses' => 'ImageController@index']);
