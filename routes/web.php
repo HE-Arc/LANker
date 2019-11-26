@@ -36,7 +36,7 @@ Route::get('/search_event', [
   'uses' => 'EventController@searchEvent'
 ]);
 
-Route::get('/event/{name}',[
+Route::get('/event/show/{name}',[
   'as' => 'event',
   'uses' => 'EventController@show'
 ]);
