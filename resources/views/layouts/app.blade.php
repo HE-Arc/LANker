@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 
     <!-- Fonts -->
@@ -21,6 +22,10 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/file_input.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/image_preview.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+
   </head>
   <body>
     <div id="app">
@@ -42,8 +47,9 @@
               <!-- My Events here -->
             </ul>
             <ul class="navbar-nav">
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('search_event') }}">
+                 @csrf
+                <input class="form-control mr-sm-2" name="searchvalue" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0 d-none" type="submit">Search</button>
               </form>
               @guest
@@ -63,7 +69,7 @@
 
                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         @if(Auth::user()->can('browse_admin'))
-                          <a class="dropdown-item" href="lanker_admin">Admin</a>
+                          <a class="dropdown-item" href="{{ url('lanker_admin') }}">Admin</a>
                         @endif
                           <a class="dropdown-item" href="{{ route('profile', Auth::user()->name) }}">Profile</a>
 

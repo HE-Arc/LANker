@@ -9,10 +9,10 @@ use App\Http\Requests\EventCreateRequest;
 class EventController extends Controller
 {
   /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
+  * Create a new controller instance.
+  *
+  * @return void
+  */
   public function __construct()
   {
 
@@ -23,14 +23,36 @@ class EventController extends Controller
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
-   public function show()
+   public function show(string $name)
    {
-     return view('event');
+     $event = Event::where('name', $name)->first();
+     return view('event', compact('event'));
    }
 
    public function form()
    {
      return view('event_form');
+   }
+
+   public function searchEvent(Request $request)
+   {
+     $name = $request->input('searchvalue') . '%';
+     $events = Event::where('name', 'like', $name)->take(10)->get();
+     return view('search_event', compact('events'));
+   }
+
+   public function joinEvent(int $id)
+   {
+     $event = Event::find($id);
+     $event->users()->attach($id);
+     return redirect()->back();
+   }
+
+   public function leaveEvent(int $id)
+   {
+     $event = Event::find($id);
+     $event->users()->detach($id);
+     return redirect()->back();
    }
 
    public function create(EventCreateRequest $request)
@@ -49,6 +71,17 @@ class EventController extends Controller
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
      $event->description = $request->description;
+
+     if($request->has("image"))
+     {
+       $image = $request->image->store('public/banners');
+       $event->banner = substr($image, strlen("public/"));
+     }
+     else {
+       $event->banner = "banners/dreamhack.jpg";
+     }
+
+
      $event->save();
 
      return redirect()->route('dashboard');
