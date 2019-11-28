@@ -103,3 +103,18 @@ Route::get('forceDelete', [
 Route::group(['prefix' => 'lanker_admin'], function() {
   Voyager::routes();
 });
+
+Route::post('/event/send_invite',[
+  'as' => 'send_invite_event',
+  'uses' => 'EventController@invite'
+])->middleware('auth');
+
+Route::post('/event/send_invite',[
+  'as' => 'send_invite_event_username',
+  'uses' => 'EventController@inviteUsername'
+])->middleware('auth');
+
+Route::get('/event/invite/{event}', [
+  'as' => 'invite_event',
+  'uses' => 'EventController@showInvite'
+])->middleware('auth');

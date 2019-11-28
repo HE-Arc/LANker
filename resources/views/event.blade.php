@@ -52,6 +52,7 @@
               @else
                 <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary">Join event</a>
               @endif
+              <a href="{{ route('invite_event', $event) }}" class="btn btn-primary">Share</a>
             @else
               <a href="{{ route('login') }}" class="btn btn-primary">Login first</a>
             @endauth
