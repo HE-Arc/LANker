@@ -30,14 +30,4 @@ class UserEditRequest extends FormRequest
       'description' => 'max:2048'
     ];
   }
-
-  /**
-  * Get the error messages for the defined validation rules.
-  *
-  * @return array
-  */
-  public function messages()
-  {
-    // no custom messages
-  }
 }
