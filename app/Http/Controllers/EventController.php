@@ -77,10 +77,6 @@ class EventController extends Controller
        $image = $request->image->store('public/banners');
        $event->banner = substr($image, strlen("public/"));
      }
-     else {
-       $event->banner = "banners/dreamhack.jpg";
-     }
-
 
      $event->save();
 
