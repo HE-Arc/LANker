@@ -14,8 +14,13 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
                             <div class="col-md-6">
-                                <input id="mail" type="text" class="form-control" name="email" value="" required autofocus placeholder="Email adress">
+                                <input id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="" required autofocus placeholder="Email adress">
                                 <input id="event_name" type="text" name="event_name" value="{{$event->name}}" hidden>
+                                @error('email')
+                                <span class="invalid-feedback">
+                                  <strong>invalid email address</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">
@@ -40,8 +45,13 @@
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
                             <div class="col-md-6">
-                                <input id="mail" type="text" class="form-control" name="username" value="" required autofocus placeholder="Username">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="" required autofocus placeholder="Username">
                                 <input id="event_name" type="text" name="event_name" value="{{$event->name}}" hidden>
+                                @error('username')
+                                <span class="invalid-feedback">
+                                  <strong>Unknown username</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group row">

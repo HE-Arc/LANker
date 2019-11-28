@@ -12,6 +12,7 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
@@ -90,24 +91,26 @@ class EventController extends Controller
      return redirect()->route('dashboard');
    }
 
-   public function inviteUsername(Request $request)
+   public function inviteUsername()
    {
-     $event_name = "";
-     $username = "";
-     if(isset($_POST['event_name'])){$event_name=$_POST['event_name'];}
-     if(isset($_POST['username'])){$username=$_POST['username'];}
+
+     $event_name=app('request')->input('event_name');
+     $username=app('request')->input('username');
      $email = DB::table('users')->where('name',$username)->select('email')->get();
-     Log::info($email);
+     $validator = Validator::make(['username'=>$email], ['username' => 'required|email',])->validate(); //Trick to get the good error
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
 
-   public function invite(Request $request)
+   public function invite()
    {
-     $event_name = "";
-     $email = "";
-     if(isset($_POST['event_name'])){$event_name=$_POST['event_name'];}
-     if(isset($_POST['email'])){$email=$_POST['email'];}
+     $event_name=app('request')->input('event_name');
+     $email=app('request')->input('email');
+     $validator = Validator::make(['email'=>$email], ['email' => 'required|email',])->validate();
+    /*if ($validator->fails())
+    {
+      return redirect()->back()->withErrors($validator)->withInput();
+    }*/
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
