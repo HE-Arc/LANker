@@ -5,6 +5,9 @@
     <h1 class="display-4">Events</h1>
     @forelse ($events as $event)
       @component('components/event_card')
+        @slot('banner')
+          {{$event->banner}}
+        @endslot
         @slot('name')
           {{$event->name}}
         @endslot

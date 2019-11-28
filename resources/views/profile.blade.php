@@ -78,6 +78,9 @@
           <div class="card-body">
             @forelse ($user->events as $event)
               @component('components/event_card')
+                @slot('banner')
+                  {{$event->banner}}
+                @endslot
                 @slot('name')
                   {{$event->name}}
                 @endslot

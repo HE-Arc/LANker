@@ -77,7 +77,9 @@ class UserController extends Controller
         return redirect()->back()->withErrors($validator);
     }
 
-    Storage::delete("public/".$user->avatar);
+    if($user->avatar != "/users/default.png") {
+      Storage::delete("public/".$user->avatar);
+    }
 
     $image = request()->image->store('public/users');
 
