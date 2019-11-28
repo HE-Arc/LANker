@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Http\Requests\EventCreateRequest;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -44,14 +45,14 @@ class EventController extends Controller
    public function joinEvent(int $id)
    {
      $event = Event::find($id);
-     $event->users()->attach($id);
+     $event->users()->attach(Auth::id());
      return redirect()->back();
    }
 
    public function leaveEvent(int $id)
    {
      $event = Event::find($id);
-     $event->users()->detach($id);
+     $event->users()->detach(Auth::id());
      return redirect()->back();
    }
 
