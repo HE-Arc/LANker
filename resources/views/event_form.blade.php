@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="{{ asset('js/image_preview.js') }}" defer></script>
-
 <div class="container">
   <div class="container">
     <h1 class="display-4">Create Event</h1>
@@ -25,17 +23,18 @@
               <div class="col-xs-9">
                 <img src="{{ url('storage/banners/dreamhack.jpg')}}" id="image_preview_container" class="img-thumbnail float-left event-banner" alt="">
               </div>
-              <div class="col-xs-6 align-self-end mt-2 @error('image') is-invalid @enderror">
+              <div class="col-xs-6 align-self-end mt-2">
                 <span class="btn btn-primary btn-file">
-                  @error('image')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                      </span>
-                  @enderror
                   Browse an image <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
                 </span>
               </div>
             </div>
+            <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
+            @error('image')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
           </div>
 
           <div class="form-group row">

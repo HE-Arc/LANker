@@ -47,6 +47,7 @@ class EventCreateRequest extends FormRequest
       return [
           'start.date_format' => 'Time format must be HH:MM!',
           'end.date_format'  => 'Time format must be HH:MM!',
+          'image.max'  => 'The image is too big!',
       ];
   }
 }
