@@ -7,7 +7,6 @@ use App\User;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserEditRequest;
-use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -111,9 +110,6 @@ class UserController extends Controller
     }
     $participated = DB::table('event_user')->where('user_id',$user->id)->count();
     $organised = DB::table('events')->where('user_id',$user->id)->count();
-    Log::info("participated: ".$participated);
-    Log::info("organised: ".$participated);
-
 
     return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised]);
   }
