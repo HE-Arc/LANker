@@ -27,7 +27,7 @@
       <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
       @error('image')
           <span class="invalid-feedback" role="alert">
-              <strong>{{ $message }}</strong>
+              <strong>The image is too big!</strong>
           </span>
       @enderror
     </div>
