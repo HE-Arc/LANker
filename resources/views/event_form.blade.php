@@ -83,6 +83,9 @@
 
           <div class="form-group row">
             <label for="game">Game</label>
+            <div id="game_tags">
+
+            </div>
             <input id="game" type="text" class="form-control @error('game') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games" required>
             @error('game')
                 <span class="invalid-feedback" role="alert">

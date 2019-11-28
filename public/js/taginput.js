@@ -1,13 +1,13 @@
-$('#game').autocomplete({
-  source: []
-})
+// $('#game').autocomplete({
+//   source: []
+// })
 
 let gameArray = []
 var results = []
 $('#game').keydown(function(e){
   if($(this).val().length >= 3 && e.which != 13) {
     $.get({
-      url: '/public/autocomplete',
+      url: '/LANker/public/autocomplete',
       data: {name:$('#game').val()},
       success: function (data, textStatus, jqXHR) {
         console.log(data);

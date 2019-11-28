@@ -23,7 +23,7 @@ class GameController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function find_games()
+    public function findGames()
     {
         $name="";
         if(isset($_GET['name'])){$name=$_GET['name'];}
