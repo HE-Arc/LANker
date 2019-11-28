@@ -93,12 +93,22 @@
 
           <div class="form-group row">
             <label for="description">Description</label>
-            <textarea id="description" class="form-control  @error('description') is-invalid @enderror" name="description" value="{{ old('description') }}"></textarea>
-            @error('description')
+            <textarea id="description" class="form-control  @error('public') is-invalid @enderror" name="description" value="{{ old('description') }}"></textarea>
+            @error('public')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
             @enderror
+          </div>
+
+          <div class="form-group row">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" id="private" name="private" @if (old('private')) checked @endif>
+              <label class="form-check-label" for="private">
+                Private Event
+              </label>
+            </div>
+
           </div>
 
           <div class="row">

@@ -72,6 +72,10 @@ class EventController extends Controller
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
      $event->description = $request->description;
+     if (isset($request->private)) {
+          $event->public = 0;
+     }
+     $event->user_id = Auth::id();
 
      if($request->has("image"))
      {
