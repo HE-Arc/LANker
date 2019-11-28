@@ -47,7 +47,7 @@
         <div class="row m-0 my-2">
           <div class="col">
             @auth
-              @if ($event->users()->where('event_id', $event->id)->exists())
+              @if ($event->users()->where('event_id', $event->id)->where('user_id', Auth::id())->exists())
                 <a href="{{ route('leave_event', $event->id) }}" class="btn btn-primary">Leave event</a>
               @else
                 <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary">Join event</a>

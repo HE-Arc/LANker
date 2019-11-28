@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\User;
 use Validator;
 use Illuminate\Support\Facades\Storage;
@@ -109,6 +110,9 @@ class UserController extends Controller
     if ($user === null) {
       return redirect()->route('dashboard');
     }
-    return view('profile', ['user' => $user]);
+    $participated = DB::table('event_user')->where('user_id',$user->id)->count();
+    $organised = DB::table('events')->where('user_id',$user->id)->count();
+
+    return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised]);
   }
 }

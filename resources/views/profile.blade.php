@@ -62,6 +62,14 @@
         <p>{{ $user->description }}</p>
       </div>
     </div>
+    <div class="row">
+      <div class="col pl-0 pr-0">
+        <h3>Statistics</h3>
+        <p><b>Number of participations to events: </b>{{ $participated }} <br>
+          <b>Number of organised events: </b>{{ $organised }}
+        </p>
+      </div>
+    </div>
   </div>
   <div class="col pl-0 pr-0">
     <!-- change accordion to blink collapsible ? -->
