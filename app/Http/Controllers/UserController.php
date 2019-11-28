@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UserEditRequest;
 
 class UserController extends Controller
 {
