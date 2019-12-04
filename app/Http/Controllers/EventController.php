@@ -97,7 +97,7 @@ class EventController extends Controller
      $event_name=app('request')->input('event_name');
      $username=app('request')->input('username');
      $email = DB::table('users')->where('name',$username)->select('email')->get();
-     $validator = Validator::make(['username'=>$email], ['username' => 'required|email',])->validate(); //Trick to get the good error
+     $validator = Validator::make(['username'=>$email], ['username' => 'required',])->validate(); //Trick to get the good error
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
@@ -107,10 +107,6 @@ class EventController extends Controller
      $event_name=app('request')->input('event_name');
      $email=app('request')->input('email');
      $validator = Validator::make(['email'=>$email], ['email' => 'required|email',])->validate();
-    /*if ($validator->fails())
-    {
-      return redirect()->back()->withErrors($validator)->withInput();
-    }*/
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
