@@ -25,11 +25,11 @@
               </div>
               <div class="col-xs-6 align-self-end mt-2">
                 <span class="btn btn-primary btn-file">
-                  Browse an image <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
+                  Browse an image <input type="file" id="image" name="image" class="form-control" accept="image/*"/ value="{{ url('storage/banners/dreamhack.jpg')}}">
                 </span>
               </div>
             </div>
-            <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
+
             @error('image')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
