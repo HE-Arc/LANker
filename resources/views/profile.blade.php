@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<script src="{{ asset('js/image_preview.js') }}" defer></script>
-
 <div class="container">
   <div class="row">
     <div class="col-sm">
@@ -17,13 +15,8 @@
           <div class="card-img-overlay h-100 d-flex flex-column justify-content-end mt-3">
             <div class="form-group">
               <span class="btn btn-primary btn-file">
-                Browse <input type="file" id="image" name="image" class="form-control @error('image') is-invalid @enderror" accept="image/*"/>
+                Browse <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
               </span>
-              @error('image')
-                  <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                  </span>
-              @enderror
               <button type="submit" class="btn btn-primary ml-1">Change</button>
             </div>
           </div>
@@ -31,6 +24,12 @@
         @endunless
 
       </div>
+      <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
+      @error('image')
+          <span class="invalid-feedback" role="alert">
+              <strong>The image is too big!</strong>
+          </span>
+      @enderror
     </div>
     <div class="col-sm">
       <h1>{{ $user->name }}</h1>
