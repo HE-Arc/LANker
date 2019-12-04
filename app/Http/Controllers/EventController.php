@@ -4,8 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\SendMail;
+use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\EventCreateRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
@@ -86,5 +93,40 @@ class EventController extends Controller
      $event->save();
 
      return redirect()->route('dashboard');
+   }
+
+   public function inviteUsername()
+   {
+
+     $event_name=app('request')->input('event_name');
+     $username=app('request')->input('username');
+     $email = DB::table('users')->where('name',$username)->select('email')->get();
+     $validator = Validator::make(['username'=>$email], ['username' => 'required|email',])->validate(); //Trick to get the good error
+     $this->sendMail($email,$event_name);
+     return redirect()->route('event', ['name' => $event_name]);
+   }
+
+   public function invite()
+   {
+     $event_name=app('request')->input('event_name');
+     $email=app('request')->input('email');
+     $validator = Validator::make(['email'=>$email], ['email' => 'required|email',])->validate();
+    /*if ($validator->fails())
+    {
+      return redirect()->back()->withErrors($validator)->withInput();
+    }*/
+     $this->sendMail($email,$event_name);
+     return redirect()->route('event', ['name' => $event_name]);
+   }
+
+   private function sendMail($email, $event_name)
+   {
+     $url = str_replace("http://","",URL::route('event', ['name'=>$event_name]));
+     Mail::to($email)->send(new SendMail(Auth::user()->name,$event_name,$url));
+   }
+
+   public function showInvite(Event $event)
+   {
+     return view('invite_form', ['event' => $event]);
    }
 }

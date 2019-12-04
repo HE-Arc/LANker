@@ -16,7 +16,6 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Username or Email') }}</label>
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" name="name" value="{{ old('username') ?: old('email') }}" required autocomplete="name" autofocus>
-
                                 @if ($errors->has('username') || $errors->has('email'))
                                 <span class="invalid-feedback">
                                   <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
@@ -30,7 +29,6 @@
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
