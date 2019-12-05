@@ -115,8 +115,9 @@ class UserController extends Controller
     $participated = DB::table('events')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
     $organised = DB::table('events')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
 
-    $participating_evt = Event::whereDate('date_start','>',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
-    $participated_evt = Event::whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
+    $participating_evt = Event::join('event_user', 'events.id', '=', 'event_user.event_id')->whereDate('date_start','>',date('Y-m-d H:i:s'))->where('event_user.user_id',$user->id)->get();
+    $participated_evt = Event::join('event_user', 'events.id', '=', 'event_user.event_id')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('event_user.user_id',$user->id)->get();
+
     $organising_evt = Event::whereDate('date_start','>',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
     $organised_evt = Event::whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
 

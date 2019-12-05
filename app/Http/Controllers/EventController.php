@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\SendMail;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\EventCreateRequest;
+use App\Http\Requests\InviteEmailRequest;
+use App\Http\Requests\InviteUsernameRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Log;
@@ -95,26 +98,26 @@ class EventController extends Controller
      return redirect()->route('dashboard');
    }
 
-   public function inviteUsername()
+   public function inviteUsername(InviteUsernameRequest $request)
    {
 
-     $event_name=app('request')->input('event_name');
-     $username=app('request')->input('username');
-     $email = DB::table('users')->where('name',$username)->select('email')->get();
-     $validator = Validator::make(['username'=>$email], ['username' => 'required|email',])->validate(); //Trick to get the good error
+     $event_name=$request->event_name;
+     $username=$request->username;
+     //Validator::make($request->all(), ['username' => 'required','event_name' => 'required',])->validate();
+     $email = User::where('name',$username)->select('email')->get();
+     $request->username=$email;
+     $request->validated();
+
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
 
-   public function invite()
+   public function invite(InviteEmailRequest $request)
    {
-     $event_name=app('request')->input('event_name');
-     $email=app('request')->input('email');
-     $validator = Validator::make(['email'=>$email], ['email' => 'required|email',])->validate();
-    /*if ($validator->fails())
-    {
-      return redirect()->back()->withErrors($validator)->withInput();
-    }*/
+     $event_name=$request->event_name;
+     $email=$request->email;
+     //Validator::make($request->all(), ['email' => 'required|email','event_name' => 'required',])->validate();
+     $request->validated();
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
