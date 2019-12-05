@@ -104,10 +104,8 @@ class EventController extends Controller
      $event_name=$request->event_name;
      $username=$request->username;
      //Validator::make($request->all(), ['username' => 'required','event_name' => 'required',])->validate();
-     $email = User::where('name',$username)->select('email')->get();
-     $request->username=$email;
      $request->validated();
-
+     $email = User::where('name',$username)->select('email')->get();
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
