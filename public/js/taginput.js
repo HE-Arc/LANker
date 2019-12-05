@@ -90,7 +90,7 @@ function createHiddenInputWithGames(gameArray) {
 
   let hiddenGames = $('<input>', {
     type: 'hidden',
-    name: 'frmHidden',
+    name: 'games',
     id: 'hiddenGames',
     value: gameArray
   })
