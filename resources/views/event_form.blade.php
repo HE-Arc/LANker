@@ -123,11 +123,6 @@
             <button class="btn btn-primary mr-2" type="submit" >Create event</button>
             <a class="btn btn-secondary" href="{{ url()->previous() }}">Cancel</a>
           </div>
-
-        <div class="row">
-          <button class="btn btn-primary mr-2" type="submit" >Create event</button>
-          <a class="btn btn-secondary" href="{{ url()->previous() }}">Cancel</a>
-        </div>
     </form>
   </div>
 </div>
