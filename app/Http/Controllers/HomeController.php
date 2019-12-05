@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $events = Event::all();
+      $events = Event::where('public', '1')->get();
       return view('dashboard', compact('events'));
     }
 }
