@@ -14,10 +14,7 @@ class InviteUsernameRequest extends FormRequest
      */
     public function authorize()
     {
-        if(User::where('name',$this->username)->exists()){
-          return true;
-        }
-        return false; //TODO fix to return on page with errors
+        return true;
     }
 
     /**
@@ -28,7 +25,7 @@ class InviteUsernameRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required',
+            'username' => 'required|exists:users,name',
             'event_name' => 'required'
         ];
     }
