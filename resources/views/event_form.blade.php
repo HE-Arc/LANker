@@ -32,7 +32,7 @@
                 Browse an image <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
               </span>
             </div>
-            <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
+
             @error('image')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
