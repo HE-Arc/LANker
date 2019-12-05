@@ -3,3 +3,7 @@
     height: 15vw !important;
     object-fit: cover !important;
 }
+
+.lanker-tag {
+  border-radius: 1.5rem !important;
+}
