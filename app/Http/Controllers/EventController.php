@@ -92,7 +92,7 @@ class EventController extends Controller
 
      $event->save();
 
-     $games = split(',',$request->games);
+     $games = explode(',',$request->games);
 
      foreach ($games as $game) {
        $eventgame = new Eventgame;
