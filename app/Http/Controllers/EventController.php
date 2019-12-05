@@ -81,6 +81,14 @@ class EventController extends Controller
 
      $event->save();
 
+     $games = split(',',$request->games);
+
+     foreach ($games as $game) {
+       $eventgame = new Eventgame;
+       $eventgame->game = $game;
+       $event->eventgames()->save($eventgame);
+     }
+
      return redirect()->route('dashboard');
    }
 }

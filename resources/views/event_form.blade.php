@@ -79,7 +79,7 @@
         </div>
         <div class="form-group row">
           <label for="game">Game</label>
-          <input id="gameInput" type="text" class="form-control @error('game') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games" required>
+          <input id="gameInput" type="text" class="form-control @error('game') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
           @error('game')
               <span class="invalid-feedback" role="alert">
                   <strong>{{ $message }}</strong>

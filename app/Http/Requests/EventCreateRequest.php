@@ -31,7 +31,7 @@ class EventCreateRequest extends FormRequest
           'start' => 'required|date_format:H:i',
           'end' => 'required|date_format:H:i|after_or_equal:start',
           'location' => 'required|string|max:120',
-          'game' => 'required|string|max:120',
+          'games' => 'string',
           'description' => 'string|max:240|nullable',
           'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
       ];
