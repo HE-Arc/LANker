@@ -65,7 +65,7 @@ class EventController extends Controller
      }
 
      $event = new Event;
-     $event->event_name = $request->name;
+     $event->name = $request->event_name;
      // TODO : ajouter host name, ajouter price, ajouter nb sièges
      $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->start_date $request->start_time:00"));
      $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->end_date $request->end_time:00"));
@@ -76,6 +76,10 @@ class EventController extends Controller
      if (isset($request->private)) {
           $event->public = 0;
      }
+
+     $event->nb_chairs = $request->nb_chairs;
+     $event->price = $request->price;
+
      $event->user_id = Auth::id();
 
      if($request->has("image"))
@@ -83,6 +87,8 @@ class EventController extends Controller
        $image = $request->image->store('public/banners');
        $event->banner = substr($image, strlen("public/"));
      }
+
+
 
      $event->save();
 

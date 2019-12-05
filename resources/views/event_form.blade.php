@@ -142,9 +142,9 @@
             </div>
             <div class="col">
               <div class="form-group row">
-                <label for="nb_seats">Number of seats</label>
-                <input id="nb_seats" type="text" class="form-control @error('nb_seats') is-invalid @enderror" name="nb_seats" value="{{ old('nb_seats') }}" placeholder="100">
-                @error('nb_seats')
+                <label for="nb_chairs">Number of seats</label>
+                <input id="nb_chairs" type="text" class="form-control @error('nb_chairs') is-invalid @enderror" name="nb_chairs" value="{{ old('nb_chairs') }}" placeholder="100">
+                @error('nb_chairs')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>

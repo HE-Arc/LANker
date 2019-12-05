@@ -31,13 +31,13 @@ class EventCreateRequest extends FormRequest
           'start_date' => 'required|date',
           'end_date' => ['required', 'date', 'after_or_equal:start_date', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
           'start_time' => 'required|date_format:H:i',
-          'end_time' => 'required|date_format:H:i',
+          'end_time' => ['required', 'date_format:H:i', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
           'location' => 'required|string|max:120',
           'game' => 'required|string|max:120',
           'description' => 'string|max:240|nullable',
           'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-          'price' => 'nullable|regex:/[0-9]*\.[0-9][0-9]?/',
-          'nb_seats' => 'nullable|numeric|min:0'
+          'price' => 'nullable|regex:/[0-9]*(\.[0-9][0-9]?)?/',
+          'nb_chairs' => 'nullable|numeric|min:0'
       ];
     }
 
