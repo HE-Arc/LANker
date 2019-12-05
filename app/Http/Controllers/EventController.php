@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Eventgame;
 use App\SendMail;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\EventCreateRequest;
