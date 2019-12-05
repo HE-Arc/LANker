@@ -14,6 +14,9 @@
         @slot('description')
           {{$event->description}}
         @endslot
+        @slot('dates')
+          {{$event->getStartDate().$event->getEndDate()}}
+        @endslot
         @slot('created_at')
           {{$event->created_at}}
         @endslot
