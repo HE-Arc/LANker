@@ -65,9 +65,10 @@ class EventController extends Controller
      }
 
      $event = new Event;
-     $event->name = $request->name;
-     $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->date $request->start:00"));
-     $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->date $request->end:00"));
+     $event->event_name = $request->name;
+     // TODO : ajouter host name, ajouter price, ajouter nb sièges
+     $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->start_date $request->start_time:00"));
+     $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->end_date $request->end_time:00"));
      $event->date_start = $combinedDTStart;
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
