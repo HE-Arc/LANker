@@ -34,7 +34,7 @@
             </div>
             <div class="row my-2">
               @event_info(['id'=>'time','name'=>'Time','value'=>$event->getStartTime().'-'.$event->getEndTime()])@endevent_info
-              @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>$event->seats])@endevent_info
+              @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>$event->getNbSeats()])@endevent_info
             </div>
           </div>
         </div>

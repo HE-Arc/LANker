@@ -12,7 +12,6 @@ use App\Http\Requests\InviteEmailRequest;
 use App\Http\Requests\InviteUsernameRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\UrlGenerator;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -112,7 +111,6 @@ class EventController extends Controller
    {
      $event_name=$request->event_name;
      $email=$request->email;
-     //Validator::make($request->all(), ['email' => 'required|email','event_name' => 'required',])->validate();
      $request->validated();
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);

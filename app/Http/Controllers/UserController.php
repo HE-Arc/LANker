@@ -7,7 +7,6 @@ use App\User;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserEditRequest;
-use Illuminate\Support\Facades\Log;
 use App\Event;
 
 class UserController extends Controller
@@ -120,12 +119,6 @@ class UserController extends Controller
 
     $organising_evt = Event::whereDate('date_start','>',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
     $organised_evt = Event::whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
-
-    Log::info(count($participating_evt));
-    Log::info(count($participated_evt));
-    Log::info(count($organising_evt));
-    Log::info(count($organised_evt));
-
 
     return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised, 'participating_evt'=>$participating_evt,'organising_evt'=>$organising_evt, 'participated_evt'=>$participated_evt,'organised_evt'=>$organised_evt]);
   }

@@ -48,4 +48,11 @@ class Event extends Model
     return $this->price.".-";
   }
 
+  public function getNbSeats(){
+    if($this->seats==0){
+      return "-";
+    }
+    return $this->seats;
+  }
+
 }
