@@ -37,7 +37,7 @@
               @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>$event->seats])@endevent_info
             </div>
             <h2>Games</h2>
-              @foreach ($event->eventgames() as $eventgame)
+              @foreach ($event->eventgames()->get() as $eventgame)
               <div class="row my-2">{{$eventgame->game}}</div>
               @endforeach
           </div>
