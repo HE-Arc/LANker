@@ -7,34 +7,34 @@
       <div class="card p-3">
         <div class="row">
           <div class="col">
-            @image(['name'=>'dreamhack.jpg','alt'=>'event image','id'=>'event-image'])@endimage
+            <img src="{{ url('storage/'.$event->banner)}}" alt="event image" id="event-image" class="img-fluid">
           </div>
 
           <div class="col">
             <h2>General informations</h2>
             <div class="row my-2">
               @event_info(['id'=>'host','name'=>'Host','value'=>'HE-Arc'])@endevent_info
-              @event_info(['id'=>'location','name'=>'Location','value'=>'Neuchâtel'])@endevent_info
+              @event_info(['id'=>'location','name'=>'Location','value'=>$event->location])@endevent_info
             </div>
             <div class="row my-2">
-              @event_info(['id'=>'price','name'=>'Price','value'=>'Free'])@endevent_info
+              @event_info(['id'=>'price','name'=>'Price','value'=>$event->getPrice()])@endevent_info
 
               @component('components/event_info')
                 @slot('id')
                   date
                 @endslot
                 @slot('name')
-                  Host
+                  Date
                 @endslot
                 @slot('value')
-                  {{ $event->date_start }}
+                  {{ $event->getStartDate().$event->getEndDate() }}
                 @endslot
               @endcomponent
               {{-- @event_info(['id'=>'date','name'=>'Host','value'=>''])@endevent_info --}}
             </div>
             <div class="row my-2">
-              @event_info(['id'=>'time','name'=>'Time','value'=>'9:00-22:00'])@endevent_info
-              @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>'100'])@endevent_info
+              @event_info(['id'=>'time','name'=>'Time','value'=>$event->getStartTime().'-'.$event->getEndTime()])@endevent_info
+              @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>$event->getNbSeats()])@endevent_info
             </div>
           </div>
         </div>
