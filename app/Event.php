@@ -13,4 +13,8 @@ class Event extends Model
   {
       return $this->belongsToMany('App\User');
   }
+
+  public function getFormatedDescription(){
+    return preg_replace('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', '<a href="\1">\1</a>', $this->description);
+  }
 }

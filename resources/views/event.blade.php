@@ -41,7 +41,7 @@
         <div class="row m-0 my-2">
           <div class="col">
             <h2>Description</h2>
-            <p>{{ $event->description }}</p>
+            <p>{!! $event->getFormatedDescription() !!}</p>
           </div>
         </div>
         <div class="row m-0 my-2">
