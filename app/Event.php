@@ -19,6 +19,11 @@ class Event extends Model
     return $this->hasMany('App\Eventgame');
   }
 
+
+  public function getFormatedDescription(){
+    return preg_replace('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', '<a href="\1">\1</a>', $this->description);
+  }
+
   public function getEndTime()
   {
     return date("H:i", strtotime($this->date_end));
@@ -60,4 +65,8 @@ class Event extends Model
     return $this->seats;
   }
 
+  public function getId()
+  {
+    return $this->id;
+  }
 }
