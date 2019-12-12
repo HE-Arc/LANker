@@ -3,11 +3,56 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-sm">
-      <div class="card text-center" style="width: 18rem; ">
+    <div class="col">
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          {{-- <div class="col-sm-4 d-none d-sm-block">
+            <img src="{{ url('storage/'.$user->avatar) }}" class="card-img p-3" alt="user avatar">
+          </div> --}}
+          <div class="col-md-8">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h2 class="card-title">{{ $user->name }}</h2>
+                  @if(Auth::user()->hasRole('admin'))
+                    <p class="card-text text-muted">Administrator</p>
+                  @else
+                    <p class="card-text text-muted">User</p>
+                  @endif
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <h3>User information</h3>
+                  <p>{{ $user->email }}</p>
+                  <p>Joined on {{ date("d.m.Y",strtotime($user->created_at)) }}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <h3>Actions</h3>
+                  <form action="{{ route('delete_profile', Auth::user()) }}" method="POST">
+                      {{ csrf_field() }}
+                      {{ method_field('DELETE') }}
+                      <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary">Change account informations</a>
+                      @if (Auth::check() && Auth::user()->id == $user->id)
+                      <input type="submit" class="btn btn-danger" value="Delete profile" onclick="return confirm('Are you sure?')"/>
+                      @endunless
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 d-none d-md-block">
+            <img src="{{ url('storage/'.$user->avatar) }}" class="card-img p-3" alt="user avatar">
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" alt="" class="card-img avatar img-thumbnail"/>
-
+    {{-- <div class="card text-center">
+      <div class="card-body">
+        <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" alt="" class="card-img avatar img-thumbnail" style="width: 18rem; "/>
         @if (Auth::check() && Auth::user()->id == $user->id)
         <form method="POST" enctype="multipart/form-data" id="upload_image_form" action="{{ route('change_profile_avatar', $user) }}" >
           @csrf
@@ -22,210 +67,180 @@
           </div>
         </form>
         @endunless
-
       </div>
-      <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
-      @error('image')
-          <span class="invalid-feedback" role="alert">
-              <strong>The image is too big!</strong>
-          </span>
-      @enderror
     </div>
-    <div class="col-sm">
-      <h1>{{ $user->name }}</h1>
-
-      @if(Auth::user()->hasRole('admin'))
-        <p class="text-muted">Administrator</p>
-      @else
-        <p class="text-muted">User</p>
-      @endif
-      <h2>User information</h2>
-      <p>{{ $user->email }}</p>
-      <p>Joined on {{ date("d.m.Y",strtotime($user->created_at)) }}</p>
-    </div>
-    <div class="col-sm-6">
+    <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
+    @error('image')
+        <span class="invalid-feedback" role="alert">
+            <strong>The image is too big!</strong>
+        </span>
+    @enderror --}}
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>Description</h3>
+      <p>{{ $user->description }}</p>
     </div>
   </div>
-  <div class="col my-4">
-    @if (Auth::check() && Auth::user()->id == $user->id)
-      <div class="row">
-        <h3>Actions</h3>
-      </div>
-      <div class="row mb-2">
-        <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary mr-2">Change account informations</a>
-        <form action="{{ route('delete_profile', Auth::user()) }}" method="POST"  onclick="return confirm('Are you sure?')">
-            {{ csrf_field() }}
-            {{ method_field('DELETE') }}
-            <input type="submit" class="btn btn-danger" value="Delete profile"/>
-        </form>
-      </div>
-    @endunless
-    <div class="row">
-      <div class="col pl-0 pr-0">
-        <h3>Description</h3>
-        <p>{{ $user->description }}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col pl-0 pr-0">
-        <h3>Statistics</h3>
-        <p><b>Number of participations to events: </b>{{ $participated }} <br>
-          <b>Number of organised events: </b>{{ $organised }}
-        </p>
-      </div>
+  <div class="row">
+    <div class="col">
+      <h3>Statistics</h3>
+      <p>Number of participations to events: {{ $participated }}</p>
+      <p>Number of organised events: {{ $organised }}</p>
     </div>
   </div>
-  <div class="col pl-0 pr-0">
-    <!-- change accordion to blink collapsible ? -->
-    <div class="accordion" id="organising">
-      <div class="card">
-        <div class="card-header" id="headingThree">
-          <h2 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#organising_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Organising events
-            </button>
-          </h2>
+  <div class="row">
+    <div class="col">
+      <h3>Events</h3>
+      <!-- change accordion to blink collapsible ? -->
+      <div class="accordion" id="organising">
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#organising_collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Organising events
+              </button>
+            </h2>
+          </div>
+          <div id="organising_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#organising">
+            <div class="card-body">
+              @forelse($organising_evt as $event)
+                @component('components/event_card')
+                  @slot('banner')
+                    {{$event->banner}}
+                  @endslot
+                  @slot('name')
+                    {{$event->name}}
+                  @endslot
+                  @slot('dates')
+                    {{$event->getStartDate().$event->getEndDate()}}
+                  @endslot
+                  @slot('description')
+                    {{$event->description}}
+                  @endslot
+                  @slot('created_at')
+                    {{$event->created_at}}
+                  @endslot
+                @endcomponent
+              @empty
+                <p>You aren't organising any upcoming event</p>
+              @endforelse
+            </div>
+          </div>
         </div>
-        <div id="organising_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#organising">
-          <div class="card-body">
-            @forelse($organising_evt as $event)
-              @component('components/event_card')
-                @slot('banner')
-                  {{$event->banner}}
-                @endslot
-                @slot('name')
-                  {{$event->name}}
-                @endslot
-                @slot('dates')
-                  {{$event->getStartDate().$event->getEndDate()}}
-                @endslot
-                @slot('description')
-                  {{$event->description}}
-                @endslot
-                @slot('created_at')
-                  {{$event->created_at}}
-                @endslot
-              @endcomponent
-            @empty
-              <p>You aren't organising any upcoming event</p>
-            @endforelse
+      </div>
+
+      <div class="accordion" id="participating">
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#participating_collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Participating events
+              </button>
+            </h2>
+          </div>
+          <div id="participating_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#participating">
+            <div class="card-body">
+              @forelse($participating_evt as $event)
+                @component('components/event_card')
+                  @slot('banner')
+                    {{$event->banner}}
+                  @endslot
+                  @slot('name')
+                    {{$event->name}}
+                  @endslot
+                  @slot('dates')
+                    {{$event->getStartDate().$event->getEndDate()}}
+                  @endslot
+                  @slot('description')
+                    {{$event->description}}
+                  @endslot
+                  @slot('created_at')
+                    {{$event->created_at}}
+                  @endslot
+                @endcomponent
+              @empty
+                <p>You aren't organising any upcoming event</p>
+              @endforelse
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion" id="organised">
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#organised_collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Organised events
+              </button>
+            </h2>
+          </div>
+          <div id="organised_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#organised">
+            <div class="card-body">
+              @forelse($organised_evt as $event)
+                @component('components/event_card')
+                  @slot('banner')
+                    {{$event->banner}}
+                  @endslot
+                  @slot('name')
+                    {{$event->name}}
+                  @endslot
+                  @slot('dates')
+                    {{$event->getStartDate().$event->getEndDate()}}
+                  @endslot
+                  @slot('description')
+                    {{$event->description}}
+                  @endslot
+                  @slot('created_at')
+                    {{$event->created_at}}
+                  @endslot
+                @endcomponent
+              @empty
+                <p>You aren't organising any upcoming event</p>
+              @endforelse
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion" id="participated">
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#participated_collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Participated events
+              </button>
+            </h2>
+          </div>
+          <div id="participated_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#participated">
+            <div class="card-body">
+              @forelse($participated_evt as $event)
+                @component('components/event_card')
+                  @slot('banner')
+                    {{$event->banner}}
+                  @endslot
+                  @slot('name')
+                    {{$event->name}}
+                  @endslot
+                  @slot('dates')
+                    {{$event->getStartDate().$event->getEndDate()}}
+                  @endslot
+                  @slot('description')
+                    {{$event->description}}
+                  @endslot
+                  @slot('created_at')
+                    {{$event->created_at}}
+                  @endslot
+                @endcomponent
+              @empty
+                <p>You aren't organising any upcoming event</p>
+              @endforelse
+            </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="accordion" id="participating">
-      <div class="card">
-        <div class="card-header" id="headingThree">
-          <h2 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#participating_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Participating events
-            </button>
-          </h2>
-        </div>
-        <div id="participating_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#participating">
-          <div class="card-body">
-            @forelse($participating_evt as $event)
-              @component('components/event_card')
-                @slot('banner')
-                  {{$event->banner}}
-                @endslot
-                @slot('name')
-                  {{$event->name}}
-                @endslot
-                @slot('dates')
-                  {{$event->getStartDate().$event->getEndDate()}}
-                @endslot
-                @slot('description')
-                  {{$event->description}}
-                @endslot
-                @slot('created_at')
-                  {{$event->created_at}}
-                @endslot
-              @endcomponent
-            @empty
-              <p>You aren't organising any upcoming event</p>
-            @endforelse
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion" id="organised">
-      <div class="card">
-        <div class="card-header" id="headingThree">
-          <h2 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#organised_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Organised events
-            </button>
-          </h2>
-        </div>
-        <div id="organised_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#organised">
-          <div class="card-body">
-            @forelse($organised_evt as $event)
-              @component('components/event_card')
-                @slot('banner')
-                  {{$event->banner}}
-                @endslot
-                @slot('name')
-                  {{$event->name}}
-                @endslot
-                @slot('dates')
-                  {{$event->getStartDate().$event->getEndDate()}}
-                @endslot
-                @slot('description')
-                  {{$event->description}}
-                @endslot
-                @slot('created_at')
-                  {{$event->created_at}}
-                @endslot
-              @endcomponent
-            @empty
-              <p>You aren't organising any upcoming event</p>
-            @endforelse
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="accordion" id="participated">
-      <div class="card">
-        <div class="card-header" id="headingThree">
-          <h2 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#participated_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Participated events
-            </button>
-          </h2>
-        </div>
-        <div id="participated_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#participated">
-          <div class="card-body">
-            @forelse($participated_evt as $event)
-              @component('components/event_card')
-                @slot('banner')
-                  {{$event->banner}}
-                @endslot
-                @slot('name')
-                  {{$event->name}}
-                @endslot
-                @slot('dates')
-                  {{$event->getStartDate().$event->getEndDate()}}
-                @endslot
-                @slot('description')
-                  {{$event->description}}
-                @endslot
-                @slot('created_at')
-                  {{$event->created_at}}
-                @endslot
-              @endcomponent
-            @empty
-              <p>You aren't organising any upcoming event</p>
-            @endforelse
-          </div>
-        </div>
-      </div>
-    </div>
-
-
   </div>
 </div>
 @endsection

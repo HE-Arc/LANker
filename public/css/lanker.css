@@ -10,3 +10,7 @@
   overflow: hidden;
   text-overflow: ellipsis !important;
 }
+
+.lanker-avatar {
+  width: 18rem !important; 
+}
