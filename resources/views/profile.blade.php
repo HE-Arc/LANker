@@ -50,31 +50,6 @@
       </div>
     </div>
 
-    {{-- <div class="card text-center">
-      <div class="card-body">
-        <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" alt="" class="card-img avatar img-thumbnail" style="width: 18rem; "/>
-        @if (Auth::check() && Auth::user()->id == $user->id)
-        <form method="POST" enctype="multipart/form-data" id="upload_image_form" action="{{ route('change_profile_avatar', $user) }}" >
-          @csrf
-          {{ method_field('patch') }}
-          <div class="card-img-overlay h-100 d-flex flex-column justify-content-end mt-3">
-            <div class="form-group">
-              <span class="btn btn-primary btn-file">
-                Browse <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
-              </span>
-              <button type="submit" class="btn btn-primary ml-1">Change</button>
-            </div>
-          </div>
-        </form>
-        @endunless
-      </div>
-    </div>
-    <input type="hidden" name="image" value="" class="form-control @error('image') is-invalid @enderror">
-    @error('image')
-        <span class="invalid-feedback" role="alert">
-            <strong>The image is too big!</strong>
-        </span>
-    @enderror --}}
   </div>
   <div class="row">
     <div class="col">
