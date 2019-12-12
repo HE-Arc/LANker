@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Event;
 use App\Eventgame;
-use App\Eventuser;
+
 
 class EventGameTableSeeder extends Seeder
 {
