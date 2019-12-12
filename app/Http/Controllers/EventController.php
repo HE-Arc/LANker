@@ -80,7 +80,7 @@ class EventController extends Controller
      $event->date_start = $combinedDTStart;
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
-     $event->description = $request->description;
+     $event->description = htmlspecialchars($request->description);
      if (isset($request->private)) {
           $event->public = 0;
      }

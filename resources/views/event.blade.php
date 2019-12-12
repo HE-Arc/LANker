@@ -41,7 +41,7 @@
         <div class="row m-0 my-2">
           <div class="col">
             <h2>Description</h2>
-            <p style="white-space: pre-line">{!! $event->getFormatedDescription() !!}</p>
+            <p class="formatted">{!! $event->getFormatedDescription() !!}</p>
           </div>
         </div>
         <div class="row m-0 my-2">

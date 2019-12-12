@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\EventTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
