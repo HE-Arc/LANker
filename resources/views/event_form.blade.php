@@ -32,16 +32,20 @@
               </div>
           </div>
 
-          <div class="form-group row">
-            <div class="form-row">
-              <div class="col-xs-9">
-                <img src="{{ url('storage/banners/dreamhack.jpg')}}" id="image_preview_container" class="img-thumbnail float-left event-banner" alt="">
-              </div>
-              <div class="col-xs-6 align-self-end mt-2">
-                <span class="btn btn-primary btn-file">
-                  Browse an image <input type="file" id="image" name="image" class="form-control" accept="image/*"/ value="{{ url('storage/banners/dreamhack.jpg')}}">
-                </span>
-              </div>
+        <div class="form-group row">
+          <div class="form-row">
+            <div class="col-xs-9">
+              <img src="{{ url('storage/banners/dreamhack.jpg')}}" id="image_preview_container" class="img-thumbnail float-left event-banner" alt="">
+            </div>
+            <div class="col-xs-6 align-self-end mt-2 @error('image') is-invalid @enderror">
+              <span class="btn btn-primary btn-file">
+                @error('image')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+                Browse an image <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
+              </span>
             </div>
 
             @error('image')
@@ -50,7 +54,7 @@
                 </span>
             @enderror
           </div>
-
+        </div>
           <div class="form-group row">
             <div class="form-row">
               <div class="col-xs-3 mr-4">
@@ -96,26 +100,32 @@
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="form-group row">
-            <label for="location">Location</label>
-            <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" placeholder="Location" required>
-            @error('location')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-          </div>
+        <div class="form-group row">
+          <label for="location">Location</label>
+          <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" placeholder="Location" required>
+          @error('location')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+        </div>
+        <div class="form-group row">
+          <label for="game">Game</label>
+          <input id="gameInput" type="text" class="form-control @error('game') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
+          @error('game')
+              <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+              </span>
+          @enderror
+        </div>
 
-          <div class="form-group row">
-            <label for="game">Game</label>
-            <input id="game" type="text" class="form-control @error('game') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games" required>
-            @error('game')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
-          </div>
+        <div class="form-group row d-block">
+          <label for="">Selected games</label>
+          <span id="game_tags" class="d-block">
+          </span>
+        </div>
 
           <div class="form-group row">
             <label for="description">Description</label>
@@ -166,9 +176,7 @@
             <button class="btn btn-primary mr-2" type="submit" >Create event</button>
             <a class="btn btn-secondary" href="{{ url()->previous() }}">Cancel</a>
           </div>
-
-
-      </form>
+    </form>
   </div>
 </div>
 @endsection

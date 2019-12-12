@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Event extends Model
 {
   /**
-   * The users that follow an event.
-   */
+  * The users that follow an event.
+  */
   public function users()
   {
-      return $this->belongsToMany('App\User');
+    return $this->belongsToMany('App\User');
+  }
+
+  public function eventgames()
+  {
+    return $this->hasMany('App\Eventgame');
   }
 
 
@@ -58,5 +63,10 @@ class Event extends Model
       return "-";
     }
     return $this->seats;
+  }
+
+  public function getId()
+  {
+    return $this->id;
   }
 }

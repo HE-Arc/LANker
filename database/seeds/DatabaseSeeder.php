@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
     {
       $this->call([
       EventTableSeeder::class,
+      EventGameTableSeeder::class,
+      UsersTableSeeder::class,
+      EventUserTableSeeder::class,
   ]);
     }
 }

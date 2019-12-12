@@ -56,7 +56,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'Lock & Load 12',
+          'name' => 'Lock and Load 12',
           'location' => 'St. Urban-Strasse 5, 6210 Sursee',
           'description' => "Nach der äusserst erfolgreichen LAL11 kommen wir auch im 2020 zurück nach Sursee – kompetitiv und dennoch gemütlich wie eh und je!
                             Vom 24.04.20 – 26.04.20 erwartet dich und 511 andere Zocker ein Wochenende voller ESPORTS und GAMING in der Stadthalle Sursee am grössten ESPORTS Event der Zentralschweiz.
@@ -118,19 +118,6 @@ class EventTableSeeder extends Seeder
 
         foreach ($events as $event) {
           Event::create($event);
-        }
-
-        $evt_games= [
-          "NetGame Convention 2019" => ['Counter-Strike: Global Offensive','League of Legends','Overwatch','Hearthstone',"PLAYERUNKNOWN'S BATTLEGROUNDS"],
-          'Tournoi FIFA 20 2vs2' => ['FIFA 20'],
-          'GameTurnier' => ['FIFA 20','Call Of Duty: Modern Warfare'],
-          'Lock & Load 12' => ['Counter-Strike: Global Offensive','League of Legends','Overwatch','Hearthstone',"Fortnite"],
-          'Dreamhack' => ["Farming Simulator 19",'League of Legends',"Super Smash Bros. Ultimate"],
-          'Paris Games Week' => ["NBA 2K20", "Borderlands 3", "Just Dance 2020", "Tom Clancy's Rainbow Six: Siege","Brawlhalla","Mario + Rabbids Kingdom Battle"],
-          'Insomnia' => ["Mortal Kombat 11","Rocket League",'Overwatch','League of Legends','FIFA 20'],
-        ];
-        foreach ($evt_games as $event => $games) {
-          // TODO insert games into DB
         }
 
     }

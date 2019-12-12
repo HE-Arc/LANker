@@ -25,12 +25,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.fit-image {
-    width: 100% !important;
-    height: 15vw !important;
-    object-fit: cover !important;
-}
-
 /* makes the font 33% larger relative to the icon container */
 
 .fa-lg {
@@ -13693,3 +13687,4 @@ a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
