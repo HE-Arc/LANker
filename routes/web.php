@@ -100,6 +100,8 @@ Route::get('forceDelete', [
   'uses' => 'UserController@forceDelete'
 ]);
 
+Route::get('autocomplete', 'GameController@findGames');
+
 Route::group(['prefix' => 'lanker_admin'], function() {
   Voyager::routes();
 });

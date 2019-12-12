@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Eventgame;
 use App\SendMail;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -99,6 +100,14 @@ class EventController extends Controller
 
 
      $event->save();
+
+     $games = explode(',',$request->games);
+
+     foreach ($games as $game) {
+       $eventgame = new Eventgame;
+       $eventgame->game = $game;
+       $event->eventgames()->save($eventgame);
+     }
 
      return redirect()->route('dashboard');
    }

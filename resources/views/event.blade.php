@@ -36,6 +36,10 @@
               @event_info(['id'=>'time','name'=>'Time','value'=>$event->getStartTime().'-'.$event->getEndTime()])@endevent_info
               @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>$event->getNbSeats()])@endevent_info
             </div>
+            <h2>Games</h2>
+              @foreach ($event->eventgames()->get() as $eventgame)
+              <div class="row my-2">{{$eventgame->game}}</div>
+              @endforeach
           </div>
         </div>
         <div class="row m-0 my-2">
