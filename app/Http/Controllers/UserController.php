@@ -7,6 +7,7 @@ use App\User;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserEditRequest;
+use App\Event;
 
 class UserController extends Controller
 {
@@ -110,9 +111,15 @@ class UserController extends Controller
     if ($user === null) {
       return redirect()->route('dashboard');
     }
-    $participated = DB::table('event_user')->where('user_id',$user->id)->count();
-    $organised = DB::table('events')->where('user_id',$user->id)->count();
+    $participated = DB::table('events')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
+    $organised = DB::table('events')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
 
-    return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised]);
+    $participating_evt = Event::join('event_user', 'events.id', '=', 'event_user.event_id')->whereDate('date_start','>',date('Y-m-d H:i:s'))->where('event_user.user_id',$user->id)->get();
+    $participated_evt = Event::join('event_user', 'events.id', '=', 'event_user.event_id')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('event_user.user_id',$user->id)->get();
+
+    $organising_evt = Event::whereDate('date_start','>',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
+    $organised_evt = Event::whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
+
+    return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised, 'participating_evt'=>$participating_evt,'organising_evt'=>$organising_evt, 'participated_evt'=>$participated_evt,'organised_evt'=>$organised_evt]);
   }
 }
