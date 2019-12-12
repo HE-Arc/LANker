@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ $name }}</h5>
-    <p class="card-text">{{ $description }}</p>
+    <p class="card-text formatted">{!! $description !!}</p>
     <p class="card-text"> <b>{{$dates}}</b></p>
     <a href="{{ route('event', $name) }}" class="btn btn-primary">Go to event</a>
     <p class="card-text"><small class="text-muted">Created on {{ $created_at }}</small></p>

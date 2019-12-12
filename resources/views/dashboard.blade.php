@@ -12,7 +12,7 @@
           {{$event->name}}
         @endslot
         @slot('description')
-          {{$event->description}}
+          {!!$event->getFormatedDescription()!!}
         @endslot
         @slot('dates')
           {{$event->getStartDate().$event->getEndDate()}}
