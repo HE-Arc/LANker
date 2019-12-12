@@ -6,11 +6,13 @@ use Illuminate\Http\Request;
 use App\Event;
 use App\Eventgame;
 use App\SendMail;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\EventCreateRequest;
+use App\Http\Requests\InviteEmailRequest;
+use App\Http\Requests\InviteUsernameRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\UrlGenerator;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -73,9 +75,9 @@ class EventController extends Controller
      }
 
      $event = new Event;
-     $event->name = $request->name;
-     $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->date $request->start:00"));
-     $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->date $request->end:00"));
+     $event->name = $request->event_name;
+     $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->start_date $request->start_time:00"));
+     $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->end_date $request->end_time:00"));
      $event->date_start = $combinedDTStart;
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
@@ -83,6 +85,10 @@ class EventController extends Controller
      if (isset($request->private)) {
           $event->public = 0;
      }
+
+     $event->nb_chairs = $request->nb_chairs;
+     $event->price = $request->price;
+
      $event->user_id = Auth::id();
 
      if($request->has("image"))
@@ -90,6 +96,8 @@ class EventController extends Controller
        $image = $request->image->store('public/banners');
        $event->banner = substr($image, strlen("public/"));
      }
+
+
 
      $event->save();
 
@@ -104,22 +112,21 @@ class EventController extends Controller
      return redirect()->route('dashboard');
    }
 
-   public function inviteUsername()
+   public function inviteUsername(InviteUsernameRequest $request)
    {
-
-     $event_name=app('request')->input('event_name');
-     $username=app('request')->input('username');
-     $email = DB::table('users')->where('name',$username)->select('email')->get();
-     $validator = Validator::make(['username'=>$email], ['username' => 'required',])->validate(); //Trick to get the good error
+     $event_name=$request->event_name;
+     $username=$request->username;
+     $request->validated();
+     $email = User::where('name',$username)->select('email')->get();
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
 
-   public function invite()
+   public function invite(InviteEmailRequest $request)
    {
-     $event_name=app('request')->input('event_name');
-     $email=app('request')->input('email');
-     $validator = Validator::make(['email'=>$email], ['email' => 'required|email',])->validate();
+     $event_name=$request->event_name;
+     $email=$request->email;
+     $request->validated();
      $this->sendMail($email,$event_name);
      return redirect()->route('event', ['name' => $event_name]);
    }
