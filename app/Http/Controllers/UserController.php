@@ -125,7 +125,9 @@ class UserController extends Controller
 
   public function usernameAutocomplete()
   {
-    $users = User::select('name')->get();
+    $name="";
+    if(isset($_GET['name'])){$name=$_GET['name'];}
+    $users = User::where('name','like',$name."%")->get();
     echo json_encode($users);
   }
 }
