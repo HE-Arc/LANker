@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Event;
+use MarcReichel\IGDBLaravel\Models\Game;
+use Illuminate\Support\Facades\Log;
 
-class HomeController extends Controller
+class GameController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,9 +23,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function findGames()
     {
-      $events = Event::whereDate('date_start','>',date('Y-m-d H:i:s'))->where('public', '1')->orderBy('date_start')->get();
-      return view('dashboard', compact('events'));
+        $name="";
+        if(isset($_GET['name'])){$name=$_GET['name'];}
+        $games=Game::limit(10)->where('name','ilike',$name."%")->orderBy('name')->select('name')->get();
+        echo json_encode($games);
     }
 }

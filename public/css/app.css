@@ -33,41 +33,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.fit-image {
-    width: 100% !important;
-    height: 32vw !important;
-    object-fit: cover !important;
-}
-
-.bg-white-80 {
-  background-color: white !important;
-  opacity: 80% !important;
-}
-
-.font-weight-boldest {
-  font-weight: 900 !important;
-}
-
-.img-object-fit {
-  object-fit: cover;
-}
-
-.bg-mazarine-blue {
-  background-color: var(--mazarine-blue) !important;
-}
-
-.color-mazarine-blue {
-  color: var(--mazarine-blue) !important;
-}
-
-.border-color-mazarine-blue {
-  border-color: var(--mazarine-blue) !important;
-}
-
-.bg-black {
-  background-color: #101010;
-}
-
 /* makes the font 33% larger relative to the icon container */
 
 .fa-lg {
