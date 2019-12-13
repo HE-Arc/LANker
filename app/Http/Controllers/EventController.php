@@ -85,9 +85,13 @@ class EventController extends Controller
      if (isset($request->private)) {
           $event->public = 0;
      }
+     if (isset($request->nb_chairs)) {
+          $event->nb_chairs = $request->nb_chairs;
+     }
+     if (isset($request->price)) {
+          $event->price = $request->price;
+     }
 
-     $event->nb_chairs = $request->nb_chairs;
-     $event->price = $request->price;
 
      $event->user_id = Auth::id();
 

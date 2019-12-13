@@ -4,12 +4,12 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      <div class="card text-center" style="width: 18rem; ">
+      <div class="card text-center">
 
         <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" alt="" class="card-img avatar img-thumbnail"/>
 
         @if (Auth::check() && Auth::user()->id == $user->id)
-        <form method="POST" enctype="multipart/form-data" id="upload_image_form" action="{{ route('change_profile_avatar', $user) }}" >
+        <form method="POST" enctype="multipart/form-data" id="upload_image_form" action="{{ route('change_profile_avatar', Auth::user()) }}" >
           @csrf
           {{ method_field('patch') }}
           <div class="card-img-overlay h-100 d-flex flex-column justify-content-end mt-3">
@@ -44,6 +44,40 @@
       <p>Joined on {{ date("d.m.Y",strtotime($user->created_at)) }}</p>
     </div>
     <div class="col-sm-6">
+      <h1>Favorite games</h1>
+        @foreach ($user->usergames()->get() as $usergame)
+        <div class="">
+          <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
+            @csrf
+            {{ method_field('DELETE') }}
+            <p>
+              {{$usergame->game}}
+              @if (Auth::check() && Auth::user()->id == $user->id)
+              <button type="submit" class="btn btn-danger pull-right">Remove game</button>
+              @endunless
+            </p>
+          </form>
+        </div>
+        @endforeach
+        @if (Auth::check() && Auth::user()->id == $user->id)
+        <form id="eventForm" method="post" action="{{ route('update_profile_games', Auth::user()) }}">
+        @csrf
+        {{ method_field('PUT') }}
+          <div class="form-group">
+            <input id="gameInput" type="text" class="form-control @error('games') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
+            @error('games')
+                <span class="invalid-feedback" role="alert">
+                    <strong>You must enter a valid game!</strong>
+                </span>
+            @enderror
+          </div>
+          <div class="form-group">
+            <span id="game_tags" class="d-block">
+            </span>
+          </div>
+          <button type="submit" class="btn btn-primary ml-1 row">Update</button>
+        </form>
+        @endunless
     </div>
   </div>
   <div class="col my-4">

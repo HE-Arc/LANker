@@ -20,6 +20,14 @@ class User extends \TCG\Voyager\Models\User
     }
 
     /**
+     * The favorite games of the user.
+     */
+    public function usergames()
+    {
+      return $this->hasMany('App\Usergame');
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
