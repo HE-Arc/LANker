@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container my-5">
     <h1 class="display-4">Create Event</h1>
     {{-- <div class="card"> --}}
     {{-- <form class="card-body form-col ml-2 mr-2" enctype="multipart/form-data" method="POST" action="{{ route('create_event') }}"> --}}

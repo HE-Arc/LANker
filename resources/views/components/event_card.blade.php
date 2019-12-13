@@ -2,7 +2,7 @@
   <div class="embbed-responsive embed-responsive-16by9">
     <img src="{{ url('storage/'.$banner) }}" class="card-img-top fit-image" alt="...">
   </div>
-  <div class="card-body">
+  <div class="card-body text-dark">
     <h5 class="card-title">{{ $name }}</h5>
     <p class="card-text">{{ $description }}</p>
     <p class="card-text"> <b>{{$dates}}</b></p>

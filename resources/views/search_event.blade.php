@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container">
+  <div class="container my-5">
     <h1 class="display-4">Search result</h1>
     @forelse ($events as $event)
       @component('components/event_card')
