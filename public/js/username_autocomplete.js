@@ -1,11 +1,10 @@
 $('#username').autocomplete({
   paramName: 'name',
   transformResult: function(response) {
-    // console.log(response);
     let userData = JSON.parse(response)
     let usernameObjectArray = []
 
-    userData.forEach(dataItem => usernameObjectArray.push({value:dataItem.name, data:dataItem.id})) // TODO : regler ça puis donner le data a l'autocomplete
+    userData.forEach(dataItem => usernameObjectArray.push({value:dataItem.name, data:dataItem.id}))
     /*
     * Required format by devbridge autocomplete :
     * { suggestions:
@@ -23,7 +22,6 @@ $('#username').autocomplete({
   onSelect: function(suggestion) {
     let id = suggestion.data
     let name = suggestion.value
-    console.log(name);
-    $('#username').value=name;
+    $('#username').value=name
   }
 });
