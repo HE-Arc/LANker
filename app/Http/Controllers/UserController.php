@@ -122,4 +122,12 @@ class UserController extends Controller
 
     return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised, 'participating_evt'=>$participating_evt,'organising_evt'=>$organising_evt, 'participated_evt'=>$participated_evt,'organised_evt'=>$organised_evt]);
   }
+
+  public function usernameAutocomplete()
+  {
+    $name="";
+    if(isset($_GET['name'])){$name=$_GET['name'];}
+    $users = User::where('name','like',$name."%")->get();
+    echo json_encode($users);
+  }
 }
