@@ -18,7 +18,7 @@
   </section>
   <div class="bg-light row no-gutters">
     <div class="col">
-      <div class="p-4 m-4">
+      <div class="px-4 my-4">
         <h1 class="display-5">What is LANker ?</h1>
         <p class="lead">LANker is an easy to use web application for lan party managing. This web app is aimed at users wanting a fast approach to lan organizing.</p>
 
@@ -41,11 +41,11 @@
   </div>
   <div class="bg-light row no-gutters">
     <div class="col">
-      <div class="p-4  m-4">
+      <div class="px-4 my-4">
         <h1 class="display-5">Don't know where to start ?</h1>
         <p class="lead">Here's some events that are currently ongoing</p>
       </div>
-      <div class="container">
+      <div class="container-fluid">
         @forelse ($events as $event)
           @component('components/event_card')
             @slot('banner')

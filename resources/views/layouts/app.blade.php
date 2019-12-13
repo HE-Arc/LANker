@@ -106,5 +106,38 @@
           @yield('content')
       </main>
     </div>
+    <footer class="bg-black text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md">
+            <h5 class="my-3">About us</h5>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div class="col-md">
+            <h5 class="my-3">Social networks</h5>
+            <p class="Follow us on"></p>
+            <i class="fab fa-twitter fa-lg mx-2"></i>
+            <i class="fab fa-facebook fa-lg mx-2"></i>
+            <i class="fab fa-instagram fa-lg mx-2"></i>
+            <i class="fab fa-snapchat fa-lg mx-2"></i>
+          </div>
+          <div class="col-md">
+            <h5 class="my-3">Contact us</h5>
+            <address>
+              <strong>LANker dev team</strong><br>
+              Espace de l'Europe, 11<br>
+              2000 Neuchâtel, Switzerland<br>
+              info@lankerteam.ch
+            </address>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md">
+            <hr class="lanker-footer-line-white">
+            <p class="text-center my-0">© 2019 Copyright LANker.ch</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
