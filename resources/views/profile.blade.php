@@ -26,6 +26,8 @@
                   <h3>User information</h3>
                   <p>{{ $user->email }}</p>
                   <p>Joined on {{ date("d.m.Y",strtotime($user->created_at)) }}</p>
+                  <p>Participating in {{ $participated }} event(s)</p>
+                  <p>Organised {{ $organised }} event(s)</p>
                 </div>
               </div>
               <div class="row">
@@ -34,8 +36,8 @@
                   <form action="{{ route('delete_profile', Auth::user()) }}" method="POST">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
-                      <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary">Change account informations</a>
                       @if (Auth::check() && Auth::user()->id == $user->id)
+                      <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary">Change account informations</a>
                       <input type="submit" class="btn btn-danger" value="Delete profile" onclick="return confirm('Are you sure?')"/>
                       @endunless
                   </form>
@@ -44,7 +46,7 @@
             </div>
           </div>
           <div class="col-md-4 d-none d-md-block">
-            <img src="{{ url('storage/'.$user->avatar) }}" class="card-img p-3" alt="user avatar">
+            <img src="{{ url('storage/'.$user->avatar) }}" class="card-img" alt="user avatar">
           </div>
         </div>
       </div>
@@ -55,13 +57,6 @@
     <div class="col">
       <h3>Description</h3>
       <p>{{ $user->description }}</p>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h3>Statistics</h3>
-      <p>Number of participations to events: {{ $participated }}</p>
-      <p>Number of organised events: {{ $organised }}</p>
     </div>
   </div>
   <div class="row">
