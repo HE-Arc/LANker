@@ -96,3 +96,8 @@
 .bg-black {
   background-color: #101010;
 }
+
+.profile_card{
+  width: 40em !important;
+  /* height: 15em !important; */
+}

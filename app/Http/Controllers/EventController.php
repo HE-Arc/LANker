@@ -79,6 +79,10 @@ class EventController extends Controller
        return redirect()->back()->withInput();
      }
 
+     if (Event::where('name', '=', $request->event_name)->exists()) {
+       return redirect()->back()->withErrors(['event_name', 'An event with the same name already exists!'])->withInput();
+     }
+
      $event = new Event;
      $event->name = $request->event_name;
      $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->start_date $request->start_time:00"));
