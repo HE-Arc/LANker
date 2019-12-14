@@ -78,6 +78,58 @@
           </div>
         </div>
 
+        <div class="form-group row">
+          <div class="col">
+            <label for="gameInput">Favourite games</label>
+            <input id="gameInput" type="text" class="form-control @error('games') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
+            @error('games')
+            <span class="invalid-feedback" role="alert">
+              <strong>You must enter a valid game!</strong>
+            </span>
+            @enderror
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col">
+            <span id="game_tags" class="d-block">
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Game</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @forelse ($user->usergames()->get() as $usergame)
+                <tr>
+                  <td>{{ $usergame->name }}</td>
+                  <td>
+                    <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
+                      @csrf
+                      {{ method_field('DELETE') }}
+                      <button type="submit" class="btn btn-danger pull-right">Remove game</button>
+                    </form>
+                  </td>
+                </tr>
+                @empty
+                  <tr>
+                    <td>
+                      <p class="text-muted">There's seems to be no favourite games</p>
+                    </td>
+                  </tr>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+        </div>
+
         <div class="form-group row mb-0">
           <div class="col">
             <p class="text-primary">Leave the password field empty if you do not want to change it</p>

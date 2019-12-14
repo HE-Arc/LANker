@@ -60,38 +60,29 @@
             <a href="{{ route('login') }}" class="btn btn-primary">Login first</a>
           @endauth
         </div>
-        <div class="row">
-          <div class="col">
-          <div class="accordion" id="organising">
-            <div class="card">
-              <div class="card-header" id="headingThree">
-                <h2 class="mb-0">
-                  <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#organising_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    {{$event->users()->count()}} people interested
-                  </button>
-                </h2>
-              </div>
-              <div id="organising_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#organising">
-                <div class="card-body">
-                  <div class="container">
-                    <div class="row">
-                    @forelse($event->users()->get() as $user)
-                    @user_preview(['user'=>$user,'class'=>'col-md-4 col-sm-6 lanker-user-preview']) @enduser_preview
-                    @empty
-                    <div class="col">
-                      <p>Nobody is interested in this event for now</p>
-                    </div>
-                    @endforelse
+      </div>
+      <div class="row my-3">
+        <div class="col">
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseInterestedUsers" aria-expanded="false" aria-controls="collapseExample">
+            {{$event->users()->count()}} user(s) participating <i class="fas fa-arrow-down"></i>
+          </button>
+          <div class="collapse" id="collapseInterestedUsers">
+            <div class="card card-body">
+              <div class="container">
+                <div class="row">
+                  @forelse($event->users()->get() as $user)
+                  @user_preview(['user'=>$user,'class'=>'col-md-4 col-sm-6 lanker-user-preview']) @enduser_preview
+                  @empty
+                  <div class="col">
+                    <p>Nobody is interested in this event for now</p>
                   </div>
-                  </div>
+                  @endforelse
                 </div>
               </div>
             </div>
           </div>
-          </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

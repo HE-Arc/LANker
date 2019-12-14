@@ -7,10 +7,20 @@ $('#gameInput').autocomplete({
   transformResult: function(response) {
     let gameData = JSON.parse(response)
     let gameObjectArray = []
+    let gameCoverArray = []
     console.log(gameData);
 
-    gameData.forEach(dataItem => gameObjectArray.push({value:dataItem.name, data:dataItem.id}))
+    gameData.forEach(dataItem => {
+      gameObjectArray.push({value:dataItem.name, data:dataItem.id})
+      if (dataItem.cover != undefined) {
+        let url = dataItem.cover.url
+        url.replace(/t_thumb/, 't_cover_big')
+        gameCoverArray.push(url)
+      }
+    })
+
     console.log({suggestions:gameObjectArray});
+    console.log(gameCoverArray);
 
     /*
     * Required format by devbridge autocomplete :
