@@ -42,48 +42,7 @@
                   </form>
                 </div>
               </div>
-<<<<<<< HEAD
-=======
-              @endunless
-              <div class="row">
-                <div class="col">
-                  <h3>Favorite games</h3>
-                  @foreach ($user->usergames()->get() as $usergame)
-                  <div class="">
-                    <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
-                      @csrf
-                      {{ method_field('DELETE') }}
-                      <p>
-                        {{$usergame->game}}
-                        @if (Auth::check() && Auth::user()->id == $user->id)
-                        <button type="submit" class="btn btn-danger pull-right">Remove game</button>
-                        @endunless
-                      </p>
-                    </form>
-                  </div>
-                  @endforeach
-                  @if (Auth::check() && Auth::user()->id == $user->id)
-                  <form id="eventForm" method="post" action="{{ route('update_profile_games', Auth::user()) }}">
-                  @csrf
-                  {{ method_field('PUT') }}
-                    <div class="form-group">
-                      <input id="gameInput" type="text" class="form-control @error('games') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
-                      @error('games')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>You must enter a valid game!</strong>
-                          </span>
-                      @enderror
-                    </div>
-                    <div class="form-group">
-                      <span id="game_tags" class="d-block">
-                      </span>
-                    </div>
-                    <button type="submit" class="btn btn-primary ml-1 row">Update</button>
-                  </form>
-                  @endunless
-                </div>
-              </div>
->>>>>>> ad7fd24f2a094bceb37536fc8f80ac5adc1f8c53
+              @endif
             </div>
           </div>
           <div class="col-md-4 d-none d-md-block">
