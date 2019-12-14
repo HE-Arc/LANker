@@ -26,9 +26,6 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> --}}
-
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -37,6 +34,7 @@
     <link href="{{ asset('css/image_preview.css') }}" rel="stylesheet">
     <link href="{{ asset('css/autocomplete_suggestion_style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
 
   </head>
   <body>
@@ -115,7 +113,7 @@
           </div>
           <div class="col-md">
             <h5 class="my-3">Social networks</h5>
-            <p class="Follow us on"></p>
+            <p class="text-muted">Follow us on</p>
             <i class="fab fa-twitter fa-lg mx-2"></i>
             <i class="fab fa-facebook fa-lg mx-2"></i>
             <i class="fab fa-instagram fa-lg mx-2"></i>
@@ -125,16 +123,17 @@
             <h5 class="my-3">Contact us</h5>
             <address>
               <strong>LANker dev team</strong><br>
-              Espace de l'Europe, 11<br>
+              <i class="fas fa-map-marker-alt"></i> Espace de l'Europe, 11<br>
               2000 Neuchâtel, Switzerland<br>
-              info@lankerteam.ch
+              <i class="far fa-envelope"></i> info@lankerteam.ch<br>
+              <i class="fas fa-phone"></i> (+41) 032 943 43 13
             </address>
           </div>
         </div>
         <div class="row">
           <div class="col-md">
             <hr class="lanker-footer-line-white">
-            <p class="text-center my-0">© 2019 Copyright LANker.ch</p>
+            <p class="text-center my-0"><i class="far fa-copyright"></i> 2019 Copyright LANker.ch</p>
           </div>
         </div>
       </div>
