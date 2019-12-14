@@ -41,7 +41,7 @@
   height: 1.5em !important;
 }
 
-.lanker-user-preview{
+.lanker-ellipses{
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -95,4 +95,13 @@
 
 .bg-black {
   background-color: #101010;
+}
+
+.lanker-img-card{
+  max-width: 20%;
+}
+
+.lanker-img-card-img{
+  object-fit: cover;
+  height: 70%;
 }

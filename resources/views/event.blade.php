@@ -36,7 +36,7 @@
           <h2>Games</h2>
           <div class="row">
             @foreach ($event->eventgames()->get() as $eventgame)
-              <div class="event-info col-sm">{{$eventgame->game}}</div>
+              @game_card(['cover'=>$eventgame->cover,'title'=>$eventgame->game])@endgame_card
             @endforeach
           </div>
         </div>
@@ -71,7 +71,7 @@
               <div class="container">
                 <div class="row">
                   @forelse($event->users()->get() as $user)
-                  @user_preview(['user'=>$user,'class'=>'col-md-4 col-sm-6 lanker-user-preview']) @enduser_preview
+                  @user_preview(['user'=>$user,'class'=>'col-md-4 col-sm-6 lanker-ellipses']) @enduser_preview
                   @empty
                   <div class="col">
                     <p>Nobody is interested in this event for now</p>

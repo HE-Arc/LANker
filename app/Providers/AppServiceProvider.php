@@ -28,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
       Blade::component('components.image', 'image');
       Blade::component('components.user_preview', 'user_preview');
       Blade::component('components.event_card', 'event_card');
+      Blade::component('components.game_card', 'game_card');
     }
 }
