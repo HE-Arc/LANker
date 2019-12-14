@@ -1,3 +1,7 @@
+.formatted{
+  white-space: pre-line;
+}
+
 .fit-image {
     width: 100% !important;
     height: 15vw !important;
@@ -9,4 +13,14 @@
   white-space: nowrap !important;
   overflow: hidden;
   text-overflow: ellipsis !important;
+}
+
+.lanker-avatar-mini{
+  height: 1.5em !important;
+}
+
+.lanker-user-preview{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

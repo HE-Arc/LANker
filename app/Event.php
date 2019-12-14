@@ -11,12 +11,17 @@ class Event extends Model
   */
   public function users()
   {
-    return $this->belongsToMany('App\User');
+    return $this->belongsToMany('App\User', 'eventusers');
   }
 
   public function eventgames()
   {
     return $this->hasMany('App\Eventgame');
+  }
+
+
+  public function getFormatedDescription(){
+    return preg_replace('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', '<a href="\1">\1</a>', $this->description);
   }
 
   public function getEndTime()
@@ -60,4 +65,8 @@ class Event extends Model
     return $this->seats;
   }
 
+  public function getId()
+  {
+    return $this->id;
+  }
 }
