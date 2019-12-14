@@ -37,6 +37,20 @@
   width: 18rem !important;
 }
 
+.lanker-avatar-mini{
+  height: 1.5em !important;
+}
+
+.lanker-avatar-medium img{
+  height: 5.0em !important;
+}
+
+.lanker-user-preview{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .lanker-display-0 {
   font-size: 8rem;
   font-weight: 300;
@@ -85,4 +99,9 @@
 
 .bg-black {
   background-color: #101010;
+}
+
+.profile_card{
+  width: 40em !important;
+  /* height: 15em !important; */
 }
