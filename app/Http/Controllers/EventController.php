@@ -17,6 +17,7 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -86,38 +87,28 @@ class EventController extends Controller
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
      $event->description = $request->description;
+
      if (isset($request->private))
      {
           $event->public = 0;
      }
-     if (isset($request->nb_chairs)) {
-          $event->nb_chairs = $request->nb_chairs;
-     }
+
      if (isset($request->price)) {
           $event->price = $request->price;
      }
-
 
      if(isset($request->seats))
      {
        $event->seats = $request->seats;
      }
-     else
-     {
-       $event->seats = 0;
-     }
-
-     $event->price = $request->price;
 
      $event->user_id = Auth::id();
 
-     if($request->has("image"))
+     if(isset($request->image))
      {
        $image = $request->image->store('public/banners');
        $event->banner = substr($image, strlen("public/"));
      }
-
-
 
      $event->save();
 

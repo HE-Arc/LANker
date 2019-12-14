@@ -36,8 +36,9 @@ class EventCreateRequest extends FormRequest
           'games' => 'string',
           'description' => 'string|max:240|nullable',
           'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-          'price' => 'nullable|regex:/[0-9]*(\.[0-9][0-9]?)?/',
-          'nb_chairs' => 'nullable|numeric|min:0'
+          // 'price' => 'nullable|regex:/[0-9]*(\.[0-9][0-9]?)?/',
+          'price' => 'nullable|numeric|min:0',
+          'seats' => 'nullable|numeric|min:0'
       ];
     }
 

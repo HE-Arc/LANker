@@ -85,7 +85,7 @@
             </span>
             @enderror
           </div>
-
+        </div>
 
         <div class="form-group row">
           <div class="col">
@@ -141,9 +141,9 @@
             @enderror
           </div>
           <div class="col">
-            <label for="nb_chairs">Number of seats</label>
-            <input id="nb_chairs" type="text" class="form-control @error('nb_chairs') is-invalid @enderror" name="nb_chairs" value="{{ old('nb_chairs') }}" placeholder="100">
-            @error('nb_chairs')
+            <label for="seats">Number of seats</label>
+            <input id="seats" type="text" class="form-control @error('seats') is-invalid @enderror" name="seats" value="{{ old('seats') }}" placeholder="100">
+            @error('seats')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $message }}</strong>
             </span>
