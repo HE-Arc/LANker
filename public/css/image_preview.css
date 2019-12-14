@@ -5,7 +5,7 @@
 }
 
 .event-banner{
-  width: 42em!important;
+  width: 100% !important;
   height: 19em!important;
   object-fit: cover;
 }

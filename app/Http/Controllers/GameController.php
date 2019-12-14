@@ -27,7 +27,7 @@ class GameController extends Controller
     {
         $name="";
         if(isset($_GET['name'])){$name=$_GET['name'];}
-        $games=Game::limit(10)->where('name','ilike',$name."%")->orderBy('name')->select('name')->get();
+        $games=Game::limit(10)->where('name','ilike',$name."%")->orderBy('name')->select('name', 'cover')->get();
         echo json_encode($games);
     }
 }

@@ -8,6 +8,24 @@
     object-fit: cover !important;
 }
 
+.lanker-dashboard-img {
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+.lanker-dashboard-container {
+  height: 450px !important;
+}
+
+.lanker-dashboard-card {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.lanker-footer-line-white {
+  background-color: white;
+}
+
 .lanker-tag { /* TODO : fix overflowing text with ...*/
   border-radius: 1.5rem !important;
   white-space: nowrap !important;
@@ -23,4 +41,58 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.lanker-avatar {
+  width: 18rem !important;
+}
+
+.lanker-display-0 {
+  font-size: 8rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+.bg-white-80 {
+  background-color: white !important;
+  opacity: 80% !important;
+}
+
+.bg-dark-80 {
+  background-color: black !important;
+  opacity: 80% !important;
+}
+
+.bg-dark-70 {
+  background-color: black !important;
+  opacity: 70% !important;
+}
+
+.bg-dark-60 {
+  background-color: black !important;
+  opacity: 60% !important;
+}
+
+.font-weight-boldest {
+  font-weight: 900 !important;
+}
+
+.img-object-fit {
+  object-fit: cover;
+}
+
+.bg-mazarine-blue {
+  background-color: var(--mazarine-blue) !important;
+}
+
+.color-mazarine-blue {
+  color: var(--mazarine-blue) !important;
+}
+
+.border-color-mazarine-blue {
+  border-color: var(--mazarine-blue) !important;
+}
+
+.bg-black {
+  background-color: #101010;
 }

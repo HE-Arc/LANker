@@ -19,7 +19,6 @@ Route::group(['prefix' => '/'], function() {
     'as' => 'dashboard',
     'uses' => 'HomeController@index'
   ]);
-
   Route::get('dashboard', [
     'as' => 'dashboard',
     'uses' => 'HomeController@index'
@@ -73,6 +72,11 @@ Route::get('/profile/edit/{user}',[
   'uses' => 'UserController@edit'
 ])->middleware('auth');
 
+Route::put('/profile/games/{user}', [
+  'as' => 'update_profile_games',
+  'uses' => 'UserController@updateGames'
+])->middleware('auth');
+
 Route::patch('/profile/avatar/{user}', [
   'as' => 'change_profile_avatar',
   'uses' => 'UserController@changeAvatar'
@@ -86,6 +90,11 @@ Route::patch('profile/edit/{user}/update', [
 Route::delete('profile/delete/{user}', [
   'as' => 'delete_profile',
   'uses' => 'UserController@delete'
+])->middleware('auth');
+
+Route::delete('profile/delete/game/{usergame}', [
+  'as' => 'remove_profile_game',
+  'uses' => 'UserController@removeGame'
 ])->middleware('auth');
 
 // Debug route to restore all softDeleted users

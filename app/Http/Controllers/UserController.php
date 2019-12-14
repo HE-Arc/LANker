@@ -8,6 +8,8 @@ use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserEditRequest;
 use App\Event;
+use App\Usergame;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -89,6 +91,34 @@ class UserController extends Controller
     $user->avatar = substr($image, strlen("public/"));
 
     $user->save();
+
+    return redirect()->back();
+  }
+
+  public function updateGames(User $user)
+  {
+    $validator = Validator::make(request()->all(), [
+            'games' => 'required|string',
+        ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator);
+    }
+
+    $games = explode(',',request()->games);
+
+    foreach ($games as $game) {
+      $usergame = new Usergame;
+      $usergame->game = $game;
+      $user->usergames()->save($usergame);
+    }
+
+    return redirect()->back();
+  }
+
+  public function removeGame(Usergame $usergame)
+  {
+    $usergame->delete();
 
     return redirect()->back();
   }
