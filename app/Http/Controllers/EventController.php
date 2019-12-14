@@ -48,8 +48,10 @@ class EventController extends Controller
    public function searchEvent(Request $request)
    {
      $name = $request->input('searchvalue') . '%';
-     $events = Event::where('name', 'like', $name)->take(10)->get();
-     return view('search_event', compact('events'));
+     $events = Event::where('name', 'like', $name)->where('public', '1')->take(10)->get();
+     $users =  User::where('name', 'like', $name)->take(10)->get();
+
+     return view('search_event', compact('events', 'users'));
    }
 
    public function joinEvent(int $id)
