@@ -113,12 +113,16 @@ class EventController extends Controller
      $event->save();
 
      $games = explode(',',$request->games);
-
-     foreach ($games as $game) {
+     $covers = explode(',',$request->covers);
+     for ($i=0; $i < count($games); $i++) {
        $eventgame = new Eventgame;
-       $eventgame->game = $game;
+       $eventgame->game = $games[$i];
+       $eventgame->cover=$covers[$i];
        $event->eventgames()->save($eventgame);
      }
+     /*foreach ($games as $game) {
+
+     }*/
 
      return redirect()->route('dashboard');
    }
