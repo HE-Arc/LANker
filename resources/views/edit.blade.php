@@ -9,17 +9,11 @@
         @csrf
         {{ method_field('PATCH') }}
 
-        <div class="form-group row">
-          <div class="col">
-            <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" alt="" class="card-img avatar img-thumbnail" style="width: 18rem; "/>
-            <div class="card-img-overlay mx-auto">
-              <span class="btn btn-primary btn-file ">
-                Browse <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
-              </span>
-            </div>
-          </div>
-          <div class="col-8">
-          </div>
+        <div class="form-group">
+          <img src="{{ url('storage/'.$user->avatar) }}" class="lanker-sq-img-container lanker-border-5 border-light">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-file">Change picture <input type="file" id="image" name="image" class="form-control" accept="image/*"/></button>
         </div>
 
         {{-- <div class="card text-center">

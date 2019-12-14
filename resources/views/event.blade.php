@@ -2,6 +2,43 @@
 
 @section('content')
 <div class="container my-5">
+  <img class="event-banner" src="{{ url('storage/'.$event->banner) }}">
+  <h1 class="my-4">{{ $event->name }}</h1>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <tr>
+          <td><i class="fa fa-building p-2 fa-lg mr-3"></i></td>
+          <td><p class="lead">He-Arc</p></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-dollar-sign p-2 fa-lg mr-3"></i></td>
+          <td><p class="lead">{{ $event->getPrice() }}</p></td>
+        </tr>
+        <tr>
+          <td><i class="far fa-clock p-2 fa-lg mr-3"></i></td>
+          <td><p class="lead">{{ $event->getStartTime().'-'.$event->getEndTime() }}</p></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col">
+      <table class="table">
+        <tr>
+          <td><i class="fa fa-map-marker-alt p-2 fa-lg mr-3"></i></td>
+          <td><p class="lead">{{$event->location}}</p></td>
+        </tr>
+        <tr>
+          <td><i class="fa fa-calendar-alt p-2 fa-lg mr-3"></i></td>
+          <td><p class="lead">{{ $event->getStartDate().$event->getEndDate() }}</p></td>
+        </tr>
+        <tr>
+          <td><i class="fas fa-chair p-2 fa-lg mr-3"></i></td>
+          <td><p class="lead">{{ $event->getNbSeats() }}</p></td>
+        </tr>
+      </table>
+    </div>
+</div>
+<div class="container my-5">
   <div class="justify-content-center">
     <h1>{{ $event->name }}</h1>
     <div class="card p-3">

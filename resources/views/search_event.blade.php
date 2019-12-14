@@ -27,27 +27,29 @@
     @endforelse
     <div class="">
       <h2>Events</h2>
-      @forelse ($events as $event)
-        @component('components/event_card')
-          @slot('banner')
-            {{$event->banner}}
-          @endslot
-          @slot('name')
-            {{$event->name}}
-          @endslot
-          @slot('description')
-            {{$event->description}}
-          @endslot
-          @slot('dates')
-            {{$event->getStartDate().$event->getEndDate()}}
-          @endslot
-          @slot('created_at')
-            {{$event->created_at}}
-          @endslot
-        @endcomponent
-        @empty
-        <h3 class="text-muted">No events founds...</h3>
-        @endforelse
+      <div class="row">
+        @forelse ($events as $event)
+          @component('components/event_card')
+            @slot('banner')
+              {{$event->banner}}
+            @endslot
+            @slot('name')
+              {{$event->name}}
+            @endslot
+            @slot('description')
+              {{$event->description}}
+            @endslot
+            @slot('dates')
+              {{$event->getStartDate().$event->getEndDate()}}
+            @endslot
+            @slot('created_at')
+              {{$event->created_at}}
+            @endslot
+          @endcomponent
+          @empty
+          <h3 class="text-muted">No events founds...</h3>
+          @endforelse
+      </div>
     </div>
   </div>
 @endsection
