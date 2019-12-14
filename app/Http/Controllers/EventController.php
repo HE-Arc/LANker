@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Eventgame;
+use App\Eventuser;
 use App\SendMail;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -16,6 +17,7 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class EventController extends Controller
 {
@@ -48,8 +50,10 @@ class EventController extends Controller
    public function searchEvent(Request $request)
    {
      $name = $request->input('searchvalue') . '%';
-     $events = Event::where('name', 'like', $name)->take(10)->get();
-     return view('search_event', compact('events'));
+     $events = Event::where('name', 'like', $name)->where('public', '1')->take(10)->get();
+     $users =  User::where('name', 'like', $name)->take(10)->get();
+
+     return view('search_event', compact('events', 'users'));
    }
 
    public function joinEvent(int $id)
@@ -70,7 +74,8 @@ class EventController extends Controller
    {
      $validated = $request->validated();
 
-     if(!$validated){
+     if(!$validated)
+     {
        return redirect()->back()->withInput();
      }
 
@@ -81,23 +86,29 @@ class EventController extends Controller
      $event->date_start = $combinedDTStart;
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
-     $event->description = htmlspecialchars($request->description);
-     if (isset($request->private)) {
+     $event->description = $request->description;
+
+     if (isset($request->private))
+     {
           $event->public = 0;
      }
 
-     $event->seats = $request->nb_chairs;
-     $event->price = $request->price;
+     if (isset($request->price)) {
+          $event->price = $request->price;
+     }
+
+     if(isset($request->seats))
+     {
+       $event->seats = $request->seats;
+     }
 
      $event->user_id = Auth::id();
 
-     if($request->has("image"))
+     if(isset($request->image))
      {
        $image = $request->image->store('public/banners');
        $event->banner = substr($image, strlen("public/"));
      }
-
-
 
      $event->save();
 

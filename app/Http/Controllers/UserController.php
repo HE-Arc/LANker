@@ -8,6 +8,8 @@ use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserEditRequest;
 use App\Event;
+use App\Usergame;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -93,6 +95,34 @@ class UserController extends Controller
     return redirect()->back();
   }
 
+  public function updateGames(User $user)
+  {
+    $validator = Validator::make(request()->all(), [
+            'games' => 'required|string',
+        ]);
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator);
+    }
+
+    $games = explode(',',request()->games);
+
+    foreach ($games as $game) {
+      $usergame = new Usergame;
+      $usergame->game = $game;
+      $user->usergames()->save($usergame);
+    }
+
+    return redirect()->back();
+  }
+
+  public function removeGame(Usergame $usergame)
+  {
+    $usergame->delete();
+
+    return redirect()->back();
+  }
+
   public function forceDelete()
   {
     $users = User::withTrashed()->get();
@@ -121,5 +151,13 @@ class UserController extends Controller
     $organised_evt = Event::whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
 
     return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised, 'participating_evt'=>$participating_evt,'organising_evt'=>$organising_evt, 'participated_evt'=>$participated_evt,'organised_evt'=>$organised_evt]);
+  }
+
+  public function usernameAutocomplete()
+  {
+    $name="";
+    if(isset($_GET['name'])){$name=$_GET['name'];}
+    $users = User::where('name','like',$name."%")->limit(10)->get();
+    echo json_encode($users);
   }
 }

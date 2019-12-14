@@ -27,6 +27,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-      return $this->from('noreply@lanker.com')->subject('Event invitation')->view('dynamic_invite_email_template')->with('data', $this->data);
+      return $this->from('noreply@lanker.ch')->subject('Event invitation')->view('dynamic_invite_email_template')->with('data', $this->data);
     }
 }
