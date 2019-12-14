@@ -28,25 +28,46 @@ class UserController extends Controller
   public function update(UserEditRequest $request)
   {
     $user = Auth::user();
-    $validated = $request->validated();
 
-    if(!$validated) {
+    if(!$request->validated()) {
       return redirect()->back()->withInput();
     }
 
-    if(strcmp($request->input('email'), $user->email) != 0)
+    if(strcmp($request->email, $user->email) != 0)
     {
-      $user->email = $request->input('email');
+      $user->email = $request->email;
     }
 
-    if($request->input('password') != "")
+    if($request->password != "")
     {
-      $user->password = bcrypt($request->input('password'));
+      $user->password = bcrypt($request->password);
     }
 
-    if(strcmp($request->input('description'), $user->description) != 0)
+    if(strcmp($request->description, $user->description) != 0)
     {
-      $user->description = $request->input('description');
+      $user->description = $request->description;
+    }
+
+    if($user->avatar != "users/default.png") {
+      Storage::delete("public/".$user->avatar);
+    }
+
+    $image = $request->image->store('public/users');
+
+    $user->avatar = substr($image, strlen("public/"));
+
+    if(isset($request->games))
+    {
+      $games = explode(',',$request->games);
+
+      foreach ($games as $game) {
+        $usergame = new Usergame;
+        $usergame->game = $game;
+        if(!Usergame::where(['user_id' => $user->id, 'game' => $game])->exists())
+        {
+          $user->usergames()->save($usergame);
+        }
+      }
     }
 
     $user->save();
@@ -69,51 +90,6 @@ class UserController extends Controller
     }
 
     return redirect()->route('dashboard');
-  }
-
-  public function changeAvatar(User $user)
-  {
-
-    $validator = Validator::make(request()->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-        ]);
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator);
-    }
-
-    if($user->avatar != "users/default.png") {
-      Storage::delete("public/".$user->avatar);
-    }
-
-    $image = request()->image->store('public/users');
-
-    $user->avatar = substr($image, strlen("public/"));
-
-    $user->save();
-
-    return redirect()->back();
-  }
-
-  public function updateGames(User $user)
-  {
-    $validator = Validator::make(request()->all(), [
-            'games' => 'required|string',
-        ]);
-
-    if ($validator->fails()) {
-        return redirect()->back()->withErrors($validator);
-    }
-
-    $games = explode(',',request()->games);
-
-    foreach ($games as $game) {
-      $usergame = new Usergame;
-      $usergame->game = $game;
-      $user->usergames()->save($usergame);
-    }
-
-    return redirect()->back();
   }
 
   public function removeGame(Usergame $usergame)

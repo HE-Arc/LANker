@@ -12,15 +12,15 @@ $('#gameInput').autocomplete({
 
     gameData.forEach(dataItem => {
       gameObjectArray.push({value:dataItem.name, data:dataItem.id})
-      if (dataItem.cover != undefined) {
-        let url = dataItem.cover.url
-        url.replace(/t_thumb/, 't_cover_big')
-        gameCoverArray.push(url)
-      }
+      // if (dataItem.cover != undefined) {
+      //   let url = dataItem.cover.url
+      //   url.replace(/t_thumb/, 't_cover_big')
+      //   gameCoverArray.push(url)
+      // }
     })
 
     console.log({suggestions:gameObjectArray});
-    console.log(gameCoverArray);
+    // console.log(gameCoverArray);
 
     /*
     * Required format by devbridge autocomplete :

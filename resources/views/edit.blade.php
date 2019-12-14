@@ -5,9 +5,9 @@
   <div class="row">
     <div class="col">
       <h1 class="display-4">Edit profile</h1>
-      <form method="POST" action="{{ route('update_profile', $user) }}">
+      <form id="eventForm" enctype="multipart/form-data" method="POST" action="{{ route('update_profile', $user) }}">
         @csrf
-        {{ method_field('patch') }}
+        {{ method_field('PATCH') }}
 
         <div class="form-group row">
           <div class="col">
@@ -97,39 +97,6 @@
           </div>
         </div>
 
-        <div class="form-group row">
-          <div class="col">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Game</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse ($user->usergames()->get() as $usergame)
-                <tr>
-                  <td>{{ $usergame->name }}</td>
-                  <td>
-                    <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
-                      @csrf
-                      {{ method_field('DELETE') }}
-                      <button type="submit" class="btn btn-danger pull-right">Remove game</button>
-                    </form>
-                  </td>
-                </tr>
-                @empty
-                  <tr>
-                    <td>
-                      <p class="text-muted">There's seems to be no favourite games</p>
-                    </td>
-                  </tr>
-                @endforelse
-              </tbody>
-            </table>
-          </div>
-        </div>
-
         <div class="form-group row mb-0">
           <div class="col">
             <p class="text-primary">Leave the password field empty if you do not want to change it</p>
@@ -143,6 +110,39 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <h1 class="display-4">Favourite games</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Game(s)</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @forelse (Auth::user()->usergames()->get() as $usergame)
+          <tr>
+            <td>{{ $usergame->game }}</td>
+            <td>
+              <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button type="submit" class="btn btn-danger pull-right">Remove game</button>
+              </form>
+            </td>
+          </tr>
+          @empty
+            <tr>
+              <td>
+                <p class="text-muted">There's seems to be no favourite games</p>
+              </td>
+            </tr>
+          @endforelse
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
