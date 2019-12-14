@@ -34,7 +34,7 @@
     <div class="col-sm">
       <h1>{{ $user->name }}</h1>
 
-      @if(Auth::user()->hasRole('admin'))
+      @if($user->hasRole('admin'))
         <p class="text-muted">Administrator</p>
       @else
         <p class="text-muted">User</p>
