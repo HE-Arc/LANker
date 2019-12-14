@@ -30,19 +30,19 @@
                   <p>Organised {{ $organised }} event(s)</p>
                 </div>
               </div>
+              @if (Auth::check() && Auth::user()->id == $user->id)
               <div class="row">
                 <div class="col">
                   <h3>Actions</h3>
                   <form action="{{ route('delete_profile', Auth::user()) }}" method="POST">
                       {{ csrf_field() }}
                       {{ method_field('DELETE') }}
-                      @if (Auth::check() && Auth::user()->id == $user->id)
                       <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary">Change account informations</a>
                       <input type="submit" class="btn btn-danger" value="Delete profile" onclick="return confirm('Are you sure?')"/>
-                      @endunless
                   </form>
                 </div>
               </div>
+              @endunless
               <div class="row">
                 <div class="col">
                   @if (Auth::check() && Auth::user()->id == $user->id)
