@@ -28,7 +28,7 @@ $('#gameInput').autocomplete({
   transformResult: function(response) {
     // console.log(response);
     let gameData = JSON.parse(response)
-    // console.log(gameData);
+    console.log(gameData);
     let gameObjectArray = []
 
     gameData.forEach(dataItem => gameObjectArray.push({value:dataItem.name, data:dataItem.id})) // TODO : regler ça puis donner le data a l'autocomplete
