@@ -33,6 +33,16 @@
   text-overflow: ellipsis !important;
 }
 
+.lanker-avatar-mini{
+  height: 1.5em !important;
+}
+
+.lanker-user-preview{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .lanker-avatar {
   width: 18rem !important;
 }

@@ -157,7 +157,7 @@ class UserController extends Controller
   {
     $name="";
     if(isset($_GET['name'])){$name=$_GET['name'];}
-    $users = User::where('name','like',$name."%")->get();
+    $users = User::where('name','like',$name."%")->limit(10)->get();
     echo json_encode($users);
   }
 }
