@@ -19,7 +19,6 @@ Route::group(['prefix' => '/'], function() {
     'as' => 'dashboard',
     'uses' => 'HomeController@index'
   ]);
-
   Route::get('dashboard', [
     'as' => 'dashboard',
     'uses' => 'HomeController@index'

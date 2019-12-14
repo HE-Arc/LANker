@@ -71,7 +71,8 @@ class EventController extends Controller
    {
      $validated = $request->validated();
 
-     if(!$validated){
+     if(!$validated)
+     {
        return redirect()->back()->withInput();
      }
 
@@ -82,12 +83,22 @@ class EventController extends Controller
      $event->date_start = $combinedDTStart;
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
-     $event->description = htmlspecialchars($request->description);
-     if (isset($request->private)) {
+     $event->description = $request->description;
+     if (isset($request->private))
+     {
           $event->public = 0;
      }
 
-     $event->seats = $request->nb_chairs;
+
+     if(isset($request->seats))
+     {
+       $event->seats = $request->seats;
+     }
+     else
+     {
+       $event->seats = 0;
+     }
+
      $event->price = $request->price;
 
      $event->user_id = Auth::id();
