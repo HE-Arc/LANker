@@ -43,9 +43,8 @@
 
 .lanker-avatar-medium img{
   height: 5.0em !important;
-}
 
-.lanker-user-preview{
+.lanker-ellipses{
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -101,6 +100,15 @@
   background-color: #101010;
 }
 
+
+.lanker-img-card{
+  max-width: 20%;
+}
+
+.lanker-img-card-img{
+  object-fit: cover;
+}
+ 
 .profile_card{
   width: 40em !important;
   /* height: 15em !important; */
