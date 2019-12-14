@@ -37,6 +37,12 @@
   width: 18rem !important;
 }
 
+.lanker-display-0 {
+  font-size: 8rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
 .bg-white-80 {
   background-color: white !important;
   opacity: 80% !important;

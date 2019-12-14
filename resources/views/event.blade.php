@@ -5,15 +5,15 @@
   <div class="justify-content-center">
     <h1>{{ $event->name }}</h1>
     <div class="card p-3">
-      <img src="{{ url('storage/'.$event->banner)}}" alt="event image" id="event-image" class="card-img-top img-fluid">
+      <img src="{{ url('storage/'.$event->banner)}}" alt="event image" id="event-image" class="card-img-top img-fluid event-banner">
       <div class="row">
         <div class="col">
           <h2>General informations</h2>
-          <div class="row my-2">
+          <div class="row">
             @event_info(['id'=>'host','name'=>'Host','value'=>'HE-Arc'])@endevent_info
             @event_info(['id'=>'location','name'=>'Location','value'=>$event->location])@endevent_info
           </div>
-          <div class="row my-2">
+          <div class="row">
             @event_info(['id'=>'price','name'=>'Price','value'=>$event->getPrice()])@endevent_info
 
             @component('components/event_info')
@@ -29,25 +29,25 @@
             @endcomponent
             {{-- @event_info(['id'=>'date','name'=>'Host','value'=>''])@endevent_info --}}
           </div>
-          <div class="row my-2">
+          <div class="row">
             @event_info(['id'=>'time','name'=>'Time','value'=>$event->getStartTime().'-'.$event->getEndTime()])@endevent_info
             @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>$event->getNbSeats()])@endevent_info
           </div>
           <h2>Games</h2>
-          <div class="row my-2">
+          <div class="row">
             @foreach ($event->eventgames()->get() as $eventgame)
               <div class="event-info col-sm">{{$eventgame->game}}</div>
             @endforeach
           </div>
         </div>
       </div>
-      <div class="row m-0 my-2">
+      <div class="row">
         <div class="col">
           <h2>Description</h2>
           <p>{{ $event->description }}</p>
         </div>
       </div>
-      <div class="row m-0 my-2">
+      <div class="row">
         <div class="col">
           @auth
             @if ($event->users()->where('event_id', $event->id)->exists())

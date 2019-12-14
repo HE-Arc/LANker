@@ -6,13 +6,12 @@
     <div class="col-12 d-flex">
       <div class="card lanker-dashboard-card">
         <img src="{{ asset('storage/home/home-image4.jpg') }}" class="deactivate lanker-dashboard-img lanker-dashboard-container card-img" alt="">
-        <div class="card-img-overlay bg-dark-70">
-          <h1 class="font-weight-boldest display-1 px-4 mb-2">LANker</h1>
+      </div>
+      <div class="card-img-overlay bg-dark-70">
+        <div class="container my-auto">
+          <h1 class="font-weight-boldest lanker-display-0 px-4">LANker</h1>
           <h1 class="display-4 mx-5 px-5"><em>Because we care about the gaming community.</em></h1>
         </div>
-      {{-- <div class="col-md-5 d-none d-lg-block">
-          <img src="{{ asset('storage/home/home-image4.jpg') }}" class="img-fluid img-object-fit" alt="">
-      </div> --}}
       </div>
     </div>
   </section>
@@ -44,9 +43,9 @@
     </div>
   </div>
 </div>
-<div class="bg-dark">
+<div class="bg-light">
   <div class="container">
-    <div class="row no-gutters text-white">
+    <div class="row no-gutters">
       <div class="col">
         <div class="px-4 my-4">
           <h1 class="display-5">Don't know where to start ?</h1>
