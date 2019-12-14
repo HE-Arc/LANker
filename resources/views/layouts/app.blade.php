@@ -21,6 +21,7 @@
       integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
       crossorigin="anonymous"></script> --}}
     <script src="{{ asset('js/taginput.js') }}" defer></script>
+    <script src="{{ asset('js/username_autocomplete.js') }}" defer></script>
     <script src="{{ asset('js/image_preview.js') }}" defer></script>
 
     <!-- Fonts -->

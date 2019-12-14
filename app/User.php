@@ -16,7 +16,7 @@ class User extends \TCG\Voyager\Models\User
      */
     public function events()
     {
-        return $this->belongsToMany('App\Event');
+        return $this->belongsToMany('App\Event', 'eventusers');
     }
 
     /**

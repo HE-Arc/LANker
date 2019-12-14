@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Eventgame;
+use App\Eventuser;
 use App\SendMail;
 use App\User;
 use Illuminate\Support\Facades\Mail;
