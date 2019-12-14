@@ -15,9 +15,9 @@
                 <div class="col">
                   <h2 class="card-title">{{ $user->name }}</h2>
                   @if(Auth::user()->hasRole('admin'))
-                    <p class="card-text text-muted">Administrator</p>
+                  <p class="card-text text-muted">Administrator</p>
                   @else
-                    <p class="card-text text-muted">User</p>
+                  <p class="card-text text-muted">User</p>
                   @endif
                 </div>
               </div>
@@ -45,31 +45,16 @@
               @endunless
               <div class="row">
                 <div class="col">
-                  <h3>Favorite games</h3>
-                  @foreach ($user->usergames()->get() as $usergame)
-                  <div class="">
-                    <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
-                      @csrf
-                      {{ method_field('DELETE') }}
-                      <p>
-                        {{$usergame->game}}
-                        @if (Auth::check() && Auth::user()->id == $user->id)
-                        <button type="submit" class="btn btn-danger pull-right">Remove game</button>
-                        @endunless
-                      </p>
-                    </form>
-                  </div>
-                  @endforeach
                   @if (Auth::check() && Auth::user()->id == $user->id)
                   <form id="eventForm" method="post" action="{{ route('update_profile_games', Auth::user()) }}">
                   @csrf
                   {{ method_field('PUT') }}
-                    <div class="form-group">
+                    <div class="form-group row">
                       <input id="gameInput" type="text" class="form-control @error('games') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
                       @error('games')
-                          <span class="invalid-feedback" role="alert">
-                              <strong>You must enter a valid game!</strong>
-                          </span>
+                      <span class="invalid-feedback" role="alert">
+                        <strong>You must enter a valid game!</strong>
+                      </span>
                       @enderror
                     </div>
                     <div class="form-group">
@@ -94,6 +79,27 @@
     <div class="col">
       <h3>Description</h3>
       <p>{{ $user->description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h3>Favorite games</h3>
+      @forelse ($user->usergames()->get() as $usergame)
+      <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
+        @csrf
+        {{ method_field('DELETE') }}
+        <p>
+          {{$usergame->game}}
+          @if (Auth::check() && Auth::user()->id == $user->id)
+          <button type="submit" class="btn btn-danger pull-right">Remove game</button>
+          @endunless
+        </p>
+      </form>
+      @empty
+      @if (Auth::user()->id == $user->id)
+        <p class="text-muted">It seems like you don't have any favourite games, add them <a href="{{ route('edit_profile', Auth::user()) }}">here</a>.</p>
+      @endif
+      @endforelse
     </div>
   </div>
   <div class="row">
