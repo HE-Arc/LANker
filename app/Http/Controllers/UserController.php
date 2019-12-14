@@ -144,12 +144,20 @@ class UserController extends Controller
     $participated = DB::table('events')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
     $organised = DB::table('events')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
 
-    $participating_evt = Event::join('event_user', 'events.id', '=', 'event_user.event_id')->whereDate('date_start','>',date('Y-m-d H:i:s'))->where('event_user.user_id',$user->id)->get();
-    $participated_evt = Event::join('event_user', 'events.id', '=', 'event_user.event_id')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('event_user.user_id',$user->id)->get();
+    $participating_evt = Event::join('eventusers', 'events.id', '=', 'eventusers.event_id')->whereDate('date_start','>',date('Y-m-d H:i:s'))->where('eventusers.user_id',$user->id)->get();
+    $participated_evt = Event::join('eventusers', 'events.id', '=', 'eventusers.event_id')->whereDate('date_start','<',date('Y-m-d H:i:s'))->where('eventusers.user_id',$user->id)->get();
 
     $organising_evt = Event::whereDate('date_start','>',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
     $organised_evt = Event::whereDate('date_start','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->get();
 
     return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised, 'participating_evt'=>$participating_evt,'organising_evt'=>$organising_evt, 'participated_evt'=>$participated_evt,'organised_evt'=>$organised_evt]);
+  }
+
+  public function usernameAutocomplete()
+  {
+    $name="";
+    if(isset($_GET['name'])){$name=$_GET['name'];}
+    $users = User::where('name','like',$name."%")->get();
+    echo json_encode($users);
   }
 }

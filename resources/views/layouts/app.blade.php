@@ -21,14 +21,12 @@
       integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
       crossorigin="anonymous"></script> --}}
     <script src="{{ asset('js/taginput.js') }}" defer></script>
+    <script src="{{ asset('js/username_autocomplete.js') }}" defer></script>
     <script src="{{ asset('js/image_preview.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> --}}
-
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -37,12 +35,14 @@
     <link href="{{ asset('css/image_preview.css') }}" rel="stylesheet">
     <link href="{{ asset('css/autocomplete_suggestion_style.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
 
   </head>
   <body>
     <div id="app">
       <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #273c75;">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-mazarine-blue">
+        {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-black"> --}}
           <a class="navbar-brand" href="{{ route('dashboard') }}">LANker</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -101,9 +101,43 @@
         </nav>
       </header>
 
-      <main class="my-5">
+      <main>
           @yield('content')
       </main>
     </div>
+    <footer class="bg-black text-white py-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-md">
+            <h5 class="my-3">About us</h5>
+            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </div>
+          <div class="col-md">
+            <h5 class="my-3">Social networks</h5>
+            <p class="text-muted">Follow us on</p>
+            <i class="fab fa-twitter fa-lg mx-2"></i>
+            <i class="fab fa-facebook fa-lg mx-2"></i>
+            <i class="fab fa-instagram fa-lg mx-2"></i>
+            <i class="fab fa-snapchat fa-lg mx-2"></i>
+          </div>
+          <div class="col-md">
+            <h5 class="my-3">Contact us</h5>
+            <address>
+              <strong>LANker dev team</strong><br>
+              <i class="fas fa-map-marker-alt"></i> Espace de l'Europe, 11<br>
+              2000 Neuchâtel, Switzerland<br>
+              <i class="far fa-envelope"></i> info@lankerteam.ch<br>
+              <i class="fas fa-phone"></i> (+41) 032 943 43 13
+            </address>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md">
+            <hr class="lanker-footer-line-white">
+            <p class="text-center my-0"><i class="far fa-copyright"></i> 2019 Copyright LANker.ch</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

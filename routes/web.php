@@ -19,7 +19,6 @@ Route::group(['prefix' => '/'], function() {
     'as' => 'dashboard',
     'uses' => 'HomeController@index'
   ]);
-
   Route::get('dashboard', [
     'as' => 'dashboard',
     'uses' => 'HomeController@index'
@@ -111,6 +110,8 @@ Route::get('forceDelete', [
 ]);
 
 Route::get('autocomplete', 'GameController@findGames');
+
+Route::get('autocomplete_username', 'UserController@usernameAutocomplete');
 
 Route::group(['prefix' => 'lanker_admin'], function() {
   Voyager::routes();

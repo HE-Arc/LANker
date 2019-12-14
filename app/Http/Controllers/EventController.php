@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event;
 use App\Eventgame;
+use App\Eventuser;
 use App\SendMail;
 use App\User;
 use Illuminate\Support\Facades\Mail;
@@ -70,7 +71,8 @@ class EventController extends Controller
    {
      $validated = $request->validated();
 
-     if(!$validated){
+     if(!$validated)
+     {
        return redirect()->back()->withInput();
      }
 
@@ -82,7 +84,8 @@ class EventController extends Controller
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
      $event->description = $request->description;
-     if (isset($request->private)) {
+     if (isset($request->private))
+     {
           $event->public = 0;
      }
      if (isset($request->nb_chairs)) {
@@ -92,6 +95,17 @@ class EventController extends Controller
           $event->price = $request->price;
      }
 
+
+     if(isset($request->seats))
+     {
+       $event->seats = $request->seats;
+     }
+     else
+     {
+       $event->seats = 0;
+     }
+
+     $event->price = $request->price;
 
      $event->user_id = Auth::id();
 
