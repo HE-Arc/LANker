@@ -56,6 +56,10 @@
   line-height: 1.2;
 }
 
+.lanker-inline-form {
+  display: inline;
+}
+
 .bg-white-80 {
   background-color: white !important;
   opacity: 80% !important;
@@ -99,8 +103,7 @@
 .bg-black {
   background-color: #101010;
 }
-
-
+  
 .lanker-img-card{
   max-width: 20%;
 }

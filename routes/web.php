@@ -131,3 +131,8 @@ Route::get('/event/invite/{event}', [
   'as' => 'invite_event',
   'uses' => 'EventController@showInvite'
 ])->middleware('auth');
+
+Route::delete('/event/delete/{event}', [
+  'as' => 'delete_event',
+  'uses' => 'EventController@delete'
+])->middleware('auth');

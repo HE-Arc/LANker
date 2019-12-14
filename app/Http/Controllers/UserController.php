@@ -128,6 +128,10 @@ class UserController extends Controller
     $users = User::withTrashed()->get();
     foreach ($users as $user) {
       if($user->trashed()) {
+        if($user->avatar != "users/default.png") {
+          Storage::delete("public/".$user->avatar);
+        }
+        
         $user->forceDelete();
       }
     }
