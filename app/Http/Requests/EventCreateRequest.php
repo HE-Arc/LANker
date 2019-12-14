@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use App\Rules\EndDateAfterStartDate;
+use App\Rules\EventNameNotTaken;
 
 class EventCreateRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class EventCreateRequest extends FormRequest
     public function rules()
     {
       return [
-          'event_name' => 'required|string|max:120',
+          'event_name' => ['required', 'string', 'max:120', new EventNameNotTaken()],
           'host_name' => 'required|string|max:120',
           'start_date' => 'required|date',
           'end_date' => ['required', 'date', 'after_or_equal:start_date', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],

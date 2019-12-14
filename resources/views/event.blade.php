@@ -56,6 +56,11 @@
               <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary">Join event</a>
             @endif
             <a href="{{ route('invite_event', $event) }}" class="btn btn-primary">Share</a>
+            <form class="lanker-inline-form" action="{{ route('delete_event', $event) }}" method="post" onsubmit="return confirm('Are you sure you want to delete this event?');">
+              @csrf
+              {{ method_field('DELETE') }}
+              <button type="submit" class="btn btn-danger" name="button">Delete Event</button>
+            </form>
           @else
             <a href="{{ route('login') }}" class="btn btn-primary">Login first</a>
           @endauth

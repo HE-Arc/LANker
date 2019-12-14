@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use App\Event;
 
 class EventNameNotTaken implements Rule
 {
@@ -25,7 +26,7 @@ class EventNameNotTaken implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+      return !(Event::where('name', '=', $value)->exists());
     }
 
     /**
@@ -35,6 +36,6 @@ class EventNameNotTaken implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return 'An event with the same name already exists!';
     }
 }

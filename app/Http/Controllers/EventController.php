@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -77,10 +78,6 @@ class EventController extends Controller
      if(!$validated)
      {
        return redirect()->back()->withInput();
-     }
-
-     if (Event::where('name', '=', $request->event_name)->exists()) {
-       return redirect()->back()->withErrors(['event_name', 'An event with the same name already exists!'])->withInput();
      }
 
      $event = new Event;
@@ -155,5 +152,16 @@ class EventController extends Controller
    public function showInvite(Event $event)
    {
      return view('invite_form', ['event' => $event]);
+   }
+
+   public function delete(Event $event)
+   {
+     if($event->banner != "banners/dreamhack.jpg") {
+       Storage::delete("public/".$event->banner);
+     }
+
+     $event->delete();
+
+     return redirect()->route('dashboard');
    }
 }
