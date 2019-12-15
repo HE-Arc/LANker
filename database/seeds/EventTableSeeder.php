@@ -18,6 +18,7 @@ class EventTableSeeder extends Seeder
       $events = [
         [
           'name' => 'Tournoi FIFA 20 2vs2',
+          'host' => 'Casino Barrière Montreux',
           'location' => 'Rue du Théâtre 9, 1820 Montreux',
           'description' => "Ton ami et toi êtes imbattable à FIFA ? Venez défier les plus grands joueurs de le région au Tournoi FIFA 20
                             organisé par le FC Sion dans les salons du Casino Barrière Montreux ! \n https://www.gameturnier.ch/b2h_fifa20_91t",
@@ -31,6 +32,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'NetGame Convention 2019',
+          'host' => 'NetGame',
           'location' => 'Badstrasse 2, 4552 Derendingen',
           'description' => "The legendary swiss LANparty event since 1995 \n http://netgame.ch",
           'date_start' => date('Y-m-d H:i:s', strtotime("2019-12-19 18:00:00")),
@@ -43,6 +45,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'GameTurnier',
+          'host' => 'GameTurnier',
           'location' => 'Schulhausstrasse 22, Fehraltorf',
           'description' => "Vor 10 Jahren fand im Heiget Huus unser erstes FIFA Turnier statt. Im Januar 2020 heisst es nach langer Zeit wieder – back 2 Heiget Huus. Na, seid ihr auch mit dabei?
                             Nebst FIFA 20 gibt’s auch ein Call of Duty Turnier an diesem Wochenende.\nSamstag: 2v2 Call of Duty Gunfight \nSonntag: 2v2 FIFA 20 Turnier
@@ -57,6 +60,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Lock and Load 12',
+          'host' => 'Lock and Load',
           'location' => 'St. Urban-Strasse 5, 6210 Sursee',
           'description' => "Nach der äusserst erfolgreichen LAL11 kommen wir auch im 2020 zurück nach Sursee – kompetitiv und dennoch gemütlich wie eh und je!
                             Vom 24.04.20 – 26.04.20 erwartet dich und 511 andere Zocker ein Wochenende voller ESPORTS und GAMING in der Stadthalle Sursee am grössten ESPORTS Event der Zentralschweiz.
@@ -72,6 +76,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Dreamhack',
+          'host' => 'Dreamhack',
           'location' => 'Leipziger Messe, Germany',
           'description' => "DreamHack Leipzig is a three-day gaming festival where you can enjoy professional eSports tournaments.
                             It is where one discovers the latest hardware and software at DreamExpo and at the DreamStore.
@@ -87,11 +92,12 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Paris Games Week',
+          'host' => 'Paris Games Week',
           'location' => '1 Place de la Porte de Versailles, 75015 Paris',
           'description' => "Pour sa 10ème édition consécutive, l’événement a célébré la Pop-Culture sous toutes ses formes. Constructeurs, éditeurs, studios et accessoiristes se sont réunis pour
                             présenter les nouveautés de fin d’année, les jeux 2020 en avant-première, les innovations technologiques comme les nouvelles consoles et la réalité virtuelle,
                             et les compétitions Esport.
-                            https://www.dreamhack-leipzig.de/en/",
+                            https://www.parisgamesweek.com/",
           'date_start' => date('Y-m-d H:i:s', strtotime("2020-10-23 09:00:00")),
           'date_end' => date('Y-m-d H:i:s', strtotime("2020-10-27 21:00:00")),
           'public' => 1,
@@ -102,6 +108,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Insomnia',
+          'host' => 'Insomnia',
           'location' => 'North Ave, Birmingham B40 1NT ',
           'description' => "Insomnia returns to the NEC, Birmingham on 10th-13th April for its biggest show yet.
                             See your favourite YouTubers from across the globe, play some of the latest games, experience virtual reality, relive the past in our retro zone, and try a new level of gaming in the tabletop zone and so much more all under one roof!
@@ -116,6 +123,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Tournoi FIFA 19 2vs2',
+          'host' => 'Casino Barrière Montreux',
           'location' => 'Rue du Théâtre 9, 1820 Montreux',
           'description' => "Ton ami et toi êtes imbattable à FIFA ? Venez défier les plus grands joueurs de le région au Tournoi FIFA 20
                             organisé par le FC Sion dans les salons du Casino Barrière Montreux ! \n https://www.gameturnier.ch/b2h_fifa20_91t",
@@ -129,6 +137,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'NetGame Convention 2018',
+          'host' => 'NetGame',
           'location' => 'Badstrasse 2, 4552 Derendingen',
           'description' => "The legendary swiss LANparty event since 1995 \n http://netgame.ch",
           'date_start' => date('Y-m-d H:i:s', strtotime("2018-12-19 18:00:00")),
@@ -141,6 +150,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'GameTurnier',
+          'host' => 'GameTurnier',
           'location' => 'Schulhausstrasse 22, Fehraltorf',
           'description' => "Vor 10 Jahren fand im Heiget Huus unser erstes FIFA Turnier statt. Im Januar 2019 heisst es nach langer Zeit wieder – back 2 Heiget Huus. Na, seid ihr auch mit dabei?
                             Nebst FIFA 20 gibt’s auch ein Call of Duty Turnier an diesem Wochenende.\nSamstag: 2v2 Call of Duty Gunfight \nSonntag: 2v2 FIFA 20 Turnier
@@ -155,6 +165,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Lock and Load 11',
+          'host' => 'Lock and Load',
           'location' => 'St. Urban-Strasse 5, 6210 Sursee',
           'description' => "Nach der äusserst erfolgreichen LAL11 kommen wir auch im 2019 zurück nach Sursee – kompetitiv und dennoch gemütlich wie eh und je!
                             Vom 24.04.19 – 26.04.19 erwartet dich und 511 andere Zocker ein Wochenende voller ESPORTS und GAMING in der Stadthalle Sursee am grössten ESPORTS Event der Zentralschweiz.
@@ -170,6 +181,7 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Dreamhack',
+          'host' => 'Dreamhack',
           'location' => 'Leipziger Messe, Germany',
           'description' => "DreamHack Leipzig is a three-day gaming festival where you can enjoy professional eSports tournaments.
                             It is where one discovers the latest hardware and software at DreamExpo and at the DreamStore.
@@ -185,11 +197,12 @@ class EventTableSeeder extends Seeder
         ],
         [
           'name' => 'Paris Games Week',
+          'host' => 'Paris Games Week',
           'location' => '1 Place de la Porte de Versailles, 75015 Paris',
           'description' => "Pour sa 9ème édition consécutive, l’événement a célébré la Pop-Culture sous toutes ses formes. Constructeurs, éditeurs, studios et accessoiristes se sont réunis pour
                             présenter les nouveautés de fin d’année, les jeux 2020 en avant-première, les innovations technologiques comme les nouvelles consoles et la réalité virtuelle,
                             et les compétitions Esport.
-                            https://www.dreamhack-leipzig.de/en/",
+                            https://www.parisgamesweek.com/",
           'date_start' => date('Y-m-d H:i:s', strtotime("2019-10-23 09:00:00")),
           'date_end' => date('Y-m-d H:i:s', strtotime("2019-10-27 21:00:00")),
           'public' => 1,
