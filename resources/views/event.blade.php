@@ -52,9 +52,13 @@
     <p class="lead">{{ $event->description }}</p>
     <h3 class="my-4">Games</h3>
     <div class="row">
-      <div class="col">
-        <?php // TODO: add game cards ?>
-      </div>
+      @forelse ($event->eventgames()->get() as $eventgame)
+        @game_card(['cover'=>$eventgame->cover,'title'=>$eventgame->game])@endgame_card
+      @empty
+        <div class="col">
+          <p class="lead">There doesn't seem to be any games in this event.</p>
+        </div>
+      @endforelse
     </div>
     <h3 class="my-4">Participants</h3>
     <div class="row">
