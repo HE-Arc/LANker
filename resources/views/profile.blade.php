@@ -132,7 +132,6 @@
 
   {{-- <div class="row">
     <div class="col">
-
       <h3>Events</h3>
       <!-- change accordion to blink collapsible ? -->
       <div class="accordion" id="organising">

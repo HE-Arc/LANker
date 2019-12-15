@@ -41,8 +41,11 @@
   height: 1.5em !important;
 }
 
-.lanker-ellipsis {
-  /* white-space: nowrap; */
+.lanker-avatar-medium img{
+  height: 5.0em !important;
+
+.lanker-ellipsis{
+  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box;
@@ -90,6 +93,9 @@
 .lanker-border-5 {
   border-width: 5px !important;
   border-style: solid;
+
+.lanker-inline-form {
+  display: inline;
 }
 
 .bg-white-80 {
@@ -134,4 +140,17 @@
 
 .bg-black {
   background-color: #101010;
+}
+  
+.lanker-img-card{
+  max-width: 20%;
+}
+
+.lanker-img-card-img{
+  object-fit: cover;
+}
+ 
+.profile_card{
+  width: 40em !important;
+  /* height: 15em !important; */
 }

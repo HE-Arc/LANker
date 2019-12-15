@@ -53,7 +53,6 @@
     <h3 class="my-4">Games</h3>
     <div class="row">
       <div class="col">
-
         <?php // TODO: add game cards ?>
       </div>
     </div>

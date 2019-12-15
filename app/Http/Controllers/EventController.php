@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
@@ -79,10 +80,6 @@ class EventController extends Controller
        return redirect()->back()->withInput();
      }
 
-     if (Event::where('name', '=', $request->event_name)->exists()) {
-       return redirect()->back()->withErrors(['event_name', 'An event with the same name already exists!'])->withInput();
-     }
-
      $event = new Event;
      $event->name = $request->event_name;
      $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->start_date $request->start_time:00"));
@@ -117,12 +114,16 @@ class EventController extends Controller
      $event->save();
 
      $games = explode(',',$request->games);
-
-     foreach ($games as $game) {
+     $covers = explode(',',$request->covers);
+     for ($i=0; $i < count($games); $i++) {
        $eventgame = new Eventgame;
-       $eventgame->game = $game;
+       $eventgame->game = $games[$i];
+       $eventgame->cover=$covers[$i];
        $event->eventgames()->save($eventgame);
      }
+     /*foreach ($games as $game) {
+
+     }*/
 
      return redirect()->route('dashboard');
    }
@@ -155,5 +156,16 @@ class EventController extends Controller
    public function showInvite(Event $event)
    {
      return view('invite_form', ['event' => $event]);
+   }
+
+   public function delete(Event $event)
+   {
+     if($event->banner != "banners/dreamhack.jpg") {
+       Storage::delete("public/".$event->banner);
+     }
+
+     $event->delete();
+
+     return redirect()->route('dashboard');
    }
 }
