@@ -3,11 +3,11 @@
 @section('content')
 <div class="container my-5 py-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
+        <div class="col-lg-6">
+            <div class="card my-5">
                 <div class="card-header">{{ __('Invite by Email') }}</div>
 
-                <div class="card-body">
+                <div class="card-body p-5">
                     <form method="POST" action="{{ route('send_invite_event') }}">
                         @csrf
 
@@ -18,15 +18,15 @@
                                 <input id="event_name" type="text" name="event_name" value="{{$event->name}}" hidden>
                                 @error('email')
                                 <span class="invalid-feedback">
-                                  <strong>invalid email address</strong>
+                                    <strong>invalid email address</strong>
                                 </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                          <div class="col-md-6">
-                              <button class="btn btn-primary mr-2" type="submit" >Send invite</button>
-                          </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary mr-2" type="submit">Send invite</button>
+                            </div>
                         </div>
 
                     </form>
@@ -34,11 +34,11 @@
             </div>
         </div>
 
-        <div class="col-md-6">
-            <div class="card">
+        <div class="col-lg-6">
+            <div class="card my-5">
                 <div class="card-header">{{ __('Invite by username') }}</div>
 
-                <div class="card-body">
+                <div class="card-body p-5">
                     <form method="POST" action="{{ route('send_invite_event_username') }}">
                         @csrf
 
@@ -49,22 +49,20 @@
                                 <input id="event_name" type="text" name="event_name" value="{{$event->name}}" hidden>
                                 @error('username')
                                 <span class="invalid-feedback">
-                                  <strong>Unknown username</strong>
+                                    <strong>Unknown username</strong>
                                 </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="form-group row">
-                          <div class="col-md-6">
-                              <button class="btn btn-primary mr-2" type="submit" >Send invite</button>
-                          </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-primary mr-2" type="submit">Send invite</button>
+                            </div>
                         </div>
-
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 @endsection
