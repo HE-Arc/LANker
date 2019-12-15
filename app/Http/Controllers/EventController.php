@@ -82,6 +82,7 @@ class EventController extends Controller
 
      $event = new Event;
      $event->name = $request->event_name;
+     $event->host = $request->host_name;
      $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->start_date $request->start_time:00"));
      $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->end_date $request->end_time:00"));
      $event->date_start = $combinedDTStart;

@@ -36,12 +36,14 @@
         </tr>
       </table>
       <hr>
+      @if(Auth::user()->id == $user->id)
       <form action="{{ route('delete_profile', Auth::user()) }}" method="POST">
           {{ csrf_field() }}
           {{ method_field('DELETE') }}
           <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary">Change account informations</a>
           <input type="submit" class="btn btn-danger" value="Delete profile" onclick="return confirm('Are you sure?')"/>
       </form>
+      @endif
     </div>
     <div class="col mx-2 bg-light p-4">
       <h3 class="mb-3">About me</h3>

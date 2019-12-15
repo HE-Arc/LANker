@@ -45,6 +45,13 @@
         <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary">Join event <i class="fas fa-sign-in-alt"></i></a>
       @endif
       <a href="{{ route('invite_event', $event) }}" class="btn btn-primary">Share <i class="fas fa-share"></i></a>
+      @if (Auth::user()->id == $event->user_id or Auth::user()->hasRole('admin'))
+      <form class="lanker-inline-form" action="{{ route('delete_event', $event) }}" method="post">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+        <input type="submit" class="btn btn-danger" value="Delete event" onclick="return confirm('Are you sure?')"/>
+      </form>
+      @endif
     @else
       <a href="{{ route('login') }}" class="btn btn-primary">Login first</a>
     @endauth
