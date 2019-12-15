@@ -154,6 +154,8 @@
 
 .lanker-img-card-img {
     object-fit: cover;
+    width: 250px;
+    height: 350px;
 }
 
 .profile_card {

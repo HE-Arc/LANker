@@ -27,22 +27,18 @@
             @enderror
           </div>
         </div>
-        <div class="form-group row">
-          <div class="col">
-            <img src="{{ url('storage/banners/dreamhack.jpg')}}" id="image_preview_container" class="img-thumbnail event-banner" alt="">
-          </div>
+        <div class="form-group">
+          <img src="{{ url('storage/banners/dreamhack.jpg')}}" id="image_preview_container" class="img-thumbnail event-banner" alt="">
         </div>
-        <div class="form-group row">
-          <div class="col">
-            <div class="input-group">
-              <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
-              @error('image')
-              <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-              </span>
-              @enderror
-              <label class="custom-file-label" for="image">Choose file</label>
-            </div>
+        <div class="form-group">
+          <div class="input-group">
+            <input type="file" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+            @error('image')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            <label class="custom-file-label" for="image">Choose file</label>
           </div>
         </div>
         <div class="form-group row">
@@ -87,47 +83,39 @@
           </div>
         </div>
 
-        <div class="form-group row">
-          <div class="col">
-            <label for="location">Location</label>
-            <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" placeholder="Location" required>
-            @error('location')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-          </div>
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" value="{{ old('location') }}" placeholder="Location" required>
+          @error('location')
+          <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+          </span>
+          @enderror
         </div>
-        <div class="form-group row">
-          <div class="col">
-            <label for="game">Game</label>
-            <input id="gameInput" type="text" class="form-control @error('game') is-invalid @enderror" name="game" value="{{ old('game') }}" placeholder="Games">
-            @error('game')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-          </div>
+        <div class="form-group">
+          <label for="game">Game</label>
+          <input id="gameInput" type="text" class="form-control @error('game') is-invalid @enderror" name="game" value="{{ old('game') }}" placeholder="Games">
+          @error('game')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+          @enderror
         </div>
 
-        <div class="form-group row d-block">
-          <div class="col">
-            <label for="">Selected games</label>
-            <span id="game_tags" class="d-block">
-            </span>
-          </div>
+        <div class="form-group d-block">
+          <label for="">Selected games</label>
+          <span id="game_tags" class="d-block">
+          </span>
         </div>
 
-        <div class="form-group row">
-          <div class="col">
-            <label for="description">Description</label>
-            <textarea id="description" class="form-control  @error('public') is-invalid @enderror" name="description" value="{{ old('description') }}">{{{ old('description') }}}</textarea>
-            @error('public')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-          </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" class="form-control  @error('public') is-invalid @enderror" name="description" value="{{ old('description') }}" style="max-height: 300px; min-height: 200px;">{{{ old('description') }}}</textarea>
+          @error('public')
+          <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+          </span>
+          @enderror
         </div>
 
         <div class="form-group row">
@@ -151,18 +139,14 @@
           </div>
         </div>
 
-        <div class="form-group form-check row">
-          <div class="col">
+        <div class="form-group form-check">
             <input class="form-check-input" type="checkbox" id="private" name="private" @if (old('private')) checked @endif>
             <label class="form-check-label" for="private">Private Event</label>
-          </div>
         </div>
 
-        <div class="form-group row">
-          <div class="col">
+        <div class="form-group">
             <button class="btn btn-primary mr-2" type="submit">Create event</button>
             <a class="btn btn-secondary" href="{{ url()->previous() }}">Cancel</a>
-          </div>
         </div>
     </form>
 </div>
