@@ -1,60 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container my-5">
-  <img src="{{ url('storage/'.$user->avatar) }}" class="mx-auto d-block lanker-sq-img-container rounded-circle lanker-border-5 border-light" alt="user avatar">
-  <h1 class="display-4 text-center">{{ $user->name }}</h1>
-  <div class="row mt-5">
-    <div class="col mx-2 bg-light p-4">
-      <h3 class="mb-3">General information</h3>
-      <table class="table">
-        <tr>
-          <th>Account role</th>
-          <td>
-            @if(Auth::user()->hasRole('admin'))
-            Administrator
-            @else
-            User
+  <div class="container my-5">
+    <img src="{{ url('storage/'.$user->avatar) }}" class="mx-auto d-block lanker-sq-img-container rounded-circle lanker-border-5 border-light" alt="user avatar">
+    <h1 class="display-4 text-center">{{ $user->name }}</h1>
+    <div class="row mt-5">
+      <div class="col mx-2 bg-light p-4">
+        <h3 class="mb-3">General information</h3>
+        <table class="table">
+          <tr>
+            <th>Account role</th>
+            <td>
+              @if(Auth::user()->hasRole('admin'))
+                Administrator
+              @else
+                User
+              @endif
+            </td>
+          </tr>
+          <tr>
+            <th>Email</th>
+            <td>{{ $user->email }}</td>
+          </tr>
+          <tr>
+            <th>Joined on</th>
+            <td>{{ date("d.m.Y",strtotime($user->created_at)) }}</td>
+          </tr>
+          <tr>
+            <th>Participating in</th>
+            <td>{{ $participated }} event(s)</td>
+          </tr>
+          <tr>
+            <th>Organised</th>
+            <td>{{ $organised }} event(s)</td>
+          </tr>
+        </table>
+        <hr>
+        @if(Auth::user()->id == $user->id or Auth::user()->hasRole('admin'))
+          <form action="{{ route('delete_profile', Auth::user()) }}" method="POST">
+            {{ csrf_field() }}
+            {{ method_field('DELETE') }}
+            @if(Auth::user()->id == $user->id)
+              <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary">Change account informations</a>
             @endif
-          </td>
-        </tr>
-        <tr>
-          <th>Email</th>
-          <td>{{ $user->email }}</td>
-        </tr>
-        <tr>
-          <th>Joined on</th>
-          <td>{{ date("d.m.Y",strtotime($user->created_at)) }}</td>
-        </tr>
-        <tr>
-          <th>Participating in</th>
-          <td>{{ $participated }} event(s)</td>
-        </tr>
-        <tr>
-          <th>Organised</th>
-          <td>{{ $organised }} event(s)</td>
-        </tr>
-      </table>
-      <hr>
-      @if(Auth::user()->id == $user->id or Auth::user()->hasRole('admin'))
-      <form action="{{ route('delete_profile', Auth::user()) }}" method="POST">
-          {{ csrf_field() }}
-          {{ method_field('DELETE') }}
-          @if(Auth::user()->id == $user->id)
-          <a href="{{ route('edit_profile', Auth::user()) }}" class="btn btn-primary">Change account informations</a>
-          @endif
-          <input type="submit" class="btn btn-danger" value="Delete profile" onclick="return confirm('Are you sure?')"/>
-      </form>
-      @endif
-    </div>
-    <div class="col mx-2 bg-light p-4">
-      <h3 class="mb-3">About me</h3>
-      <table class="table">
-        <tr>
-          <th>Description</th>
-          <td>{{ $user->description }}</td>
-        </tr>
-      </table>
+            <input type="submit" class="btn btn-danger" value="Delete profile" onclick="return confirm('Are you sure?')"/>
+          </form>
+        @endif
+      </div>
+
+      <div class="col mx-2 bg-light p-4">
+        <h3 class="mb-3">About me</h3>
+        <table class="table">
+          <tr>
+            <th>Description</th>
+            <td>{{ $user->description }}</td>
+          </tr>
+        </table>
+      </div>
     </div>
     <h3 class="my-4">Favorite games</h3>
     <div class="row">
