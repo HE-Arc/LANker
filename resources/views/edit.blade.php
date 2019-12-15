@@ -10,7 +10,7 @@
         {{ method_field('PATCH') }}
 
         <div class="form-group">
-          <img src="{{ url('storage/'.$user->avatar) }}" class="lanker-sq-img-container lanker-border-5 border-light">
+          <img src="{{ url('storage/'.$user->avatar) }}" class="lanker-sq-img-container lanker-border-5 rounded-circle border-light">
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-file">Change picture <input type="file" id="image" name="image" class="form-control" accept="image/*"/></button>
@@ -68,7 +68,7 @@
         <div class="form-group row">
           <div class="col">
             <label for="description">{{ __('Description') }}</label>
-            <textarea id="description" class="form-control" name="description" rows="8" maxlength="2048">{{ Auth::user()->description }}</textarea>
+            <textarea id="description" class="form-control" name="description" rows="8" style="max-height: 300px; min-height: 200px;" maxlength="2048">{{ Auth::user()->description }}</textarea>
           </div>
         </div>
 

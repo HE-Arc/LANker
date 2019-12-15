@@ -68,6 +68,13 @@
   object-fit: cover !important;
 }
 
+.lanker-sq-img-container-sm {
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  object-fit: cover !important;
+}
+
 .lanker-border-2 {
   border-width: 2px !important;
   border-style: solid;
