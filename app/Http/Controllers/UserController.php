@@ -48,13 +48,15 @@ class UserController extends Controller
       $user->description = $request->description;
     }
 
-    if($user->avatar != "users/default.png") {
-      Storage::delete("public/".$user->avatar);
+    if(isset($request->image)) {
+      if($user->avatar != "users/default.png") {
+        Storage::delete("public/".$user->avatar);
+      }
+
+      $image = $request->image->store('public/users');
+
+      $user->avatar = substr($image, strlen("public/"));
     }
-
-    $image = $request->image->store('public/users');
-
-    $user->avatar = substr($image, strlen("public/"));
 
     if(isset($request->games))
     {
@@ -107,7 +109,7 @@ class UserController extends Controller
         if($user->avatar != "users/default.png") {
           Storage::delete("public/".$user->avatar);
         }
-        
+
         $user->forceDelete();
       }
     }

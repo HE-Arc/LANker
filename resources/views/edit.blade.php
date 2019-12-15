@@ -10,7 +10,7 @@
         {{ method_field('PATCH') }}
 
         <div class="form-group">
-          <img src="{{ url('storage/'.$user->avatar) }}" class="lanker-sq-img-container lanker-border-5 rounded-circle border-light">
+          <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" class="lanker-sq-img-container lanker-border-5 rounded-circle border-light">
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-file">Change picture <input type="file" id="image" name="image" class="form-control" accept="image/*"/></button>
@@ -19,7 +19,7 @@
         <div class="form-group row">
           <div class="col">
             <label for="email">{{ __('E-Mail Address') }}</label>
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ Auth::user()->email }}" required autocomplete="email">
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email', Auth::user()->email) }}" required autocomplete="email">
           </div>
         </div>
 
@@ -67,53 +67,8 @@
 
         <div class="form-group row">
           <div class="col">
-            <label for="gameInput">Favourite games</label>
-            <input id="gameInput" type="text" class="form-control @error('games') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
-            @error('games')
-            <span class="invalid-feedback" role="alert">
-              <strong>You must enter a valid game!</strong>
-            </span>
-            @enderror
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col">
             <span id="game_tags" class="d-block">
             </span>
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <div class="col">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Game</th>
-                  <th scope="col">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse ($user->usergames()->get() as $usergame)
-                <tr>
-                  <td>{{ $usergame->name }}</td>
-                  <td>
-                    <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
-                      @csrf
-                      {{ method_field('DELETE') }}
-                      <button type="submit" class="btn btn-danger pull-right">Remove game</button>
-                    </form>
-                  </td>
-                </tr>
-                @empty
-                  <tr>
-                    <td>
-                      <p class="text-muted">There's seems to be no favourite games</p>
-                    </td>
-                  </tr>
-                @endforelse
-              </tbody>
-            </table>
           </div>
         </div>
 
