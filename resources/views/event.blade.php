@@ -44,9 +44,7 @@
       @else
         <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary">Join event <i class="fas fa-sign-in-alt"></i></a>
       @endif
-      @if (Auth::user()->id == $event->user_id)
       <a href="{{ route('invite_event', $event) }}" class="btn btn-primary">Share <i class="fas fa-share"></i></a>
-      @endif
       @if (Auth::user()->id == $event->user_id or Auth::user()->hasRole('admin'))
       <form class="lanker-inline-form" action="{{ route('delete_event', $event) }}" method="post">
         {{ csrf_field() }}
