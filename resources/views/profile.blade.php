@@ -5,7 +5,7 @@
     <img src="{{ url('storage/'.$user->avatar) }}" class="mx-auto d-block lanker-sq-img-container rounded-circle lanker-border-5 border-light" alt="user avatar">
     <h1 class="display-4 text-center">{{ $user->name }}</h1>
     <div class="row mt-5">
-      <div class="col mx-2 bg-light p-4">
+      <div class="col-lg mx-2 bg-light p-4">
         <h3 class="mb-3">General information</h3>
         <table class="table">
           <tr>
@@ -27,7 +27,7 @@
             <td>{{ date("d.m.Y",strtotime($user->created_at)) }}</td>
           </tr>
           <tr>
-            <th>Participating in</th>
+            <th>Participated in</th>
             <td>{{ $participated }} event(s)</td>
           </tr>
           <tr>
@@ -48,7 +48,7 @@
         @endif
       </div>
 
-      <div class="col mx-2 bg-light p-4">
+      <div class="col-lg mx-2 bg-light p-4">
         <h3 class="mb-3">About me</h3>
         <table class="table">
           <tr>
@@ -78,6 +78,12 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" id="pills-participating-events-tab" data-toggle="pill" href="#pills-participating-events" role="tab" aria-controls="pills-participating-events" aria-selected="false">Participating events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-organised-events-tab" data-toggle="pill" href="#pills-organised-events" role="tab" aria-controls="pills-organised-events" aria-selected="false">Organised events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-participated-events-tab" data-toggle="pill" href="#pills-participated-events" role="tab" aria-controls="pills-participated-events" aria-selected="false">Participated events</a>
       </li>
     </ul>
 
@@ -128,7 +134,63 @@
               @endslot
             @endcomponent
           @empty
-            <p>You aren't organising any upcoming event</p>
+            <div class="col">
+              <p>You aren't participating any upcoming event</p>
+            </div>
+          @endforelse
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-organised-events" role="tabpanel" aria-labelledby="pills-organised-events-tab">
+        <div class="row">
+          @forelse($organised_evt as $event)
+            @component('components/event_card')
+              @slot('banner')
+                {{$event->banner}}
+              @endslot
+              @slot('name')
+                {{$event->name}}
+              @endslot
+              @slot('dates')
+                {{$event->getStartDate().$event->getEndDate()}}
+              @endslot
+              @slot('description')
+                {{$event->description}}
+              @endslot
+              @slot('created_at')
+                {{$event->created_at}}
+              @endslot
+            @endcomponent
+          @empty
+            <div class="col">
+              <p>The events that you are organising have not yet expired</p>
+            </div>
+          @endforelse
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-participated-events" role="tabpanel" aria-labelledby="pills-participated-events-tab">
+        <div class="row">
+          @forelse($organised_evt as $event)
+            @component('components/event_card')
+              @slot('banner')
+                {{$event->banner}}
+              @endslot
+              @slot('name')
+                {{$event->name}}
+              @endslot
+              @slot('dates')
+                {{$event->getStartDate().$event->getEndDate()}}
+              @endslot
+              @slot('description')
+                {{$event->description}}
+              @endslot
+              @slot('created_at')
+                {{$event->created_at}}
+              @endslot
+            @endcomponent
+          @empty
+            <div class="col">
+              <p>The events that you are participating in have not yet expired</p>
+            </div>
           @endforelse
         </div>
       </div>
