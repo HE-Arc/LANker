@@ -25,11 +25,11 @@ class UserEditRequest extends FormRequest
   public function rules()
   {
     return [
-      'email' => 'required|email',
+      'email' => 'email',
       'password' => 'confirmed',
       'description' => 'max:2048',
       'games' => 'string',
-      'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+      'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
   }
 }
