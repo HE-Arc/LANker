@@ -146,7 +146,8 @@
 
         <div class="form-group">
             <button class="btn btn-primary mr-2" type="submit">Create event</button>
-            <a class="btn btn-secondary" href="{{ url()->previous() }}">Cancel</a>
+            <a class="btn btn-secondary" href="{{ route('dashboard') }}">Cancel</a>
+          </div>
         </div>
     </form>
 </div>
