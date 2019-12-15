@@ -126,7 +126,7 @@ class EventController extends Controller
        }
      }
 
-     return redirect()->route('dashboard');
+     return redirect()->route('event', $event->name);
    }
 
    public function inviteUsername(InviteUsernameRequest $request)
