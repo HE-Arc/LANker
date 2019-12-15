@@ -5,21 +5,15 @@
   <div class="row">
     <div class="col">
       <h1 class="display-4">Edit profile</h1>
-      <form method="POST" action="{{ route('update_profile', $user) }}">
+      <form id="eventForm" enctype="multipart/form-data" method="POST" action="{{ route('update_profile', $user) }}">
         @csrf
-        {{ method_field('patch') }}
+        {{ method_field('PATCH') }}
 
-        <div class="form-group row">
-          <div class="col">
-            <img id="image_preview_container" src="{{ url('storage/'.$user->avatar) }}" alt="" class="card-img avatar img-thumbnail" style="width: 18rem; "/>
-            <div class="card-img-overlay mx-auto">
-              <span class="btn btn-primary btn-file ">
-                Browse <input type="file" id="image" name="image" class="form-control" accept="image/*"/>
-              </span>
-            </div>
-          </div>
-          <div class="col-8">
-          </div>
+        <div class="form-group">
+          <img src="{{ url('storage/'.$user->avatar) }}" class="lanker-sq-img-container lanker-border-5 rounded-circle border-light">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary btn-file">Change picture <input type="file" id="image" name="image" class="form-control" accept="image/*"/></button>
         </div>
 
         {{-- <div class="card text-center">
@@ -74,7 +68,26 @@
         <div class="form-group row">
           <div class="col">
             <label for="description">{{ __('Description') }}</label>
-            <textarea id="description" class="form-control" name="description" rows="8" maxlength="2048">{{ Auth::user()->description }}</textarea>
+            <textarea id="description" class="form-control" name="description" rows="8" style="max-height: 300px; min-height: 200px;" maxlength="2048">{{ Auth::user()->description }}</textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col">
+            <label for="gameInput">Favourite games</label>
+            <input id="gameInput" type="text" class="form-control @error('games') is-invalid @enderror"  name="game" value="{{ old('game') }}" placeholder="Games">
+            @error('games')
+            <span class="invalid-feedback" role="alert">
+              <strong>You must enter a valid game!</strong>
+            </span>
+            @enderror
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col">
+            <span id="game_tags" class="d-block">
+            </span>
           </div>
         </div>
 
@@ -143,6 +156,39 @@
           </div>
         </div>
       </form>
+    </div>
+  </div>
+  <div class="row my-3">
+    <div class="col">
+      <h1 class="display-4">Favourite games</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Game(s)</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          @forelse (Auth::user()->usergames()->get() as $usergame)
+          <tr>
+            <td>{{ $usergame->game }}</td>
+            <td>
+              <form method="post" action="{{ route('remove_profile_game', $usergame) }}">
+                @csrf
+                {{ method_field('DELETE') }}
+                <button type="submit" class="btn btn-danger pull-right">Remove game</button>
+              </form>
+            </td>
+          </tr>
+          @empty
+            <tr>
+              <td>
+                <p class="text-muted">There's seems to be no favourite games</p>
+              </td>
+            </tr>
+          @endforelse
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
