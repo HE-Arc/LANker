@@ -8,6 +8,7 @@ use Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\UserEditRequest;
 use App\Event;
+use App\Eventuser;
 use App\Usergame;
 use Illuminate\Support\Facades\Log;
 
@@ -124,8 +125,8 @@ class UserController extends Controller
     if ($user === null) {
       return redirect()->route('dashboard');
     }
-    $participated = DB::table('events')->whereDate('date_end','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
-    $organised = DB::table('events')->whereDate('date_end','<',date('Y-m-d H:i:s'))->where('user_id',$user->id)->count();
+    $participated = Eventuser::where('user_id',$user->id)->count();
+    $organised = Event::where('user_id',$user->id)->count();
 
     $participating_evt = Event::join('eventusers', 'events.id', '=', 'eventusers.event_id')->whereDate('date_end','>',date('Y-m-d H:i:s'))->where('eventusers.user_id',$user->id)->get();
     $participated_evt = Event::join('eventusers', 'events.id', '=', 'eventusers.event_id')->whereDate('date_end','<',date('Y-m-d H:i:s'))->where('eventusers.user_id',$user->id)->get();
