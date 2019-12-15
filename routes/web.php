@@ -61,6 +61,16 @@ Route::post('/event/form/create', [
   'uses' => 'EventController@create'
 ])->middleware('auth');
 
+Route::get('/event/edit/{name}', [
+  'as' => 'edit_event',
+  'uses' => 'EventController@edit'
+])->middleware('auth');
+
+Route::patch('/event/edit/{event}/update', [
+  'as' => 'update_event',
+  'uses' => 'EventController@update'
+])->middleware('auth');
+
 // TODO: ajouter vue quand user pas trouvé (plutot que redirect à home)
 Route::get('/profile/{name}',[
   'as' => 'profile',

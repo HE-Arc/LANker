@@ -10,6 +10,7 @@ use App\SendMail;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\EventCreateRequest;
+use App\Http\Requests\EventEditRequest;
 use App\Http\Requests\InviteEmailRequest;
 use App\Http\Requests\InviteUsernameRequest;
 use Illuminate\Support\Facades\Auth;
@@ -46,6 +47,12 @@ class EventController extends Controller
    public function form()
    {
      return view('event_form');
+   }
+
+   public function edit(int $id)
+   {
+     $event = Event::where('id', $id)->first();
+     return view('event_edit', compact('event'));
    }
 
    public function searchEvent(Request $request)
@@ -157,6 +164,75 @@ class EventController extends Controller
    public function showInvite(Event $event)
    {
      return view('invite_form', ['event' => $event]);
+   }
+
+   public function update(Event $event, EventEditRequest $request)
+   {
+     if(!$request->validated()) {
+       return redirect()->back()->withInput();
+     }
+
+     if(strcmp($request->event_name, $event->name) != 0)
+     {
+       if(Event::where('name', $request->event_name)->where('id', '<>',$event->id)->exists())
+       {
+         return redirect()->back()->withInput()->withErrors(['event_name' => 'This event name is already taken!']);
+       }
+       else
+       {
+         $event->name = $request->event_name;
+       }
+
+     }
+
+     if(strcmp($request->host_name, $event->host) != 0)
+     {
+       $event->host = $request->host_name;
+     }
+
+     if(isset($request->image))
+     {
+       if($event->banner != "banners/dreamhack.jpg")
+       {
+         Storage::delete("public/" . $event->banner);
+       }
+
+       $image = $request->image->store('public/banners');
+
+       $event->banner = substr($image, strlen("public/"));
+     }
+
+     if(strcmp($request->location, $event->location) != 0)
+     {
+       $event->location = $request->location;
+     }
+
+     if(isset($request->start_date) && isset($request->end_date) && isset($request->start_time) && isset($request->end_time))
+     {
+       $combinedDTStart = date('Y-m-d H:i:s', strtotime("$request->start_date $request->start_time:00"));
+       $combinedDTEnd = date('Y-m-d H:i:s', strtotime("$request->end_date $request->end_time:00"));
+       $event->date_start = $combinedDTStart;
+       $event->date_end = $combinedDTEnd;
+     }
+
+     if(strcmp($request->description, $event->description) != 0)
+     {
+       $event->description = $request->description;
+     }
+
+     if(strcmp($request->price, $event->price) != 0)
+     {
+       $event->price = $request->price;
+     }
+
+     if(strcmp($request->seats, $event->seats) != 0)
+     {
+       $event->seats = $request->seats;
+     }
+
+     $event->save();
+
+     return redirect()->route('event', $event->name);
    }
 
    public function delete(Event $event)
