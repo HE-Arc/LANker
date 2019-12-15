@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $events = Event::whereDate('date_end','>',date('Y-m-d H:i:s'))->where('public', '1')->orderBy('date_start')->get();
+      $events = Event::whereDate('date_end','>',date('Y-m-d H:i:s'))->where('public', '1')->orderBy('date_start')->limit(10)->get();
       return view('dashboard', compact('events'));
     }
 }

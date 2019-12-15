@@ -49,7 +49,8 @@ class UserController extends Controller
       $user->description = $request->description;
     }
 
-    if(isset($request->image)) {
+    if(isset($request->image))
+    {
       if($user->avatar != "users/default.png") {
         Storage::delete("public/".$user->avatar);
       }

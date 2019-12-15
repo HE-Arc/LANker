@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Rules\EndDateAfterStartDate;
 use App\Rules\EventNameNotTaken;
 
-class EventCreateRequest extends FormRequest
+class EventEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,17 +27,16 @@ class EventCreateRequest extends FormRequest
     public function rules()
     {
       return [
-          'event_name' => ['required', 'string', 'max:120', new EventNameNotTaken()],
-          'host_name' => 'required|string|max:120',
-          'start_date' => 'required|date',
-          'end_date' => ['required', 'date', 'after_or_equal:start_date', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
-          'start_time' => 'required|date_format:H:i|before:end_time',
-          'end_time' => ['required', 'date_format:H:i', 'after:start_time', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
-          'location' => 'required|string|max:120',
+          'event_name' => ['string', 'max:120'],
+          'host_name' => 'string|max:120',
+          'start_date' => 'nullable|required_with:end_date,start_time,end_time|date',
+          'end_date' => ['nullable', 'required_with:start_date,start_time,end_time', 'date', 'after_or_equal:start_date', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
+          'start_time' => 'nullable|required_with:start_date,end_date,end_time|date_format:H:i|before:end_time',
+          'end_time' => ['nullable', 'required_with:start_date,end_date,start_time,end_time', 'date_format:H:i', 'after:start_time', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
+          'location' => 'string|max:120',
           'games' => 'nullable|string',
           'description' => 'string|max:240|nullable',
-          'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-          // 'price' => 'nullable|regex:/[0-9]*(\.[0-9][0-9]?)?/',
+          'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
           'price' => 'nullable|numeric|min:0',
           'seats' => 'nullable|numeric|min:0'
       ];

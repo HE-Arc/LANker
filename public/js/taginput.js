@@ -4,6 +4,14 @@ var gameCoverArray = []
 
 // Initialize ajax autocomplete: WILL NOT WORK BECAUSE FORMAT IS NOT THE SAME AS APIs
 // SEE : https://www.devbridge.com/sourcery/components/jquery-autocomplete/#jquery-autocomplete-response-format
+
+$('#gameInput').keydown(function(event){
+  if(event.keyCode == 13) {
+    event.preventDefault();
+    return false;
+  }
+});
+
 $('#gameInput').autocomplete({
   paramName: 'name',
   transformResult: function(response) {

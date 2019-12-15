@@ -46,6 +46,7 @@
       @endif
       <a href="{{ route('invite_event', $event) }}" class="btn btn-primary">Share <i class="fas fa-share"></i></a>
       @if (Auth::user()->id == $event->user_id or Auth::user()->hasRole('admin'))
+      <a href="{{ route('edit_event', $event->id) }}" class="btn btn-primary">Modify event <i class="far fa-edit"></i></a>
       <form class="lanker-inline-form" action="{{ route('delete_event', $event) }}" method="post">
         {{ csrf_field() }}
         {{ method_field('DELETE') }}
