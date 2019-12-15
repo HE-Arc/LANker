@@ -1,4 +1,12 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+/* @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8"; */
+@import url('https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap');
+@charset "UTF-8";
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box !important;
+  -moz-box-sizing: border-box !important;
+  box-sizing: border-box !important;
+}
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
@@ -29,6 +37,8 @@
   --danger: #e3342f;
   --light: #f8f9fa;
   --dark: #343a40;
+  --mazarine-blue: #273c75;
+  /* --mazarine-blue: #0071e3; */
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -66,13 +76,13 @@ section {
 
 body {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: "Nunito", "FontAwesome",  sans-serif;
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
   text-align: left;
-  background-color: #f8fafc;
+   /* background-color: #f8fafc; */
 }
 
 [tabindex="-1"]:focus {
@@ -83,12 +93,6 @@ hr {
   box-sizing: content-box;
   height: 0;
   overflow: visible;
-}
-
-.fit-image {
-    width: 100% !important;
-    height: 15vw !important;
-    object-fit: cover !important;
 }
 
 h1,

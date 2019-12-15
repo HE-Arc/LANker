@@ -17,10 +17,10 @@ class CreateEventsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('location');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->date('date_start');
             $table->date('date_end');
-            $table->boolean('public');
+            $table->boolean('public')->default(1);
             $table->timestamps();
         });
     }

@@ -1,45 +1,85 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="justify-content-center">
-            <div class="d-flex flex-wrap justify-content-start">
-              <h1>LAN for everyWAN LAN for everyWAN</h1>
-              <div class="mx-2">
-                <button type="button" name="button" class="btn btn-primary"><i class="fa fa-plus mx-1" aria-hidden="true"></i>Join</button>
-              </div>
-
-            </div>
-            <div class="card p-3">
-              <div class="row">
-                <div class="col">
-                  @image(['name'=>'dreamhack.jpg','alt'=>'event image','id'=>'event-image'])@endimage
-                </div>
-
-                <div class="col">
-                  <h2>General informations</h2>
-                  <div class="row my-2">
-                    @event_info(['id'=>'host','name'=>'Host','value'=>'HE-Arc'])@endevent_info
-                    @event_info(['id'=>'location','name'=>'Location','value'=>'Neuchâtel'])@endevent_info
-                  </div>
-                  <div class="row my-2">
-                    @event_info(['id'=>'price','name'=>'Price','value'=>'Free'])@endevent_info
-
-                    @event_info(['id'=>'date','name'=>'Host','value'=>'30 oct. 2019'])@endevent_info
-                  </div>
-                  <div class="row my-2">
-                    @event_info(['id'=>'time','name'=>'Time','value'=>'9:00-22:00'])@endevent_info
-                    @event_info(['id'=>'seats','name'=>'Nb. seats','value'=>'100'])@endevent_info
-                  </div>
-                </div>
-              </div>
-              <div class="row m-0 my-2">
-                <h2>Description</h2>
-                <div>
-                  Les vidéos vous permettent de faire passer votre message de façon convaincante. Quand vous cliquez sur Vidéo en ligne, vous pouvez coller le code incorporé de la vidéo que vous souhaitez ajouter. Vous pouvez également taper un mot-clé pour rechercher en ligne la vidéo qui convient le mieux à votre document.
-                </div>
-              </div>
-        </div>
+  <div class="container my-5">
+    <img class="event-banner" src="{{ url('storage/'.$event->banner) }}">
+    <h1 class="my-4">{{ $event->name }}</h1>
+    <div class="row">
+      <div class="col-lg">
+        <table class="table">
+          <tr>
+            <td><i class="fa fa-building p-2 fa-lg mr-3"></i></td>
+            <td><p class="lead text-right">{{ $event->host }}</p></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-dollar-sign p-2 fa-lg mr-3"></i></td>
+            <td><p class="lead text-right">{{ $event->getPrice() }}</p></td>
+          </tr>
+          <tr>
+            <td><i class="far fa-clock p-2 fa-lg mr-3"></i></td>
+            <td><p class="lead text-right">{{ $event->getStartTime().' - '.$event->getEndTime() }}</p></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-lg">
+        <table class="table">
+          <tr>
+            <td><i class="fa fa-map-marker-alt p-2 fa-lg mr-3"></i></td>
+            <td><p class="lead text-right">{{$event->location}}</p></td>
+          </tr>
+          <tr>
+            <td><i class="fa fa-calendar-alt p-2 fa-lg mr-3"></i></td>
+            <td><p class="lead text-right">{{ $event->getStartDate().$event->getEndDate() }}</p></td>
+          </tr>
+          <tr>
+            <td><i class="fas fa-chair p-2 fa-lg mr-3"></i></td>
+            <td><p class="lead text-right">{{ $event->getNbSeats() }}</p></td>
+          </tr>
+        </table>
+      </div>
     </div>
-</div>
+    @auth
+      @if ($event->users()->where('event_id', $event->id)->where('user_id', Auth::user()->id)->exists())
+        <a href="{{ route('leave_event', $event->id) }}" class="btn btn-primary">Leave event <i class="fas fa-sign-out-alt"></i></a>
+      @else
+        <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary">Join event <i class="fas fa-sign-in-alt"></i></a>
+      @endif
+      <a href="{{ route('invite_event', $event) }}" class="btn btn-primary">Share <i class="fas fa-share"></i></a>
+      @if (Auth::user()->id == $event->user_id or Auth::user()->hasRole('admin'))
+      <a href="{{ route('edit_event', $event->id) }}" class="btn btn-primary">Modify event <i class="far fa-edit"></i></a>
+      <form class="lanker-inline-form" action="{{ route('delete_event', $event) }}" method="post">
+        {{ csrf_field() }}
+        {{ method_field('DELETE') }}
+        <input type="submit" class="btn btn-danger" value="Delete event" onclick="return confirm('Are you sure?')"/>
+      </form>
+      @endif
+    @else
+      <a href="{{ route('login') }}" class="btn btn-primary">Login first</a>
+    @endauth
+    <h3 class="my-4">Description</h3>
+    <p class="lead">{{ $event->description }}</p>
+    <h3 class="my-4">Games</h3>
+    <div class="row">
+      @forelse ($event->eventgames()->get() as $eventgame)
+        @game_card(['cover'=>$eventgame->cover,'title'=>$eventgame->game])@endgame_card
+      @empty
+        <div class="col">
+          <p class="lead">There doesn't seem to be any games in this event.</p>
+        </div>
+      @endforelse
+    </div>
+    <h3 class="my-4">Participants</h3>
+    <div class="row">
+      @forelse($event->users()->get() as $user)
+        <div class="col-2">
+          <img src="{{ url('storage/'.$user->avatar) }}" class="mx-auto d-block lanker-sq-img-container-sm rounded-circle" alt="user avatar">
+          <p class="lead text-center my-2">{{ $user->name }}</p>
+        </div>
+      @empty
+        <div class="col">
+          <p class="lead">Nobody is interested in this event for now</p>
+        </div>
+      @endforelse
+    </div>
+  </div>
 @endsection

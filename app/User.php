@@ -7,9 +7,25 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
+
+    /**
+     * The events that belong to the user.
+     */
+    public function events()
+    {
+        return $this->belongsToMany('App\Event', 'eventusers');
+    }
+
+    /**
+     * The favorite games of the user.
+     */
+    public function usergames()
+    {
+      return $this->hasMany('App\Usergame');
+    }
 
     /**
      * The attributes that are mass assignable.
