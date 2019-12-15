@@ -9,10 +9,6 @@
 
   <title>{{ config('app.name', 'Laravel') }}</title>
 
-<<<<<<< HEAD
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js', true) }}" defer></script>
-=======
   <!-- Scripts -->
   <script src="{{ asset('js/app.js') }}" defer></script>
   <script
@@ -23,7 +19,6 @@
   <script src="{{ asset('js/taginput.js') }}" defer></script>
   <script src="{{ asset('js/username_autocomplete.js') }}" defer></script>
   <script src="{{ asset('js/image_preview.js') }}" defer></script>
->>>>>>> df679b9ee5b3f140f026807e204e24cb8ad5947b
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -39,19 +34,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
 </head>
 
-<<<<<<< HEAD
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css', true) }}" rel="stylesheet">
-  </head>
-  <body>
-    <div id="app">
-      <header>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #273c75;">
-          <a class="navbar-brand" href="{{ url('/') }}">LANker</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-=======
 <body>
   <div id="app">
     <header>
@@ -60,7 +42,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
->>>>>>> df679b9ee5b3f140f026807e204e24cb8ad5947b
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
