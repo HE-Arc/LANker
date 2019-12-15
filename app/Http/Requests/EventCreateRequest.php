@@ -34,7 +34,7 @@ class EventCreateRequest extends FormRequest
           'start_time' => 'required|date_format:H:i',
           'end_time' => ['required', 'date_format:H:i', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
           'location' => 'required|string|max:120',
-          'games' => 'string',
+          'games' => 'nullable|string',
           'description' => 'string|max:240|nullable',
           'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
           // 'price' => 'nullable|regex:/[0-9]*(\.[0-9][0-9]?)?/',
