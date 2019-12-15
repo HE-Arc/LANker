@@ -38,16 +38,16 @@ class Event extends Model
   {
     //return new DateTime($this->date_start)->format('d-m-Y');
     //return substr($this->date_end,0,10);
-    return date("j F Y", strtotime($this->date_start));
+    return date("j M Y", strtotime($this->date_start));
   }
 
   public function getEndDate()
   {
-    $date=date(" - j F Y", strtotime($this->date_end));
+    $date=date("j M Y", strtotime($this->date_end));
     if(strcmp($date, $this->getStartDate())==0){
       return "";
     }
-    return ;
+    return " - " . $date;
   }
 
   public function getPrice()
