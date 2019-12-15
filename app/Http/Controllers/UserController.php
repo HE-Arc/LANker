@@ -58,14 +58,15 @@ class UserController extends Controller
       $user->avatar = substr($image, strlen("public/"));
     }
 
-    if(isset($request->games))
+    if(isset($request->games) && isset($request->covers))
     {
       $games = explode(',',$request->games);
-
-      foreach ($games as $game) {
+      $covers = explode(',',$request->covers);
+      for ($i=0; $i < count($games); $i++) {
         $usergame = new Usergame;
-        $usergame->game = $game;
-        if(!Usergame::where(['user_id' => $user->id, 'game' => $game])->exists())
+        $usergame->game = $games[$i];
+        $usergame->cover = $covers[$i];
+        if(!Usergame::where(['user_id' => $user->id, 'game' => $usergame->game])->exists())
         {
           $user->usergames()->save($usergame);
         }

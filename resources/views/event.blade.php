@@ -9,7 +9,7 @@
         <table class="table">
           <tr>
             <td><i class="fa fa-building p-2 fa-lg mr-3"></i></td>
-            <td><p class="lead text-right">He-Arc</p></td>
+            <td><p class="lead text-right">{{ $event->host }}</p></td>
           </tr>
           <tr>
             <td><i class="fa fa-dollar-sign p-2 fa-lg mr-3"></i></td>

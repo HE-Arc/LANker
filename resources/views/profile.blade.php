@@ -56,236 +56,80 @@
         </tr>
       </table>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <h3 class="my-4">Favorite games</h3>
+    <h3 class="my-4">Favorite games</h3>
+    <div class="row">
       @forelse ($user->usergames()->get() as $usergame)
-        <?php // TODO: add game cards ?>
+        @game_card(['cover'=>$usergame->cover,'title'=>$usergame->game])@endgame_card
       @empty
-      @if (Auth::user()->id == $user->id)
-        <p class="text-muted">It seems like you don't have any favourite games, add them <a href="{{ route('edit_profile', Auth::user()) }}">here</a>.</p>
-      @endif
+        @if (Auth::user()->id == $user->id)
+          <div class="col">
+            <p class="text-muted">It seems like you don't have any favourite games, add them <a href="{{ route('edit_profile', Auth::user()) }}">here</a>.</p>
+          </div>
+        @endif
       @endforelse
     </div>
-  </div>
 
-<h3 class="my-4">Events</h3>
-  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="pills-organising-events-tab" data-toggle="pill" href="#pills-organising-events" role="tab" aria-controls="pills-organising-events" aria-selected="true">Organising events</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="pills-participating-events-tab" data-toggle="pill" href="#pills-participating-events" role="tab" aria-controls="pills-participating-events" aria-selected="false">Participating events</a>
-    </li>
-  </ul>
-  <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-organising-events" role="tabpanel" aria-labelledby="pills-organising-events-tab">
-      <div class="row">
-        @forelse($organising_evt as $event)
-          @component('components/event_card')
-            @slot('banner')
-              {{$event->banner}}
-            @endslot
-            @slot('name')
-              {{$event->name}}
-            @endslot
-            @slot('dates')
-              {{$event->getStartDate().$event->getEndDate()}}
-            @endslot
-            @slot('description')
-              {{$event->description}}
-            @endslot
-            @slot('created_at')
-              {{$event->created_at}}
-            @endslot
-          @endcomponent
-        @empty
-          <p>You aren't organising any upcoming event</p>
-        @endforelse
+    <h3 class="my-4">Events</h3>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-organising-events-tab" data-toggle="pill" href="#pills-organising-events" role="tab" aria-controls="pills-organising-events" aria-selected="true">Organising events</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-participating-events-tab" data-toggle="pill" href="#pills-participating-events" role="tab" aria-controls="pills-participating-events" aria-selected="false">Participating events</a>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pills-organising-events" role="tabpanel" aria-labelledby="pills-organising-events-tab">
+        <div class="row">
+          @forelse($organising_evt as $event)
+            @component('components/event_card')
+              @slot('banner')
+                {{$event->banner}}
+              @endslot
+              @slot('name')
+                {{$event->name}}
+              @endslot
+              @slot('dates')
+                {{$event->getStartDate().$event->getEndDate()}}
+              @endslot
+              @slot('description')
+                {{$event->description}}
+              @endslot
+              @slot('created_at')
+                {{$event->created_at}}
+              @endslot
+            @endcomponent
+          @empty
+            <p>You aren't organising any upcoming event</p>
+          @endforelse
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pills-participating-events" role="tabpanel" aria-labelledby="pills-participating-events-tab">
+        <div class="row">
+          @forelse($participating_evt as $event)
+            @component('components/event_card')
+              @slot('banner')
+                {{$event->banner}}
+              @endslot
+              @slot('name')
+                {{$event->name}}
+              @endslot
+              @slot('dates')
+                {{$event->getStartDate().$event->getEndDate()}}
+              @endslot
+              @slot('description')
+                {{$event->description}}
+              @endslot
+              @slot('created_at')
+                {{$event->created_at}}
+              @endslot
+            @endcomponent
+          @empty
+            <p>You aren't organising any upcoming event</p>
+          @endforelse
+        </div>
       </div>
     </div>
-    <div class="tab-pane fade" id="pills-participating-events" role="tabpanel" aria-labelledby="pills-participating-events-tab">
-      <div class="row">
-        @forelse($participating_evt as $event)
-          @component('components/event_card')
-            @slot('banner')
-              {{$event->banner}}
-            @endslot
-            @slot('name')
-              {{$event->name}}
-            @endslot
-            @slot('dates')
-              {{$event->getStartDate().$event->getEndDate()}}
-            @endslot
-            @slot('description')
-              {{$event->description}}
-            @endslot
-            @slot('created_at')
-              {{$event->created_at}}
-            @endslot
-          @endcomponent
-        @empty
-          <p>You aren't organising any upcoming event</p>
-        @endforelse
-      </div>
-    </div>
   </div>
-
-
-
-  {{-- <div class="row">
-    <div class="col">
-      <h3>Events</h3>
-      <!-- change accordion to blink collapsible ? -->
-      <div class="accordion" id="organising">
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h2 class="mb-0">
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#organising_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Organising events
-              </button>
-            </h2>
-          </div>
-          <div id="organising_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#organising">
-            <div class="card-body">
-              @forelse($organising_evt as $event)
-                @component('components/event_card')
-                  @slot('banner')
-                    {{$event->banner}}
-                  @endslot
-                  @slot('name')
-                    {{$event->name}}
-                  @endslot
-                  @slot('dates')
-                    {{$event->getStartDate().$event->getEndDate()}}
-                  @endslot
-                  @slot('description')
-                    {{$event->description}}
-                  @endslot
-                  @slot('created_at')
-                    {{$event->created_at}}
-                  @endslot
-                @endcomponent
-              @empty
-                <p>You aren't organising any upcoming event</p>
-              @endforelse
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion" id="participating">
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h2 class="mb-0">
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#participating_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Participating events
-              </button>
-            </h2>
-          </div>
-          <div id="participating_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#participating">
-            <div class="card-body">
-              @forelse($participating_evt as $event)
-                @component('components/event_card')
-                  @slot('banner')
-                    {{$event->banner}}
-                  @endslot
-                  @slot('name')
-                    {{$event->name}}
-                  @endslot
-                  @slot('dates')
-                    {{$event->getStartDate().$event->getEndDate()}}
-                  @endslot
-                  @slot('description')
-                    {{$event->description}}
-                  @endslot
-                  @slot('created_at')
-                    {{$event->created_at}}
-                  @endslot
-                @endcomponent
-              @empty
-                <p>You aren't organising any upcoming event</p>
-              @endforelse
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion" id="organised">
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h2 class="mb-0">
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#organised_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Organised events
-              </button>
-            </h2>
-          </div>
-          <div id="organised_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#organised">
-            <div class="card-body">
-              @forelse($organised_evt as $event)
-                @component('components/event_card')
-                  @slot('banner')
-                    {{$event->banner}}
-                  @endslot
-                  @slot('name')
-                    {{$event->name}}
-                  @endslot
-                  @slot('dates')
-                    {{$event->getStartDate().$event->getEndDate()}}
-                  @endslot
-                  @slot('description')
-                    {{$event->description}}
-                  @endslot
-                  @slot('created_at')
-                    {{$event->created_at}}
-                  @endslot
-                @endcomponent
-              @empty
-                <p>You aren't organising any upcoming event</p>
-              @endforelse
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion" id="participated">
-        <div class="card">
-          <div class="card-header" id="headingThree">
-            <h2 class="mb-0">
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#participated_collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Participated events
-              </button>
-            </h2>
-          </div>
-          <div id="participated_collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#participated">
-            <div class="card-body">
-              @forelse($participated_evt as $event)
-                @component('components/event_card')
-                  @slot('banner')
-                    {{$event->banner}}
-                  @endslot
-                  @slot('name')
-                    {{$event->name}}
-                  @endslot
-                  @slot('dates')
-                    {{$event->getStartDate().$event->getEndDate()}}
-                  @endslot
-                  @slot('description')
-                    {{$event->description}}
-                  @endslot
-                  @slot('created_at')
-                    {{$event->created_at}}
-                  @endslot
-                @endcomponent
-              @empty
-                <p>You aren't organising any upcoming event</p>
-              @endforelse
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> --}}
-  </div>
-</div>
 @endsection
