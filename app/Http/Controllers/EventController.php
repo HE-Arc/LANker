@@ -95,7 +95,7 @@ class EventController extends Controller
      $event->date_start = $combinedDTStart;
      $event->date_end = $combinedDTEnd;
      $event->location = $request->location;
-     $event->description = $request->description;
+     $event->description = htmlspecialchars($request->description);
 
      if (isset($request->private))
      {
@@ -182,7 +182,6 @@ class EventController extends Controller
        {
          $event->name = $request->event_name;
        }
-
      }
 
      if(strcmp($request->host_name, $event->host) != 0)
@@ -217,7 +216,7 @@ class EventController extends Controller
 
      if(strcmp($request->description, $event->description) != 0)
      {
-       $event->description = $request->description;
+       $event->description = htmlspecialchars($request->description);
      }
 
      if(strcmp($request->price, $event->price) != 0)
@@ -228,6 +227,15 @@ class EventController extends Controller
      if(strcmp($request->seats, $event->seats) != 0)
      {
        $event->seats = $request->seats;
+     }
+
+     if(isset($request->private))
+     {
+       $event->public = 0;
+     }
+     else
+     {
+       $event->public = 1;
      }
 
      $event->save();
