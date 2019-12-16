@@ -97,6 +97,11 @@ class UserController extends Controller
     return redirect()->route('dashboard');
   }
 
+  /**
+   * Remove favorite game from profile.
+   *
+   * @return \Illuminate\Contracts\Support\Renderable
+   */
   public function removeGame(Usergame $usergame)
   {
     $usergame->delete();
@@ -138,6 +143,11 @@ class UserController extends Controller
     return view('profile', ['user' => $user, 'participated'=>$participated,'organised'=>$organised, 'participating_evt'=>$participating_evt,'organising_evt'=>$organising_evt, 'participated_evt'=>$participated_evt,'organised_evt'=>$organised_evt]);
   }
 
+  /**
+   * Show the event creation form.
+   *
+   * @return JSON array containing matching users
+   */
   public function usernameAutocomplete()
   {
     $name="";
