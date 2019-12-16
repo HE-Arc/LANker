@@ -18,7 +18,7 @@ $('#username').autocomplete({
     */
     return {suggestions:usernameObjectArray}
   },
-  serviceUrl: '/LANker/public/autocomplete_username',
+  serviceUrl: 'autocomplete_username',
   onSelect: function(suggestion) {
     let id = suggestion.data
     let name = suggestion.value
