@@ -52,7 +52,11 @@ class EventController extends Controller
    public function edit(int $id)
    {
      $event = Event::where('id', $id)->first();
-     return view('event_edit', compact('event'));
+     if($event->user_id == Auth::id() || Auth::user()->hasRole('admin'))
+     {
+       return view('event_edit', compact('event'));
+     }
+     return redirect()->back();
    }
 
    public function searchEvent(Request $request)
