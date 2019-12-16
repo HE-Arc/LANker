@@ -20,9 +20,9 @@ class GameController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Function used by game autocomplete.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @return JSON array containing matching games
      */
     public function findGames()
     {
