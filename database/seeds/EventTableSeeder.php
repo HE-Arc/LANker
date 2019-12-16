@@ -44,7 +44,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'GameTurnier',
+          'name' => 'GameTurnier 2020',
           'host' => 'GameTurnier',
           'location' => 'Schulhausstrasse 22, Fehraltorf',
           'description' => "Vor 10 Jahren fand im Heiget Huus unser erstes FIFA Turnier statt. Im Januar 2020 heisst es nach langer Zeit wieder – back 2 Heiget Huus. Na, seid ihr auch mit dabei?
@@ -75,7 +75,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'Dreamhack',
+          'name' => 'Dreamhack 2020',
           'host' => 'Dreamhack',
           'location' => 'Leipziger Messe, Germany',
           'description' => "DreamHack Leipzig is a three-day gaming festival where you can enjoy professional eSports tournaments.
@@ -91,7 +91,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'Paris Games Week',
+          'name' => 'Paris Games Week 2020',
           'host' => 'Paris Games Week',
           'location' => '1 Place de la Porte de Versailles, 75015 Paris',
           'description' => "Pour sa 10ème édition consécutive, l’événement a célébré la Pop-Culture sous toutes ses formes. Constructeurs, éditeurs, studios et accessoiristes se sont réunis pour
@@ -107,7 +107,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'Insomnia',
+          'name' => 'Insomnia 2020',
           'host' => 'Insomnia',
           'location' => 'North Ave, Birmingham B40 1NT ',
           'description' => "Insomnia returns to the NEC, Birmingham on 10th-13th April for its biggest show yet.
@@ -149,7 +149,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'GameTurnier',
+          'name' => 'GameTurnier 2019',
           'host' => 'GameTurnier',
           'location' => 'Schulhausstrasse 22, Fehraltorf',
           'description' => "Vor 10 Jahren fand im Heiget Huus unser erstes FIFA Turnier statt. Im Januar 2019 heisst es nach langer Zeit wieder – back 2 Heiget Huus. Na, seid ihr auch mit dabei?
@@ -180,7 +180,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'Dreamhack',
+          'name' => 'Dreamhack 2019',
           'host' => 'Dreamhack',
           'location' => 'Leipziger Messe, Germany',
           'description' => "DreamHack Leipzig is a three-day gaming festival where you can enjoy professional eSports tournaments.
@@ -196,7 +196,7 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'Paris Games Week',
+          'name' => 'Paris Games Week 2019',
           'host' => 'Paris Games Week',
           'location' => '1 Place de la Porte de Versailles, 75015 Paris',
           'description' => "Pour sa 9ème édition consécutive, l’événement a célébré la Pop-Culture sous toutes ses formes. Constructeurs, éditeurs, studios et accessoiristes se sont réunis pour
@@ -212,7 +212,8 @@ class EventTableSeeder extends Seeder
           'user_id' => 1,
         ],
         [
-          'name' => 'Insomnia',
+          'name' => 'Insomnia 2019',
+          'host' => 'Insomnia',
           'location' => 'North Ave, Birmingham B40 1NT ',
           'description' => "Insomnia returns to the NEC, Birmingham on 10th-13th April for its biggest show yet.
                             See your favourite YouTubers from across the globe, play some of the latest games, experience virtual reality, relive the past in our retro zone, and try a new level of gaming in the tabletop zone and so much more all under one roof!
