@@ -34,7 +34,7 @@ class EventController extends Controller
   }
 
   /**
-   * Show the application dashboard.
+   * Show the event page.
    *
    * @return \Illuminate\Contracts\Support\Renderable
    */
@@ -44,11 +44,21 @@ class EventController extends Controller
      return view('event', compact('event'));
    }
 
+   /**
+    * Show the event creation form.
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
    public function form()
    {
      return view('event_form');
    }
 
+   /**
+    * Show the event edition form.
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
    public function edit(int $id)
    {
      $event = Event::where('id', $id)->first();
@@ -140,6 +150,12 @@ class EventController extends Controller
      return redirect()->route('event', $event->name);
    }
 
+   /**
+    * Validate invite form (by username) and send the event invitation by mail.
+    * return the event page.
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
    public function inviteUsername(InviteUsernameRequest $request)
    {
      $event_name=$request->event_name;
@@ -150,6 +166,12 @@ class EventController extends Controller
      return redirect()->route('event', ['name' => $event_name]);
    }
 
+   /**
+    * Validate invite form (by email) and send the event invitation by mail.
+    * return the event page.
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
    public function invite(InviteEmailRequest $request)
    {
      $event_name=$request->event_name;
@@ -159,12 +181,24 @@ class EventController extends Controller
      return redirect()->route('event', ['name' => $event_name]);
    }
 
+   /**
+    * Used for invitations. Function that send the email.
+    *
+    * @param string $email : destination $email
+    * @param string $event_name : the invitation event
+    *
+    */
    private function sendMail($email, $event_name)
    {
      $url = str_replace("http://","",URL::route('event', ['name'=>$event_name]));
      Mail::to($email)->send(new SendMail(Auth::user()->name,$event_name,$url));
    }
 
+   /**
+    * Show the event invitation form.
+    *
+    * @return \Illuminate\Contracts\Support\Renderable
+    */
    public function showInvite(Event $event)
    {
      return view('invite_form', ['event' => $event]);
