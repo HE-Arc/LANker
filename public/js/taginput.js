@@ -40,7 +40,7 @@ $('#gameInput').autocomplete({
     */
     return {suggestions:gameObjectArray}
   },
-  serviceUrl: '/autocomplete',
+  serviceUrl: '/LANker/public/autocomplete',
   onSelect: function(suggestion) {
     let id = suggestion.data
     let name = suggestion.value
