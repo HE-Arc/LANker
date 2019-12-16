@@ -27,7 +27,7 @@ class UserEditRequest extends FormRequest
     return [
       'email' => 'email',
       'password' => 'confirmed',
-      'description' => 'max:2048',
+      'description' => 'max:512',
       'games' => 'string',
       'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
     ];
