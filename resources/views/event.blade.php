@@ -39,12 +39,14 @@
       </div>
     </div>
     @auth
-      @if ($event->users()->where('event_id', $event->id)->where('user_id', Auth::user()->id)->exists())
-        <a href="{{ route('leave_event', $event->id) }}" class="btn btn-primary my-2">Leave event <i class="fas fa-sign-out-alt"></i></a>
-      @else
-        <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary my-2">Join event <i class="fas fa-sign-in-alt"></i></a>
+      @if ($event->date_end > date('Y-m-d H:i:s'))
+        @if ($event->users()->where('event_id', $event->id)->where('user_id', Auth::user()->id)->exists())
+          <a href="{{ route('leave_event', $event->id) }}" class="btn btn-primary my-2">Leave event <i class="fas fa-sign-out-alt"></i></a>
+        @else
+          <a href="{{ route('join_event', $event->id) }}" class="btn btn-primary my-2">Join event <i class="fas fa-sign-in-alt"></i></a>
+        @endif
+        <a href="{{ route('invite_event', $event) }}" class="btn btn-primary my-2">Share <i class="fas fa-share"></i></a>
       @endif
-      <a href="{{ route('invite_event', $event) }}" class="btn btn-primary my-2">Share <i class="fas fa-share"></i></a>
       @if (Auth::user()->id == $event->user_id or Auth::user()->hasRole('admin'))
       <a href="{{ route('edit_event', $event->id) }}" class="btn btn-primary my-2">Modify event <i class="far fa-edit"></i></a>
       <form class="lanker-inline-form" action="{{ route('delete_event', $event) }}" method="post">

@@ -67,6 +67,10 @@
           <div class="col">
             <p class="text-muted">It seems like you don't have any favourite games, add them <a href="{{ route('edit_profile', Auth::user()) }}">here</a>.</p>
           </div>
+        @else
+          <div class="col">
+            <p class="text-muted">It seems like this user doesn't have any favourite games.</p>
+          </div>
         @endif
       @endforelse
     </div>
@@ -109,9 +113,15 @@
               @endslot
             @endcomponent
           @empty
-            <div class="col">
-              <p>You aren't organising any upcoming event</p>
-            </div>
+            @if (!Auth::guest() and Auth::user()->id == $user->id)
+              <div class="col">
+                <p>You aren't organising any upcoming event</p>
+              </div>
+            @else
+              <div class="col">
+                <p>This user isn't organising any upcoming event</p>
+              </div>
+            @endif
           @endforelse
         </div>
       </div>
@@ -136,9 +146,15 @@
               @endslot
             @endcomponent
           @empty
-            <div class="col">
-              <p>You aren't participating any upcoming event</p>
-            </div>
+            @if (!Auth::guest() and Auth::user()->id == $user->id)
+              <div class="col">
+                <p>You aren't participating in any upcoming event</p>
+              </div>
+            @else
+              <div class="col">
+                <p>This user isn't participating in any upcoming event</p>
+              </div>
+            @endif
           @endforelse
         </div>
       </div>
@@ -163,9 +179,15 @@
               @endslot
             @endcomponent
           @empty
-            <div class="col">
-              <p>The events that you are organising have not yet expired</p>
-            </div>
+            @if (!Auth::guest() and Auth::user()->id == $user->id)
+              <div class="col">
+                <p>The events that you are organising have not yet expired</p>
+              </div>
+            @else
+              <div class="col">
+                <p>This user has not organised any expired events</p>
+              </div>
+            @endif
           @endforelse
         </div>
       </div>
@@ -190,9 +212,15 @@
               @endslot
             @endcomponent
           @empty
-            <div class="col">
-              <p>The events that you are participating in have not yet expired</p>
-            </div>
+            @if (!Auth::guest() and Auth::user()->id == $user->id)
+              <div class="col">
+                <p>The events that you are participating in have not yet expired</p>
+              </div>
+            @else
+              <div class="col">
+                <p>This user has not participated in any expired events</p>
+              </div>
+            @endif
           @endforelse
         </div>
       </div>
