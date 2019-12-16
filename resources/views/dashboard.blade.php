@@ -22,7 +22,7 @@
       <div class="col">
         <div class="px-4 my-4">
           <h1 class="display-5">What is LANker ?</h1>
-          <p class="lead">LANker is an easy to use web application for lan party managing. This web app is aimed at users wanting a fast approach to lan organizing.</p>
+          <p class="lead">LANker is an easy to use web application for LAN party managing. This web app is aimed at users wanting a fast approach to LAN organizing.</p>
 
           <p class="lead">Here's what people think of us</p>
           <blockquote class="blockquote">
