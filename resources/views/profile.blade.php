@@ -11,7 +11,7 @@
           <tr>
             <th>Account role</th>
             <td>
-              @if(Auth::user()->hasRole('admin'))
+              @if($user->hasRole('admin'))
                 Administrator
               @else
                 User
@@ -36,7 +36,7 @@
           </tr>
         </table>
         <hr>
-        @if(Auth::user()->id == $user->id or Auth::user()->hasRole('admin'))
+        @if(!Auth::guest() and (Auth::id() == $user->id or Auth::user()->hasRole('admin')))
           <form action="{{ route('delete_profile', Auth::user()) }}" method="POST">
             {{ csrf_field() }}
             {{ method_field('DELETE') }}
@@ -63,7 +63,7 @@
       @forelse ($user->usergames()->get() as $usergame)
         @game_card(['cover'=>$usergame->cover,'title'=>$usergame->game])@endgame_card
       @empty
-        @if (Auth::user()->id == $user->id)
+        @if (!Auth::guest() and Auth::user()->id == $user->id)
           <div class="col">
             <p class="text-muted">It seems like you don't have any favourite games, add them <a href="{{ route('edit_profile', Auth::user()) }}">here</a>.</p>
           </div>

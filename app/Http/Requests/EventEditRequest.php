@@ -37,8 +37,8 @@ class EventEditRequest extends FormRequest
           'games' => 'nullable|string',
           'description' => 'string|max:240|nullable',
           'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-          'price' => 'nullable|numeric|min:0',
-          'seats' => 'nullable|numeric|min:0'
+          'price' => 'numeric|min:0',
+          'seats' => 'numeric|min:0'
       ];
     }
 
