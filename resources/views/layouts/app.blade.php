@@ -45,11 +45,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
-            @auth
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('form_event') }}">{{ __('Create event') }}</a>
-              </li>
-            @endauth
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('form_event') }}">{{ __('Create event') }}</a>
+            </li>
           </ul>
           <ul class="navbar-nav">
             <form class="form-inline my-2 my-lg-0" method="get" action="{{ route('search_event') }}">
