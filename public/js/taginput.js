@@ -5,6 +5,9 @@ var gameCoverArray = []
 // Initialize ajax autocomplete: WILL NOT WORK BECAUSE FORMAT IS NOT THE SAME AS APIs
 // SEE : https://www.devbridge.com/sourcery/components/jquery-autocomplete/#jquery-autocomplete-response-format
 
+/*
+* Prevent the ENTER key from validating the form.
+*/
 $('#gameInput').keydown(function(event){
   if(event.keyCode == 13) {
     event.preventDefault();

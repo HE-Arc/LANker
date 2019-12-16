@@ -19,28 +19,40 @@ class Event extends Model
     return $this->hasMany('App\Eventgame');
   }
 
-
+  /**
+  * Return the description with hyperlinks.
+  */
   public function getFormatedDescription(){
     return preg_replace('/((http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?)/', '<a href="\1">\1</a>', $this->description);
   }
 
+  /**
+  * Return formatted end time.
+  */
   public function getEndTime()
   {
     return date("H:i", strtotime($this->date_end));
   }
 
+  /**
+  * Return formatted start time.
+  */
   public function getStartTime()
   {
     return date("H:i", strtotime($this->date_start));
   }
 
+  /**
+  * Return formatted start date.
+  */
   public function getStartDate()
   {
-    //return new DateTime($this->date_start)->format('d-m-Y');
-    //return substr($this->date_end,0,10);
     return date("j M Y", strtotime($this->date_start));
   }
 
+  /**
+  * Return formatted end date if different from start date. Otherwise returns an empty string.
+  */
   public function getEndDate()
   {
     $date=date("j M Y", strtotime($this->date_end));
@@ -50,6 +62,9 @@ class Event extends Model
     return " - " . $date;
   }
 
+  /**
+  * Return formatted price.
+  */
   public function getPrice()
   {
     if($this->price==0){
@@ -58,6 +73,9 @@ class Event extends Model
     return $this->price.".-";
   }
 
+  /**
+  * Return formatted number of seats.
+  */
   public function getNbSeats(){
     if($this->seats==0){
       return "-";
