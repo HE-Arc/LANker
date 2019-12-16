@@ -37,7 +37,8 @@
 
     <div class="form-group">
       <label for="description">{{ __('Description') }}</label>
-      <textarea id="description" class="form-control" name="description" rows="8" style="max-height: 300px; min-height: 200px;" maxlength="2048">{{ Auth::user()->description }}</textarea>
+      <textarea id="description" class="form-control" name="description" rows="8" style="max-height: 300px; min-height: 200px;" maxlength="512">{{ Auth::user()->description }}</textarea>
+      <p class="text-muted">max. 512 characters</p>
     </div>
 
     <div class="form-group">

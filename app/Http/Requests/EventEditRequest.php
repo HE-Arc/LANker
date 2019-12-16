@@ -35,7 +35,7 @@ class EventEditRequest extends FormRequest
           'end_time' => ['nullable', 'required_with:start_date,end_date,start_time,end_time', 'date_format:H:i', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
           'location' => 'string|max:120',
           'games' => 'nullable|string',
-          'description' => 'string|max:240|nullable',
+          'description' => 'string|max:512|nullable',
           'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
           'price' => 'nullable|numeric|min:0',
           'seats' => 'nullable|numeric|min:0'

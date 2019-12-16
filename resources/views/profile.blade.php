@@ -53,7 +53,7 @@
         <table class="table">
           <tr>
             <th>Description</th>
-            <td>{{ $user->description }}</td>
+            <td class="text-break">{{ $user->description }}</td>
           </tr>
         </table>
       </div>
