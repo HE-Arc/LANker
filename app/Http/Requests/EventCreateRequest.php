@@ -31,8 +31,8 @@ class EventCreateRequest extends FormRequest
           'host_name' => 'required|string|max:120',
           'start_date' => 'required|date',
           'end_date' => ['required', 'date', 'after_or_equal:start_date', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
-          'start_time' => 'required|date_format:H:i|before:end_time',
-          'end_time' => ['required', 'date_format:H:i', 'after:start_time', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
+          'start_time' => 'required|date_format:H:i',
+          'end_time' => ['required', 'date_format:H:i', new EndDateAfterStartDate($this->input('start_date'), $this->input('start_time'), $this->input('end_date'), $this->input('end_time'))],
           'location' => 'required|string|max:120',
           'games' => 'nullable|string',
           'description' => 'string|max:240|nullable',
@@ -55,9 +55,7 @@ class EventCreateRequest extends FormRequest
           'end_time.date_format'  => 'The time format must be HH:MM!',
           'image.max'  => 'The image is too big!',
           'price.regex' => 'The price given is not in a valid format!',
-          'nb_seats.min' => 'The number of seats cannot be negative!',
-          'end_time.after' => 'The end time can not be before start time!',
-          'start_time.before' => 'The start time can not be after end time!'
+          'nb_seats.min' => 'The number of seats cannot be negative!'
       ];
   }
 }

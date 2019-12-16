@@ -27,11 +27,11 @@
             <td>{{ date("d.m.Y",strtotime($user->created_at)) }}</td>
           </tr>
           <tr>
-            <th>Participated in</th>
+            <th>Participation</th>
             <td>{{ $participated }} event(s)</td>
           </tr>
           <tr>
-            <th>Organised</th>
+            <th>Organisation</th>
             <td>{{ $organised }} event(s)</td>
           </tr>
         </table>
@@ -109,7 +109,9 @@
               @endslot
             @endcomponent
           @empty
-            <p>You aren't organising any upcoming event</p>
+            <div class="col">
+              <p>You aren't organising any upcoming event</p>
+            </div>
           @endforelse
         </div>
       </div>
@@ -169,7 +171,7 @@
       </div>
       <div class="tab-pane fade" id="pills-participated-events" role="tabpanel" aria-labelledby="pills-participated-events-tab">
         <div class="row">
-          @forelse($organised_evt as $event)
+          @forelse($participated_evt as $event)
             @component('components/event_card')
               @slot('banner')
                 {{$event->banner}}
