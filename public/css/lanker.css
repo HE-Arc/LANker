@@ -20,6 +20,7 @@
 .lanker-dashboard-card {
     border: none !important;
     background-color: transparent !important;
+    width: 100% !important;
 }
 
 .lanker-footer-line-white {
